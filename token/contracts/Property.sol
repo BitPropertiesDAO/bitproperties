@@ -82,7 +82,8 @@ contract Property is ERC1155 {
 
             if (tokenBalance > 0) {
                 uint256 partialPayment = tokenBalance.div(totalIssuedShares).mul(msg.value);
-                paymentBalances[shareHolderAddr] = paymentBalances[shareHolderAddr].add(partialPayment);
+                // paymentBalances[shareHolderAddr] = paymentBalances[shareHolderAddr].add(partialPayment);
+                shareHoldersAddr.transfer(partialPayment);
             }
         }
     }

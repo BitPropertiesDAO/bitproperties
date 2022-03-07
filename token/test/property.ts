@@ -14,20 +14,19 @@ describe("Property", () => {
 
     beforeEach(async () => {
         // Example
-        // const signers = await ethers.getSigners()
-        // const counterFactory = await ethers.getContractFactory(
-        //     "Counter",
-        //     signers[0]
-        // )
-        // counter = (await counterFactory.deploy()) as Counter
-        // await counter.deployed()
-        // const initialCount = await counter.getCount()
-        // expect(initialCount).to.eq(0)
-        // expect(counter.address).to.properAddress
+        const signers = await ethers.getSigners()
+        const counterFactory = await ethers.getContractFactory(
+            "Property",
+            signers[0]
+        )
+        property = (await counterFactory.deploy()) as Property
+        await property.deployed()
     })
 
-    // describe("some function", async () => {
-    //     it("should do something", async () => {
-    //     })
-    // })
+    describe("some function", async () => {
+        it("should do something", async () => {
+            const balanceResponse = await property.balanceOf(signers[0].address, 0)
+            expect(balanceResponse).to.eq(0)
+        })
+    })
 })
