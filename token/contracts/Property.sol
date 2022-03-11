@@ -31,9 +31,9 @@ contract Property is ERC1155 {
         uint256 amount;
     }
 
-    uint256 pricePerShare;
-    uint256 totalShares;
-    uint256 totalIssuedShares;
+    uint256 public pricePerShare;
+    uint256 public totalShares;
+    uint256 public totalIssuedShares;
     EnumerableSet.AddressSet private shareHolders;
 
     constructor(string memory _baseUrl, uint256 _pricePerShare, uint256 _totalShares) public ERC1155(_baseUrl) {
@@ -91,13 +91,13 @@ contract Property is ERC1155 {
     function receiveFunds () public payable {
         // iterate over each holder
         for (uint i = 0; i < shareHolders.length(); i++) {
-            address shareHolderAddr = shareHolders.at(i);
+            address payable shareHolderAddr = payable(shareHolders.at(i));
             uint256 tokenBalance = balanceOf(shareHolderAddr, TOKEN_ID);
 
             if (tokenBalance > 0) {
                 uint256 partialPayment = tokenBalance.div(totalIssuedShares).mul(msg.value);
                 // paymentBalances[shareHolderAddr] = paymentBalances[shareHolderAddr].add(partialPayment);
-                shareHoldersAddr.transfer(partialPayment);
+                shareHolderAddr.transfer(partialPayment);
             }
         }
     }
