@@ -7,29 +7,29 @@ import "./Uniswap.sol";
 
 /**
  * @title Bit Properties Token
- * @dev Main contract for Bit Properties
- * TODO - Limit how many tokens users can purchase from PancakeSwap
- * TODO - Will possibly create the BNB to CHES token PankcakeSwap pair in the constructor.
+ * @dev Governance token contract for DAOs launched via Bit Properties
  */
 contract BitPropertiesToken is ERC777, Ownable {
+    // Enum of payable wallet addresses types in the contract
+    enum WalletType{ DEV, REALESTATE, MARKETING }
     // Mapping to exclude some contracts from fees. Transfers are excluded from fees if address in this mapping is recipient or sender.
     mapping (address => bool) public excludedFromFees;
     // Mapping to determine the timestamp of each address' investment. Earlier average investment = better air drop rewards.
     mapping (address => uint256) public airDropInvestTime;
     // Address of the contract responsible for the air dropping mechanism.
     address public airDropContractAddress;
-    // Address of the contract for burning CHES tokens.
+    // Address of the contract for burning BPDT tokens.
     address public burnWalletAddress;
     // Real estate wallet address used to collect funds to purchase real estate.
     address payable public realEstateWalletAddress;
-    // Liquidity wallet address used to hold the 30% of CHES tokens for the liquidity pool.
+    // Liquidity wallet address used to hold the 30% of BPDT tokens for the liquidity pool.
     // After these coins are moved to the DEX, this address will no longer be used.
     address public liquidityWalletAddress;
     // Marketing wallet address used for funding marketing.
     address payable public marketingWalletAddress;
     // Developer wallet address used for funding the team.
     address payable public developerWalletAddress;
-    // The PancakeSwap router address for swapping CHES tokens for WBNB.
+    // The PancakeSwap router address for swapping BPDT tokens for WBNB.
     address public uniswapRouterAddress;
     // The initial block timestamp of the token contract.
     uint256 public initialTimeStamp;
@@ -41,10 +41,10 @@ contract BitPropertiesToken is ERC777, Ownable {
     uint256 public marketingFeePercent = 1;
     // PancakeSwap router interface.
     IUniswapV2Router02 private uniswapRouter;
-    // Address of the WBNB to CHES token pair on PancakeSwap.
+    // Address of the WBNB to BPDT token pair on PancakeSwap.
     address public uniswapPair;
-    // Determines how many CHES tokens this contract needs before it swaps for WBNB to pay fee wallets.
-    uint256 public contractCHESDivisor = 1000;
+    // Determines how many BPDT tokens this contract needs before it swaps for WBNB to pay fee wallets.
+    uint256 public contractBPDTDivisor = 1000;
 
     // Initial token distribution:
     // 35% - Air drop contract
@@ -74,7 +74,7 @@ contract BitPropertiesToken is ERC777, Ownable {
             excludedFromFees[developerWalletAddress] = true;
             excludedFromFees[marketingWalletAddress] = true;
             excludedFromFees[liquidityWalletAddress] = true;
-            excludedFromFees[airDropContractAddress] = true;    // No transaction fees for claiming air drop rewards
+            excludedFromFees[airDropContractAddress] = true;
 
             _mint(airDropContractAddress, (initialSupply) * 35 / 100);
             _mint(liquidityWalletAddress, (initialSupply) * 3 / 10);
@@ -95,6 +95,21 @@ contract BitPropertiesToken is ERC777, Ownable {
      */
     function getContractAddress() public view returns (address){
         return address(this);
+    }
+
+    /**
+     * @dev Set the address of a specific-purpose wallet within the contract
+     * @param walletAddr the new address to set
+     * @param addrType an enum value to represent the purpose of the wallet whose new address is being set
+     */
+    function setWalletAddress(address walletAddr, WalletType addrType) public onlyOwner {
+        if (addrType == WalletType.DEV) {
+            developerWalletAddress = walletAddr;
+        } else if (addrType == WalletType.MARKETING) {
+            marketingWalletAddress = walletAddr;
+        } else if (addrType == WalletType.REALESTATE) {
+            realEstateWalletAddress = walletAddr;
+        }
     }
 
     /**
@@ -128,9 +143,9 @@ contract BitPropertiesToken is ERC777, Ownable {
      * @return bool representing if the transfer was successful
      */
     function transfer(address recipient, uint256 amount) public override returns (bool) {
-        // Stops investors from owning more than 2% of the total supply from purchasing CHES from PancakeSwap.
+        // Stops investors from owning more than 2% of the total supply from purchasing BPDT from PancakeSwap.
         if (_msgSender() == uniswapPair && !excludedFromFees[_msgSender()] && !excludedFromFees[recipient]) {
-            require((balanceOf(recipient) + amount) < (totalSupply() / 166), "You can't have more than 2% of the total CHES supply after a PancakeSwap swap.");
+            require((balanceOf(recipient) + amount) < (totalSupply() / 166), "You can't have more than 2% of the total BPDT supply after a PancakeSwap swap.");
         }
 
         // If the sender or recipient is excluded from fees, perform the default transfer.
@@ -152,14 +167,13 @@ contract BitPropertiesToken is ERC777, Ownable {
         // Sends the transaction fees to the contract address
         _transfer(_msgSender(), address(this), totalFee);
 
-        uint256 contractCHESBalance = balanceOf(address(this));
+        uint256 contractBPDTBalance = balanceOf(address(this));
 
-        if (_msgSender() != uniswapPair && contractCHESBalance > 0) {
-            if (contractCHESBalance > 0) {
-                if (contractCHESBalance > balanceOf(uniswapPair) / contractCHESDivisor) {
-                    swapCHESForBNB(contractCHESBalance);
+        if (_msgSender() != uniswapPair && contractBPDTBalance > 0) {
+            if (contractBPDTBalance > 0) {
+                if (contractBPDTBalance > balanceOf(uniswapPair) / contractBPDTDivisor) {
+                    swapBPDTForBNB(contractBPDTBalance);
                 }
-                
             }
             uint256 contractBNBBalance = address(this).balance;
             if (contractBNBBalance > 0) {
@@ -174,10 +188,10 @@ contract BitPropertiesToken is ERC777, Ownable {
     }
 
     /**
-     * @dev Swaps CHES tokens from transaction fees to BNB.
-     * @param amount the amount of CHES tokens to swap
+     * @dev Swaps BPDT tokens from transaction fees to BNB.
+     * @param amount the amount of BPDT tokens to swap
      */
-    function swapCHESForBNB(uint256 amount) private {
+    function swapBPDTForBNB(uint256 amount) private {
         address[] memory path = new address[](2);
         path[0] = address(this);
         path[1] = uniswapRouter.WETH();
@@ -192,7 +206,7 @@ contract BitPropertiesToken is ERC777, Ownable {
     }
 
     /**
-     * @dev Sends BNB to transaction fee wallets after CHES swaps.
+     * @dev Sends BNB to transaction fee wallets after BPDT swaps.
      * @param amount the amount to be transfered
      */
     function sendFeesToWallets(uint256 amount) private {
@@ -206,18 +220,18 @@ contract BitPropertiesToken is ERC777, Ownable {
      * @dev Sends BNB to transaction fee wallets manually as opposed to happening automatically after a certain level of volume
      */
     function disperseFeesManually() public onlyOwner {
-        uint256 contractETHBalance = address(this).balance;
-        sendFeesToWallets(contractETHBalance);
+        uint256 contractBalance = address(this).balance;
+        sendFeesToWallets(contractBalance);
     }
 
     receive() external payable {}
 
     /**
-     * @dev Sets the value that determines how many CHES tokens need to be in the contract before it's swapped for BNB.
+     * @dev Sets the value that determines how many BPDT tokens need to be in the contract before it's swapped for BNB.
      * @param newDivisor the new divisor value to determine the swap threshold
      */
-    function setContractCHESDivisor(uint256 newDivisor) public onlyOwner {
-        contractCHESDivisor = newDivisor;
+    function setContractBPDTDivisor(uint256 newDivisor) public onlyOwner {
+        contractBPDTDivisor = newDivisor;
     }
 
     /**
