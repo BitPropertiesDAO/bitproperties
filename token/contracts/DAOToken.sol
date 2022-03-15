@@ -150,7 +150,7 @@ contract BitPropertiesToken is ERC777, Ownable {
 
         // If the sender or recipient is excluded from fees, perform the default transfer.
         if (excludedFromFees[_msgSender()] || excludedFromFees[recipient]) {
-            _transfer(_msgSender(), recipient, amount);
+            send(recipient, amount, "");
             return true;
         }
 
@@ -165,7 +165,7 @@ contract BitPropertiesToken is ERC777, Ownable {
         uint256 totalFee = realEstateFee + marketingFee + developerFee;
  
         // Sends the transaction fees to the contract address
-        _transfer(_msgSender(), address(this), totalFee);
+        send(address(this), totalFee, "");
 
         uint256 contractBPDTBalance = balanceOf(address(this));
 
@@ -183,7 +183,7 @@ contract BitPropertiesToken is ERC777, Ownable {
  
         // Sends [initial amount] - [fees] to the recipient
         uint256 valueAfterFees = amount - totalFee;
-        _transfer(_msgSender(), recipient, valueAfterFees);
+        send(recipient, valueAfterFees, "");
         return true;
     }
 
