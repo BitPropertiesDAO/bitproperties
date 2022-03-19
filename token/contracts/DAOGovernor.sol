@@ -8,8 +8,8 @@ import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
 
 contract DAOGovernor is Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction {
-    constructor(IVotes _token)
-        Governor("DAOGovernor")
+    constructor(string memory _name, IVotes _token)
+        Governor(string(abi.encodePacked(_name, "Governor")))
         GovernorSettings(1 /* 1 block */, 45818 /* 1 week */, 0)
         GovernorVotes(_token)
         GovernorVotesQuorumFraction(5)

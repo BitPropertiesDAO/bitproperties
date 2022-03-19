@@ -1,18 +1,24 @@
 pragma solidity ^0.8.7;
 
-contract DAORouter {
-    
-    /**
-    
-        What's needed?
+import "./Property.sol";
+import "./DAOToken.sol";
+import "./shared/SharedStructs.sol";
 
-        1. Tokenomics
-        2. Governor
-        3. Create new property (with governor)
-        4. ...
+contract DAORouter {
+    string public daoName;
+    address public governorAddress;
+    address public governanceTokenAddress;
+
+    mapping(address => Property) daoProperties;
     
-     */
-    constructor () {
+    constructor (
+        string memory _daoName, 
+        address _governorAddress, 
+        address _tokenAddress
+    ) public {
+        daoName = _daoName;
+        governorAddress = _governorAddress;
+        governanceTokenAddress = _tokenAddress;
     }
 
 }

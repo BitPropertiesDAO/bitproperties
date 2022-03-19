@@ -11,6 +11,7 @@ import {
   PopulatedTransaction,
   BaseContract,
   ContractTransaction,
+  CallOverrides,
 } from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
@@ -18,7 +19,31 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface DAORouterInterface extends ethers.utils.Interface {
-  functions: {};
+  functions: {
+    "daoName()": FunctionFragment;
+    "governanceTokenAddress()": FunctionFragment;
+    "governorAddress()": FunctionFragment;
+  };
+
+  encodeFunctionData(functionFragment: "daoName", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "governanceTokenAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "governorAddress",
+    values?: undefined
+  ): string;
+
+  decodeFunctionResult(functionFragment: "daoName", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "governanceTokenAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "governorAddress",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -66,13 +91,45 @@ export class DAORouter extends BaseContract {
 
   interface: DAORouterInterface;
 
-  functions: {};
+  functions: {
+    daoName(overrides?: CallOverrides): Promise<[string]>;
 
-  callStatic: {};
+    governanceTokenAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    governorAddress(overrides?: CallOverrides): Promise<[string]>;
+  };
+
+  daoName(overrides?: CallOverrides): Promise<string>;
+
+  governanceTokenAddress(overrides?: CallOverrides): Promise<string>;
+
+  governorAddress(overrides?: CallOverrides): Promise<string>;
+
+  callStatic: {
+    daoName(overrides?: CallOverrides): Promise<string>;
+
+    governanceTokenAddress(overrides?: CallOverrides): Promise<string>;
+
+    governorAddress(overrides?: CallOverrides): Promise<string>;
+  };
 
   filters: {};
 
-  estimateGas: {};
+  estimateGas: {
+    daoName(overrides?: CallOverrides): Promise<BigNumber>;
 
-  populateTransaction: {};
+    governanceTokenAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    governorAddress(overrides?: CallOverrides): Promise<BigNumber>;
+  };
+
+  populateTransaction: {
+    daoName(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    governanceTokenAddress(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    governorAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+  };
 }

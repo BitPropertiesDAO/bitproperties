@@ -11,6 +11,8 @@ import {
   PopulatedTransaction,
   BaseContract,
   ContractTransaction,
+  Overrides,
+  CallOverrides,
 } from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
@@ -18,10 +20,55 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface DAOFactoryInterface extends ethers.utils.Interface {
-  functions: {};
+  functions: {
+    "daoRouters(address)": FunctionFragment;
+    "launchDAO(string,string,string,uint256,tuple,address,tuple)": FunctionFragment;
+  };
 
-  events: {};
+  encodeFunctionData(functionFragment: "daoRouters", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "launchDAO",
+    values: [
+      string,
+      string,
+      string,
+      BigNumberish,
+      {
+        _airDropContractAddress: string;
+        _burnWalletAddress: string;
+        _liquidityWalletAddress: string;
+        _realEstateWalletAddress: string;
+        _marketingWalletAddress: string;
+        _developerWalletAddress: string;
+      },
+      string,
+      {
+        airdropPercent: BigNumberish;
+        liquidityPoolPercent: BigNumberish;
+        burnPercent: BigNumberish;
+        developerPercent: BigNumberish;
+        marketingPercent: BigNumberish;
+      }
+    ]
+  ): string;
+
+  decodeFunctionResult(functionFragment: "daoRouters", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "launchDAO", data: BytesLike): Result;
+
+  events: {
+    "NewDAO(address,address,address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "NewDAO"): EventFragment;
 }
+
+export type NewDAOEvent = TypedEvent<
+  [string, string, string] & {
+    daoAddress: string;
+    tokenAddress: string;
+    governorAddress: string;
+  }
+>;
 
 export class DAOFactory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -66,13 +113,188 @@ export class DAOFactory extends BaseContract {
 
   interface: DAOFactoryInterface;
 
-  functions: {};
+  functions: {
+    daoRouters(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string] & {
+        governanceTokenAddress: string;
+        governorAddress: string;
+      }
+    >;
 
-  callStatic: {};
+    launchDAO(
+      _daoName: string,
+      _tokenName: string,
+      _tokenSymbol: string,
+      _initialSupply: BigNumberish,
+      _addresses: {
+        _airDropContractAddress: string;
+        _burnWalletAddress: string;
+        _liquidityWalletAddress: string;
+        _realEstateWalletAddress: string;
+        _marketingWalletAddress: string;
+        _developerWalletAddress: string;
+      },
+      _uniswapRouterAddress: string,
+      _percentages: {
+        airdropPercent: BigNumberish;
+        liquidityPoolPercent: BigNumberish;
+        burnPercent: BigNumberish;
+        developerPercent: BigNumberish;
+        marketingPercent: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+  };
 
-  filters: {};
+  daoRouters(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string] & {
+      governanceTokenAddress: string;
+      governorAddress: string;
+    }
+  >;
 
-  estimateGas: {};
+  launchDAO(
+    _daoName: string,
+    _tokenName: string,
+    _tokenSymbol: string,
+    _initialSupply: BigNumberish,
+    _addresses: {
+      _airDropContractAddress: string;
+      _burnWalletAddress: string;
+      _liquidityWalletAddress: string;
+      _realEstateWalletAddress: string;
+      _marketingWalletAddress: string;
+      _developerWalletAddress: string;
+    },
+    _uniswapRouterAddress: string,
+    _percentages: {
+      airdropPercent: BigNumberish;
+      liquidityPoolPercent: BigNumberish;
+      burnPercent: BigNumberish;
+      developerPercent: BigNumberish;
+      marketingPercent: BigNumberish;
+    },
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  populateTransaction: {};
+  callStatic: {
+    daoRouters(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string] & {
+        governanceTokenAddress: string;
+        governorAddress: string;
+      }
+    >;
+
+    launchDAO(
+      _daoName: string,
+      _tokenName: string,
+      _tokenSymbol: string,
+      _initialSupply: BigNumberish,
+      _addresses: {
+        _airDropContractAddress: string;
+        _burnWalletAddress: string;
+        _liquidityWalletAddress: string;
+        _realEstateWalletAddress: string;
+        _marketingWalletAddress: string;
+        _developerWalletAddress: string;
+      },
+      _uniswapRouterAddress: string,
+      _percentages: {
+        airdropPercent: BigNumberish;
+        liquidityPoolPercent: BigNumberish;
+        burnPercent: BigNumberish;
+        developerPercent: BigNumberish;
+        marketingPercent: BigNumberish;
+      },
+      overrides?: CallOverrides
+    ): Promise<[string, string, string]>;
+  };
+
+  filters: {
+    "NewDAO(address,address,address)"(
+      daoAddress?: null,
+      tokenAddress?: null,
+      governorAddress?: null
+    ): TypedEventFilter<
+      [string, string, string],
+      { daoAddress: string; tokenAddress: string; governorAddress: string }
+    >;
+
+    NewDAO(
+      daoAddress?: null,
+      tokenAddress?: null,
+      governorAddress?: null
+    ): TypedEventFilter<
+      [string, string, string],
+      { daoAddress: string; tokenAddress: string; governorAddress: string }
+    >;
+  };
+
+  estimateGas: {
+    daoRouters(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    launchDAO(
+      _daoName: string,
+      _tokenName: string,
+      _tokenSymbol: string,
+      _initialSupply: BigNumberish,
+      _addresses: {
+        _airDropContractAddress: string;
+        _burnWalletAddress: string;
+        _liquidityWalletAddress: string;
+        _realEstateWalletAddress: string;
+        _marketingWalletAddress: string;
+        _developerWalletAddress: string;
+      },
+      _uniswapRouterAddress: string,
+      _percentages: {
+        airdropPercent: BigNumberish;
+        liquidityPoolPercent: BigNumberish;
+        burnPercent: BigNumberish;
+        developerPercent: BigNumberish;
+        marketingPercent: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+  };
+
+  populateTransaction: {
+    daoRouters(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    launchDAO(
+      _daoName: string,
+      _tokenName: string,
+      _tokenSymbol: string,
+      _initialSupply: BigNumberish,
+      _addresses: {
+        _airDropContractAddress: string;
+        _burnWalletAddress: string;
+        _liquidityWalletAddress: string;
+        _realEstateWalletAddress: string;
+        _marketingWalletAddress: string;
+        _developerWalletAddress: string;
+      },
+      _uniswapRouterAddress: string,
+      _percentages: {
+        airdropPercent: BigNumberish;
+        liquidityPoolPercent: BigNumberish;
+        burnPercent: BigNumberish;
+        developerPercent: BigNumberish;
+        marketingPercent: BigNumberish;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+  };
 }

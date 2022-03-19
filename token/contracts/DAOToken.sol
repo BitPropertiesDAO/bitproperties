@@ -2,14 +2,17 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC777/ERC777.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 import "./Uniswap.sol";
+import "./shared/SharedStructs.sol";
 
 /**
  * @title Bit Properties Token
  * @dev Governance token contract for DAOs launched via Bit Properties
  */
-contract BitPropertiesToken is ERC777, Ownable {
+contract DAOToken is ERC20, Ownable, ERC20Permit, ERC20Votes {
     // Enum of payable wallet addresses types in the contract
     enum WalletType{ DEV, REALESTATE, MARKETING }
     // Mapping to exclude some contracts from fees. Transfers are excluded from fees if address in this mapping is recipient or sender.
@@ -46,13 +49,9 @@ contract BitPropertiesToken is ERC777, Ownable {
     // Determines how many BPDT tokens this contract needs before it swaps for WBNB to pay fee wallets.
     uint256 public contractBPDTDivisor = 1000;
 
-    // Initial token distribution:
-    // 35% - Air drop contract
-    // 30% - Liquidity pool (6 month lockup period)
-    // 20% - Burn
-    // 10% - Developer coins (6 month lockup period)
-    // 5% - Marketing
     constructor(
+        string memory tokenName,
+        string memory tokenSymbol,
         uint256 initialSupply, 
         address _airDropContractAddress, 
         address _burnWalletAddress,
@@ -60,7 +59,9 @@ contract BitPropertiesToken is ERC777, Ownable {
         address payable _realEstateWalletAddress,
         address payable _marketingWalletAddress,
         address payable _developerWalletAddress,
-        address _uniswapRouterAddress) ERC777("BitPropertiesToken", "BPDT", [_msgSender()]) {
+        address _uniswapRouterAddress,
+        SharedStructs.percentages memory _mintPercentages
+    ) ERC20(tokenName, tokenSymbol) ERC20Permit(tokenName) {
             initialTimeStamp = block.timestamp;
             airDropContractAddress = _airDropContractAddress;
             realEstateWalletAddress = _realEstateWalletAddress;
@@ -76,11 +77,11 @@ contract BitPropertiesToken is ERC777, Ownable {
             excludedFromFees[liquidityWalletAddress] = true;
             excludedFromFees[airDropContractAddress] = true;
 
-            _mint(airDropContractAddress, (initialSupply) * 35 / 100);
-            _mint(liquidityWalletAddress, (initialSupply) * 3 / 10);
-            _mint(burnWalletAddress, initialSupply / 5);
-            _mint(marketingWalletAddress, initialSupply * 5 / 100);
-            _mint(developerWalletAddress, initialSupply / 10);
+            _mint(airDropContractAddress, initialSupply * _mintPercentages.airdropPercent / 100);
+            _mint(liquidityWalletAddress, initialSupply * _mintPercentages.liquidityPoolPercent / 100);
+            _mint(burnWalletAddress, initialSupply * _mintPercentages.burnPercent / 100);
+            _mint(marketingWalletAddress, initialSupply * _mintPercentages.marketingPercent / 100);
+            _mint(developerWalletAddress, initialSupply * _mintPercentages.developerPercent / 100);
 
             IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(uniswapRouterAddress);
             uniswapRouter = _uniswapV2Router;
@@ -102,7 +103,7 @@ contract BitPropertiesToken is ERC777, Ownable {
      * @param walletAddr the new address to set
      * @param addrType an enum value to represent the purpose of the wallet whose new address is being set
      */
-    function setWalletAddress(address walletAddr, WalletType addrType) public onlyOwner {
+    function setWalletAddress(address payable walletAddr, WalletType addrType) public onlyOwner {
         if (addrType == WalletType.DEV) {
             developerWalletAddress = walletAddr;
         } else if (addrType == WalletType.MARKETING) {
@@ -150,7 +151,7 @@ contract BitPropertiesToken is ERC777, Ownable {
 
         // If the sender or recipient is excluded from fees, perform the default transfer.
         if (excludedFromFees[_msgSender()] || excludedFromFees[recipient]) {
-            send(recipient, amount, "");
+            transfer(recipient, amount);
             return true;
         }
 
@@ -165,7 +166,7 @@ contract BitPropertiesToken is ERC777, Ownable {
         uint256 totalFee = realEstateFee + marketingFee + developerFee;
  
         // Sends the transaction fees to the contract address
-        send(address(this), totalFee, "");
+        transfer(address(this), totalFee);
 
         uint256 contractBPDTBalance = balanceOf(address(this));
 
@@ -183,7 +184,7 @@ contract BitPropertiesToken is ERC777, Ownable {
  
         // Sends [initial amount] - [fees] to the recipient
         uint256 valueAfterFees = amount - totalFee;
-        send(recipient, valueAfterFees, "");
+        transfer(recipient, valueAfterFees);
         return true;
     }
 
@@ -240,9 +241,17 @@ contract BitPropertiesToken is ERC777, Ownable {
      * @param to the recipient's address
      * @param value the amount that was transferred
      */
-    function _afterTokenTransfer(address from, address to, uint256 value) internal virtual override {
+    function _afterTokenTransfer(address from, address to, uint256 value) internal virtual override(ERC20, ERC20Votes) {
         uint256 userBalance = balanceOf(to);
         airDropInvestTime[to] = (value * block.timestamp + (userBalance - value) * airDropInvestTime[to]) / userBalance;
         super._afterTokenTransfer(from, to, value);
+    }
+
+    function _mint(address to, uint256 amount) internal override(ERC20, ERC20Votes) {
+        super._mint(to, amount);
+    }
+
+    function _burn(address account, uint256 amount) internal override(ERC20, ERC20Votes) {
+        super._burn(account, amount);
     }
 }
