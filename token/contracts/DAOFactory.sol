@@ -24,7 +24,7 @@ contract DAOFactory {
         SharedStructs.addresses memory _addresses,
         address _uniswapRouterAddress,
         SharedStructs.percentages memory _percentages
-    ) public returns(address, address, address) {
+    ) public payable returns(address, address, address) {
         DAOToken token = new DAOToken(
             _tokenName,
             _tokenSymbol,

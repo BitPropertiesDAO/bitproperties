@@ -21,4 +21,9 @@ contract DAORouter {
         governanceTokenAddress = _tokenAddress;
     }
 
+    function launchNewProperty (string memory _propertyName, uint256 _pricePerShare) public {
+        Property newProperty = new Property("", 0.05 ether, 1000);
+        daoProperties[address(newProperty)] = newProperty;
+    }
+
 }

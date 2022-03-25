@@ -63,34 +63,32 @@ describe('Factory', () => {
             console.log(daoRouterAddress, daoTokenAddress, daoGovernorAddress)
 		})
 
-        it('', async () => {
-			const launchDAOTxn = await factory.launchDAO(
-                "Quinta DAO",
-                "Quinta DAO Token",
-                "QPDT",
-                10**9,
-                {
-                    _airDropContractAddress: signers[1].address,
-                    _burnWalletAddress: signers[2].address,
-                    _liquidityWalletAddress: signers[3].address,
-                    _realEstateWalletAddress: signers[4].address,
-                    _marketingWalletAddress: signers[5].address,
-                    _developerWalletAddress: signers[6].address
-                },
-                uniswapRouterAddress,
-                {
-                    airdropPercent: 20,
-                    liquidityPoolPercent: 20,
-                    burnPercent: 20,
-                    developerPercent: 20,
-                    marketingPercent: 20
-                }
-            )
-
-            const resp = await launchDAOTxn.wait()
-            
-            expect(resp).to.exist
-		})
+        // it('', async () => {
+		// 	const launchDAOTxn = await factory.launchDAO(
+        //         "Quinta DAO",
+        //         "Quinta DAO Token",
+        //         "QPDT",
+        //         10**9,
+        //         {
+        //             _airDropContractAddress: signers[1].address,
+        //             _burnWalletAddress: signers[2].address,
+        //             _liquidityWalletAddress: signers[3].address,
+        //             _realEstateWalletAddress: signers[4].address,
+        //             _marketingWalletAddress: signers[5].address,
+        //             _developerWalletAddress: signers[6].address
+        //         },
+        //         uniswapRouterAddress,
+        //         {
+        //             airdropPercent: 20,
+        //             liquidityPoolPercent: 20,
+        //             burnPercent: 20,
+        //             developerPercent: 20,
+        //             marketingPercent: 20
+        //         }
+        //     )
+        //     const resp = await launchDAOTxn.wait()
+        //     expect(resp).to.exist
+		// })
 
 	})
 })
