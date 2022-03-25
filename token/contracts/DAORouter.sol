@@ -8,12 +8,11 @@ contract DAORouter {
     string public daoName;
     address public governorAddress;
     address public governanceTokenAddress;
+    mapping(address => Property) public daoProperties;
 
-    mapping(address => Property) daoProperties;
-    
     constructor (
-        string memory _daoName, 
-        address _governorAddress, 
+        string memory _daoName,
+        address _governorAddress,
         address _tokenAddress
     ) public {
         daoName = _daoName;
@@ -21,8 +20,12 @@ contract DAORouter {
         governanceTokenAddress = _tokenAddress;
     }
 
-    function launchNewProperty (string memory _propertyName, uint256 _pricePerShare) public {
-        Property newProperty = new Property("", 0.05 ether, 1000);
+    function launchNewProperty (
+        string memory _propertyName,
+        uint256 _numShares,
+        uint256 _pricePerShare
+    ) public {
+        Property newProperty = new Property("", _pricePerShare, _numShares);
         daoProperties[address(newProperty)] = newProperty;
     }
 
