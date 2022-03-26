@@ -1,0 +1,146 @@
+.header {
+  z-index: 2;
+  width: 100%;
+  align-items: center;
+  /* background-color: rgba(255, 255, 255, 0.2); */
+  display: flex;
+  padding: 15px 40px;
+  justify-content: space-between;
+  position: sticky;
+}
+
+.header--logo {
+  margin: 0px;
+  padding: 0px;
+  color: white;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.header--logo--button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2.1rem;
+}
+
+.header--nav--actionbutton {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 7.5px 20px;
+  margin: 0px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.header--nav--actionbutton:hover {
+  box-shadow: 1px 4px 20px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.4);
+  transition-duration: 0.2s;
+}
+.header--nav--actionbutton:active,
+.header--nav--actionbutton:focus {
+  box-shadow: none;
+}
+
+.header--logo--bolder {
+  font-weight: 700;
+  background: linear-gradient(
+    90deg,
+    #d9d8d6 0%,
+    #e5e4e2 29.17%,
+    #f1f0ed 64.06%,
+    #faf9f6 100%
+  );
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.header--nav--link {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.header--nav--link:hover,
+a:hover {
+  color: #343e66;
+  transition-duration: 0.3s;
+}
+
+.header--nav--link:focus {
+  border: 1px solid blue;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.header--nav {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  justify-content: space-between;
+}
+
+.header--li {
+  margin-left: 70px;
+}
+
+.header--connect {
+  background-color: aquamarine;
+  border-radius: 5px;
+}
+
+@media (max-width: 1150px) {
+  .burger {
+    visibility: visible;
+  }
+
+  nav,
+  header--li {
+    visibility: hidden;
+    white-space: nowrap;
+    margin-left: 0;
+  }
+}
+
+.dropdown--nav {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: red;
+  top: 0;
+  left: 0;
+}
+
+@media (min-width: 850px) {
+  .menu--is--active {
+    visibility: visible;
+    z-index: 5;
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    padding: 5px 15px;
+  }
+  .burger {
+    right: 15px;
+  }
+}
+
+.disconnect {
+  overflow: hidden;
+  width: 15ch;
+  white-space: nowrap;
+}
