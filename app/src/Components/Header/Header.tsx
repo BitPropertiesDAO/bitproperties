@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 
 import "antd/dist/antd.css";
@@ -6,9 +6,6 @@ import "./styles.css";
 import { injected } from "../../utils/connectors";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
-import { $CombinedState } from "redux";
-
-// import CollapsedNav from "./Collapse/CollapsedNav";
 
 function NavBar(props: any) {
   return (
@@ -34,7 +31,6 @@ function NavItem(props: any) {
 
   return (
     <li className="header--li">
-      {/* <button className="header--nav--link" onClick={handleClick}> */}
       <button
         className={
           props.type !== "connect"
@@ -43,7 +39,7 @@ function NavItem(props: any) {
         }
         onClick={handleClick}
       >
-        {props.title}
+        <div style={{ overflow: `hidden` }}>{props.title}</div>
       </button>
       {open && props.children}
     </li>
@@ -77,10 +73,11 @@ function DropdownMenu() {
 
   return (
     <div className="nav--dropdown">
+      {/* <div className="nav--dropdown--underlay"> */}
       <DropdownItem>
         Account: {account ? account : <>Not Connected</>}
       </DropdownItem>
-      <DropdownItem link="My Account" navigate={`/`}></DropdownItem>
+      <DropdownItem link="My Account" navigate={`/Profile`}></DropdownItem>
       <DropdownItem>
         {!account ? (
           <button
@@ -98,6 +95,7 @@ function DropdownMenu() {
           </button>
         )}
       </DropdownItem>
+      {/* </div> */}
     </div>
   );
 }
@@ -108,6 +106,8 @@ export default function Header() {
 
   const pathName = location.pathname.toString();
   let isAlchemy = pathName.includes("Alchemy/");
+
+  const { account } = useWeb3React<Web3Provider>();
 
   return (
     <div className="header">
@@ -123,7 +123,7 @@ export default function Header() {
             url="https://app.gitbook.com/o/royHtkR6AKieNQ1UygU7/s/tgIrluxcjOTzLxDW1aVB/"
           ></NavItem>
           <NavItem title="CREATE DAO" navigate={`/Alchemy`}></NavItem>
-          <NavItem title="Connect Wallet" type="connect">
+          <NavItem title={!account ? "Connect wallet" : account} type="connect">
             <DropdownMenu></DropdownMenu>
           </NavItem>
         </NavBar>

@@ -20,6 +20,8 @@ import Governance from "./Components/DaoManager/Governance";
 import Tokenomics from "./Components/DaoManager/Tokenomics";
 import Confirmation from "./Components/DaoManager/Confirmation";
 
+import Profile from "./Components/Profile/DashBoard";
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -49,6 +51,7 @@ ReactDOM.render(
                 ></Route>
               </Route>
             </Route>
+            <Route path="profile" element={<Profile />}></Route>
             <Route path="*" element={<App />}></Route>
           </Routes>
         </BrowserRouter>
