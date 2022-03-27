@@ -73,6 +73,9 @@ export const DaoCreationSlice = createSlice({
     changeTokenSymbol: (state, action: PayloadAction<string>) => {
       state.tokenSymbol = action.payload;
     },
+    changeTokenName: (state, action: PayloadAction<string>) => {
+      state.tokenName = action.payload;
+    },
     changeAirdropWalletPercentage: (state, action: PayloadAction<number>) => {
       state.walletPercentages.AirDropWallet = action.payload;
     },
@@ -125,6 +128,7 @@ export const {
   changeVoteDuration,
   changeInitTokenSupply,
   changeTokenSymbol,
+  changeTokenName,
   changeAirdropWalletPercentage,
   changeLiquidityWalletPercentage,
   changeBurnWalletPercentage,

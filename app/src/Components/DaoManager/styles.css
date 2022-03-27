@@ -4,6 +4,7 @@
   --title-font-width: 700;
   --side--width: 300px;
 }
+@import "~antd/dist/antd.css";
 .alchemy--intro {
   padding: 100px 40px;
 }
@@ -53,6 +54,10 @@
   align-items: center;
 }
 
+.space--between {
+  justify-content: space-between;
+}
+
 .alchemy--tab--title {
   font-size: 1.25rem;
 }
@@ -94,8 +99,8 @@
 .alchemy--payout {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 15px;
-  width: 740px;
 }
 
 .align--middle {
@@ -112,8 +117,9 @@
 }
 
 .alchemy--input--group {
-  margin-bottom: 30px;
-  padding: 10px 0;
+  /* margin-bottom: 40px; */
+  margin: 40px auto;
+  padding: 35px 0px 50px 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -165,4 +171,15 @@
 
 .wallet {
   padding-right: 0;
+}
+
+.plain--button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+.plain--button:hover {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
 }

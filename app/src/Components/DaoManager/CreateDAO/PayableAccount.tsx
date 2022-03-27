@@ -23,13 +23,10 @@ export default function PayableAccounts() {
 
   const [totalPercent, setTotalPercent] = useState(0);
 
-  const walletPercentages = useAppSelector(
-    // (state) => state.Alchemy.walletPercentages.walletPercentagesWallet
-    (state) => {
-      const walletPercentages = state.Alchemy.walletPercentages;
-      return walletPercentages;
-    }
-  );
+  const walletPercentages = useAppSelector((state) => {
+    const walletPercentages = state.Alchemy.walletPercentages;
+    return walletPercentages;
+  });
 
   const walletAddresses = useAppSelector((state) => {
     const walletAddresses = state.Alchemy.walletAddresses;
@@ -93,11 +90,11 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation</h3>
+          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
           <InputNumber
             placeholder="%"
             max={100}
-            style={{ width: 100 }}
+            style={{ width: 110 }}
             className="alchemy--input"
             typeof="number"
             onChange={(value) =>
@@ -137,10 +134,10 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation</h3>
+          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
           <InputNumber
             placeholder="%"
-            style={{ width: 100 }}
+            style={{ width: 110 }}
             className="alchemy--input"
             max={100}
             typeof="number"
@@ -181,10 +178,10 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation</h3>
+          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
           <InputNumber
             placeholder="%"
-            style={{ width: 100 }}
+            style={{ width: 110 }}
             className="alchemy--input"
             max={100}
             typeof="number"
@@ -225,11 +222,11 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation</h3>
+          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
           <InputNumber
             max={100}
             placeholder="%"
-            style={{ width: 100 }}
+            style={{ width: 110 }}
             className="alchemy--input"
             typeof="number"
             onChange={(value) =>
@@ -269,11 +266,11 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation</h3>
+          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
           <InputNumber
             max={100}
             placeholder="%"
-            style={{ width: 100 }}
+            style={{ width: 110 }}
             className="alchemy--input"
             typeof="number"
             onChange={(value) =>
@@ -313,11 +310,11 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation</h3>
+          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
           <InputNumber
             max={100}
             placeholder="%"
-            style={{ width: 100 }}
+            style={{ width: 110 }}
             className="alchemy--input"
             typeof="number"
             onChange={(value) =>

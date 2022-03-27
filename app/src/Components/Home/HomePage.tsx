@@ -29,54 +29,52 @@ export default function HomePage() {
   });
 
   return (
-    <div>
-      <div className="container">
-        <section>
-          <div className="section--hero">
-            <div className="section--hero--left">
-              <p className="hero--title">
-                The industry standard platform for invesing in real-estate
-                through DAOs
-              </p>
-              <p className="hero--sub">
-                Bit Properties simplifies DAO management by providing a platform
-                to manage real-world and metaverse properties and assets, manage
-                re-constitution at the asset level, and manage payment splitting
-              </p>
-              <button className="primary--button">Explore Properties</button>
-            </div>
-            <div className="section--hero--right">
-              <div
-                className="section--hero--right--card main--card"
-                style={{
-                  transform: `translate(${xPos.current}px, ${yPos.current}px)`,
-                }}
-              >
-                <div className="card--image">
-                  <img className="main--image" src={MainHouse}></img>
-                </div>
-              </div>
-              <div
-                className="section--hero--right--card right--card"
-                style={{
-                  transform: `translate(${xPos.current * 1.5}px, ${
-                    yPos.current * 1.5
-                  }px)`,
-                }}
-              ></div>
-              <div
-                className="section--hero--right--card left--card"
-                style={{
-                  transform: `translate(${xPos.current * 1.5}px, ${
-                    yPos.current * 1.5
-                  }px)`,
-                }}
-              ></div>
-              <img className="hero--image" src={HeroImage} alt="hero" />
-            </div>
+    <div className="container">
+      <section>
+        <div className="section--hero">
+          <div className="section--hero--left">
+            <p className="hero--title">
+              The industry standard platform for invesing in real-estate through
+              DAOs
+            </p>
+            <p className="hero--sub">
+              Bit Properties simplifies DAO management by providing a platform
+              to manage real-world and metaverse properties and assets, manage
+              re-constitution at the asset level, and manage payment splitting
+            </p>
+            <button className="primary--button">Explore Properties</button>
           </div>
-        </section>
-      </div>
+          <div className="section--hero--right">
+            <div
+              className="section--hero--right--card main--card"
+              style={{
+                transform: `translate(${xPos.current}px, ${yPos.current}px)`,
+              }}
+            >
+              <div className="card--image">
+                <img className="main--image" src={MainHouse}></img>
+              </div>
+            </div>
+            <div
+              className="section--hero--right--card right--card"
+              style={{
+                transform: `translate(${xPos.current * 1.5}px, ${
+                  yPos.current * 1.5
+                }px)`,
+              }}
+            ></div>
+            <div
+              className="section--hero--right--card left--card"
+              style={{
+                transform: `translate(${xPos.current * 1.5}px, ${
+                  yPos.current * 1.5
+                }px)`,
+              }}
+            ></div>
+            <img className="hero--image" src={HeroImage} alt="hero" />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -7,6 +7,7 @@ export const useMousePosition = () => {
     const setFromEvent = (e: any) =>
       setPosition({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", setFromEvent);
+
     return () => {
       window.removeEventListener("mousemove", setFromEvent);
     };
