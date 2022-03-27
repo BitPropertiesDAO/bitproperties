@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.css";
 import { useAppSelector } from "../../utils/reduxhooks";
 import { ethers } from "ethers";
 import DAOFactoryABI from "../../artifacts/contracts/DAOFactory.sol/DAOFactory.json";
 import { useWeb3React } from "@web3-react/core";
+
+import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factories/DAOFactory__factory";
 
 export default function Confirmation() {
   const DAOFactoryAddress = "0x4bf010f1b9beda5450a8dd702ed602a104ff65ee";
@@ -44,13 +46,9 @@ export default function Confirmation() {
   const handleSubmit = async () => {
     try {
       const signer = library.getSigner();
-      const factory = await new ethers.Contract(
-        DAOFactoryAddress,
-        DAOFactoryABI.abi,
-        signer
-      );
+      const factory = DAOFactoryFactory.connect(DAOFactoryAddress, signer);
 
-      const launchDAOTxn = await factory.launchDAO(
+      const launchDAOTransaction = await factory.launchDAO(
         inputs.name,
         inputs.tokenName,
         inputs.tokenSymbol,
@@ -73,14 +71,19 @@ export default function Confirmation() {
         }
       );
 
-      const resp = await launchDAOTxn.wait();
-      console.log("DAO Launched", resp);
+      const contractReceipt = await launchDAOTransaction.wait();
+      console.log("DAO Launched", contractReceipt);
 
-      const event = resp.events?.find((event: any) => event.event === "NewDAO");
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+
+      const event = contractReceipt.events?.find(
+        (event: any) => event.event === "NewDAO"
+      );
       console.log("Event:", event);
 
       const [daoRouterAddress, daoTokenAddress, daoGovernorAddress] =
         event?.args as any;
+
       console.log(daoRouterAddress, daoTokenAddress, daoGovernorAddress);
     } catch (error) {
       console.log("launchDAO error", error);

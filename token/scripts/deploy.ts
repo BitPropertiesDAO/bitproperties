@@ -1,12 +1,19 @@
-import { ethers } from "hardhat"
+import { ethers } from "hardhat";
 
 async function main() {
-  const propertyFactory = await ethers.getContractFactory('Property')
-  let propertyContract = await propertyFactory.deploy()
-  console.log('Property Contract Address = ', propertyContract.address)
-  console.log('Property Txn Hash = ', propertyContract.deployTransaction.hash)
-  console.log('Deployed By = ', propertyContract.deployTransaction.from)
-  await propertyContract.deployed()
+  // const propertyFactory = await ethers.getContractFactory('Property')
+  // let propertyContract = await propertyFactory.deploy()
+  // console.log('Property Contract Address = ', propertyContract.address)
+  // console.log('Property Txn Hash = ', propertyContract.deployTransaction.hash)
+  // console.log('Deployed By = ', propertyContract.deployTransaction.from)
+  // await propertyContract.deployed()
+
+  const DAOFactory = await ethers.getContractFactory("DAOFactory");
+  let DAOFactoryContract = await DAOFactory.deploy();
+  console.log("DAO Factory Contract Address = ", DAOFactoryContract.address);
+  console.log("DAO Txn Hash = ", DAOFactoryContract.deployTransaction.hash);
+  console.log("Deployed By = ", DAOFactoryContract.deployTransaction.from);
+  await DAOFactoryContract.deployed();
 
   /**
    -- Example --
@@ -17,7 +24,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
-    console.error(error)
-    process.exit(1)
-  })
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

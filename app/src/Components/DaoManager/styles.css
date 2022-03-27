@@ -1,11 +1,17 @@
+:root {
+  --color: white;
+  --title-font-size: 3.4rem;
+  --title-font-width: 700;
+  --side--width: 300px;
+}
 .alchemy--intro {
   padding: 100px 40px;
 }
 
 .intro--title {
-  color: white;
+  color: var(--color);
   text-align: center;
-  font-size: 3.4rem;
+  font-size: var(--title-font-size);
   font-weight: 700;
 }
 
@@ -27,7 +33,7 @@
   left: 0;
   top: 0;
   height: calc(100%);
-  width: 300px;
+  width: var(--side--width);
 }
 
 .alchemy--side--container {
@@ -53,13 +59,12 @@
 
 .alchemy--section--right {
   position: absolute;
-
   top: 0;
   left: 300px;
   overflow: scroll;
   padding: 100px;
   height: 100vh;
-  width: calc(100% - 300px);
+  width: calc(100% - var(--side--width));
   min-width: 940px;
 }
 .alchemy--section--right::-webkit-scrollbar {
@@ -67,23 +72,23 @@
 }
 
 .alchemy--section--title {
-  color: white;
+  color: var(--color);
   font-size: 2.4rem;
   font-weight: 600;
 }
 .alchemy--section--subtitle {
-  color: white;
+  color: var(--color);
 }
 
 .alchemy--inputfield {
-  color: white;
+  color: var(--color);
 }
 
 .alchemy--input {
   margin: 10px 0 10px;
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid white;
-  color: white;
+  color: var(--color);
 }
 
 .alchemy--payout {
@@ -124,7 +129,7 @@
 }
 .alchemy--step {
   /* background-color: aquamarine; */
-  color: white;
+  color: var(--color);
 }
 
 @media (max-width: 1400px) {

@@ -4,7 +4,6 @@
 
 .section--hero {
   padding: 100px 50px;
-
   min-height: 65vh;
   margin-bottom: 50px;
   z-index: -1;
@@ -21,7 +20,7 @@
 }
 
 .hero--title {
-  font-size: 3.4rem;
+  font-size: var(--title-font-size);
   font-weight: 700;
   width: 80%;
 }
@@ -35,7 +34,7 @@
 
 .primary--button {
   padding: 8px 20px;
-  color: rgb(255, 255, 255);
+  color: var(--color);
   font-weight: 500;
   font-size: 1rem;
   border: none;
@@ -152,7 +151,6 @@ button.focus {
 }
 
 .card--image {
-  background-color: aqua;
   height: 60%;
   border-radius: 40px;
   overflow: hidden;

@@ -101,7 +101,7 @@ export default function Creation() {
               direction="vertical"
               className="alchemy--steps"
             >
-              <Step style={{}} title={`Basic Information`}></Step>
+              <Step title={`Basic Information`}></Step>
               <Step title={`Governance`}></Step>
               <Step title={`Tokenomics`}></Step>
               <Step title={`Done!`}></Step>
