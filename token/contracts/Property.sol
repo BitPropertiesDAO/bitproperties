@@ -8,7 +8,7 @@ contract Property is ERC1155 {
     // emitted when a user purchases shares listed by another user
     event PurchaseShares(address buyer, address seller, uint256 amount);
     // emitted when a user lists some portion of their shares for sale
-    event ListShares(address seller, uint256 amount);
+    event ListShares(address seller, uint256 price, uint256 amount);
     // emitted when a user mints some of the supply of the collection
     event MintShares(address minter, uint256 amount);
     // emitted when a user withdraws the funds they have available within the contract
@@ -59,7 +59,7 @@ contract Property is ERC1155 {
 
         listings[msg.sender] = Listing(price, amount);
 
-        // TODO: emit event for listing shares
+        emit ListShares(msg.sender, listings[msg.sender].price, listings[msg.sender].amount);
     }
 
     function purchaseShares (address listingId, uint256 amountToPurchase) public payable {

@@ -67,7 +67,34 @@ describe('Property', () => {
 
 	describe('Market place functionality', async () => {
 
-		it('should allow listing of shares owned by a wallet')
+		beforeEach(async () => {
+			const pricePerToken = await property.pricePerShare()
+			
+			// mint tokens
+			const mintResponse = await property.mint(55, {
+				value: (pricePerToken.toNumber() * 55).toFixed(0).toString(),
+			})
+	
+			// allow operator (bitproperties) to transact
+			await property.setApprovalForAll(property.address, true)
+
+		})
+
+		it('should allow listing of shares owned by a wallet', async () => {
+			const signers = await ethers.getSigners()
+
+			const shareListPrice = 12345
+			const sharesToList = 15
+
+			const resp = await (await property.connect(signers[0]).listShares(shareListPrice, sharesToList)).wait()
+			const event = resp.events?.find(event => event.event === 'ListShares')
+			const [sender, price, amount] = event?.args as any
+			console.log(sender, Number(price), Number(amount))
+
+			expect(sender).to.equal(signers[0].address)
+			expect(Number(price)).to.equal(shareListPrice)
+			expect(Number(amount)).to.equal(sharesToList)
+		}) 
 
 		it('should reject listing shares not owned by wallet')
 
