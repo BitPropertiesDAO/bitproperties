@@ -75,7 +75,7 @@ describe('Property', () => {
 				value: (pricePerToken.toNumber() * 55).toFixed(0).toString(),
 			})
 	
-			// allow operator (bitproperties) to transact
+			// allow operator (bitproperties) to act as operator
 			await property.setApprovalForAll(property.address, true)
 
 		})
