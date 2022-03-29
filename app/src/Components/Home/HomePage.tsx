@@ -42,7 +42,7 @@ export default function HomePage() {
               to manage real-world and metaverse properties and assets, manage
               re-constitution at the asset level, and manage payment splitting
             </p>
-            <button className="primary--button">Explore Properties</button>
+            <button className="primary--button">Start your DAO journey</button>
           </div>
           <div className="section--hero--right">
             <div

@@ -1,14 +1,46 @@
 import React, { useEffect } from "react";
 import "./styles.css";
 import { useAppSelector } from "../../utils/reduxhooks";
-import { ethers } from "ethers";
+import { ethers, providers } from "ethers";
 import DAOFactoryABI from "../../artifacts/contracts/DAOFactory.sol/DAOFactory.json";
 import { useWeb3React } from "@web3-react/core";
-
 import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factories/DAOFactory__factory";
 
+const ConfirmationResult = (props: any) => {
+  return (
+    <div style={{ marginBottom: 40 }}>
+      <h2 className="alchemy--section--subtitle" style={{ fontSize: "1.8rem" }}>
+        {props.title}
+      </h2>
+      {props.children}
+    </div>
+  );
+};
+
+const Result2Column = (props: any) => {
+  return (
+    <div className="alchemy--confirmation" style={{ margin: "20px 0px" }}>
+      <p>{props.resultTitle}:</p>
+      <p className="alchemy--confirmation--result">{props.result}</p>
+    </div>
+  );
+};
+
+const Result3Column = (props: any) => {
+  return (
+    <div
+      className="alchemy--confirmation wallet"
+      style={{ margin: "20px 0px" }}
+    >
+      <p style={{ width: 215 }}>{props.wallet}</p>
+      <p className="alchemy--confirmation--result">{props.address}</p>
+      <p>{props.percentage}%</p>
+    </div>
+  );
+};
+
 export default function Confirmation() {
-  const DAOFactoryAddress = "0x4bf010f1b9beda5450a8dd702ed602a104ff65ee";
+  const DAOFactoryAddress = "0x870526b7973b56163a6997bb7c886f5e4ea53638";
 
   const name = useAppSelector((state) => state.Alchemy.name);
 
@@ -45,8 +77,24 @@ export default function Confirmation() {
 
   const handleSubmit = async () => {
     try {
-      const signer = library.getSigner();
-      const factory = DAOFactoryFactory.connect(DAOFactoryAddress, signer);
+      const provider = new ethers.providers.JsonRpcProvider(
+        "http://localhost:8545"
+      );
+
+      const signer = await provider.getSigner();
+
+      console.log(provider);
+
+      // const factory = await DAOFactoryFactory.connect(
+      //   DAOFactoryAddress,
+      //   signer
+      // );
+
+      const factory = new ethers.Contract(
+        DAOFactoryAddress,
+        DAOFactoryABI.abi,
+        signer
+      );
 
       const launchDAOTransaction = await factory.launchDAO(
         inputs.name,
@@ -74,8 +122,6 @@ export default function Confirmation() {
       const contractReceipt = await launchDAOTransaction.wait();
       console.log("DAO Launched", contractReceipt);
 
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-
       const event = contractReceipt.events?.find(
         (event: any) => event.event === "NewDAO"
       );
@@ -91,97 +137,85 @@ export default function Confirmation() {
   };
 
   return (
-    <>
-      <div className="alchemy--section--right">
-        <h1 className="alchemy--section--title">Confirmation</h1>
-        <div>
-          <h2 className="alchemy--section--subtitle">Basic Info</h2>
-          <div className="alchemy--confirmation" style={{ margin: "30px 0px" }}>
-            <p>Dao Name:</p>
-            <p className="alchemy--confirmation--result">{name}</p>
-          </div>
-        </div>
-        {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
-        <div>
-          <h2 className="alchemy--section--subtitle">Governance</h2>
-          <div className="alchemy--confirmation" style={{ marginTop: 30 }}>
-            <p>Proposal Passing Percentage: </p>
-            <p className="alchemy--confirmation--result">
-              {inputs.proposalPassing} %
-            </p>
-          </div>
-          <div className="alchemy--confirmation">
-            <p>Vote Duration: </p>
-            <p className="alchemy--confirmation--result">
-              {inputs.voteDurationWeeks} Weeks {inputs.voteDurationDays} Days
-            </p>
-          </div>
-        </div>
-        {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
-        <div>
-          <h2 className="alchemy--section--subtitle" style={{ marginTop: 30 }}>
-            Tokenomics
-          </h2>
-          <div className="alchemy--confirmation">
-            <p>Token Name</p>
-            <p className="alchemy--confirmation--result">{inputs.tokenName}</p>
-          </div>
-          <div className="alchemy--confirmation">
-            <p>Token Symbol</p>
-            <p className="alchemy--confirmation--result">
-              {inputs.tokenSymbol}
-            </p>
-          </div>
-          <div className="alchemy--confirmation">
-            <p>Initial Token Supply</p>
-            <p className="alchemy--confirmation--result">
-              {inputs.initTokenSupply.toLocaleString()}
-            </p>
-          </div>
-        </div>
-        {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
-        <div>
-          <h2 className="alchemy--section--subtitle" style={{ marginTop: 30 }}>
-            Payouts
-          </h2>
-          <div className="alchemy--confirmation wallet">
-            <p style={{ width: 215 }}>AirDrop Wallet</p>
-            <p className="alchemy--confirmation--result">{AirDropAddress}</p>
-            <p>{AirDropWallet}%</p>
-          </div>
-          <div className="alchemy--confirmation wallet">
-            <p style={{ width: 215 }}>AirDrop Wallet</p>
-            <p className="alchemy--confirmation--result">{LiquidityAddress}</p>
-            <p>{Liquidity}%</p>
-          </div>
-          <div className="alchemy--confirmation wallet">
-            <p style={{ width: 215 }}>Burn Wallet</p>
-            <p className="alchemy--confirmation--result">{BurnAddress}</p>
-            <p>{Burn}%</p>
-          </div>
-          <div className="alchemy--confirmation wallet">
-            <p style={{ width: 215 }}>Real Estate Wallet</p>
-            <p className="alchemy--confirmation--result">{RealEstateAddress}</p>
-            <p>{RealEstate}%</p>
-          </div>
-          <div className="alchemy--confirmation wallet">
-            <p style={{ width: 215 }}>Marketing Wallet</p>
-            <p className="alchemy--confirmation--result">{MarketingAddress}</p>
-            <p>{Marketing}%</p>
-          </div>
-          <div
-            className="alchemy--confirmation wallet"
-            style={{ marginBottom: 50 }}
-          >
-            <p style={{ width: 215 }}>Developer Wallet</p>
-            <p className="alchemy--confirmation--result">{DeveloperAddress}</p>
-            <p>{Developer}%</p>
-          </div>
-        </div>
-        <button className="header--nav--actionbutton" onClick={handleSubmit}>
-          CREATE
-        </button>
-      </div>
-    </>
+    // <>
+    <div className="alchemy--section--right">
+      <h1 className="alchemy--section--title">Confirmation</h1>
+      <ConfirmationResult title="Basic Info">
+        <Result2Column resultTitle="Dao Name" result={name}></Result2Column>
+      </ConfirmationResult>
+
+      {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
+
+      <ConfirmationResult title="Governance">
+        <Result2Column
+          resultTitle="Proposal Passing Percentage"
+          result={`${inputs.proposalPassing} %`}
+        ></Result2Column>
+        <Result2Column
+          resultTitle="Vote Duration"
+          result={`${inputs.voteDurationWeeks} Weeks ${inputs.voteDurationDays} Days`}
+        ></Result2Column>
+      </ConfirmationResult>
+
+      {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
+
+      <ConfirmationResult title="Tokenomics">
+        <Result2Column
+          resultTitle="Token Name"
+          result={inputs.tokenName}
+        ></Result2Column>
+        <Result2Column
+          resultTitle="Token Symbol"
+          result={inputs.tokenSymbol}
+        ></Result2Column>
+        <Result2Column
+          resultTitle="Initial Token Supply"
+          result={inputs.initTokenSupply.toLocaleString()}
+        ></Result2Column>
+      </ConfirmationResult>
+
+      {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
+
+      <ConfirmationResult title="Payouts">
+        <Result3Column
+          wallet="AirDrop Wallet"
+          address={AirDropAddress}
+          percentage={AirDropWallet}
+        ></Result3Column>
+        <Result3Column
+          wallet="Liquidity Wallet"
+          address={LiquidityAddress}
+          percentage={Liquidity}
+        ></Result3Column>
+        <Result3Column
+          wallet="Burn Wallet"
+          address={BurnAddress}
+          percentage={Burn}
+        ></Result3Column>
+        <Result3Column
+          wallet="Real Estate Wallet"
+          address={RealEstateAddress}
+          percentage={RealEstate}
+        ></Result3Column>
+        <Result3Column
+          wallet="Marketing Wallet"
+          address={MarketingAddress}
+          percentage={Marketing}
+        ></Result3Column>
+        <Result3Column
+          wallet="Developer Wallet"
+          address={DeveloperAddress}
+          percentage={Developer}
+        ></Result3Column>
+      </ConfirmationResult>
+
+      <button
+        style={{ marginTop: 30 }}
+        className="header--nav--actionbutton"
+        onClick={handleSubmit}
+      >
+        CREATE DAO
+      </button>
+    </div>
   );
 }

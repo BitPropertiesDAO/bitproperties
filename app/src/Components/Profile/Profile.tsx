@@ -1,10 +1,7 @@
 import React from "react";
 import { useParams } from "react-router";
 
-import "./styles.css";
-
-export default function DashBoard() {
+export default function Profile() {
   let { accountID } = useParams();
-
-  return <div>{accountID}Yo</div>;
+  return <div>{accountID}</div>;
 }
