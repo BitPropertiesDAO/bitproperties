@@ -3,6 +3,7 @@ import chaiAsPromised from 'chai-as-promised'
 import chai from "chai"
 import { solidity } from "ethereum-waffle"
 import { Property } from "../typechain/Property"
+import { doesNotMatch } from 'assert'
 
 chai.use(solidity)
 chai.use(chaiAsPromised)
@@ -96,9 +97,38 @@ describe('Property', () => {
 			expect(Number(amount)).to.equal(sharesToList)
 		}) 
 
-		it('should reject listing shares not owned by wallet')
+		it('should reject listing shares not owned by wallet', async() => {
+			const signers = await ethers.getSigners()
+			const shareListPrice = 12345
+			const sharesToList = 15
 
-		it('should allow purchasing listed shares')
+			await expect(property.connect(signers[1]).listShares(shareListPrice, sharesToList)
+			).to.be.revertedWith("caller must own given token")
+		})
+
+		it.only('should allow purchasing listed shares', async() => {
+			const signers = await ethers.getSigners()
+			const shareListPrice = 12345
+			const sharesToList = 15
+			const sharesToBuy = 10
+			
+			// signers[0] initially has no payment balance 
+			expect(await property.paymentBalances(signers[0].address)).to.be.equal(0)
+
+			// List and purchase shares
+			await property.connect(signers[0]).listShares(shareListPrice, sharesToList)
+			await property.setApprovalForAll(signers[1].address, true)
+			await property.connect(signers[1]).purchaseShares(signers[0].address, sharesToBuy, {
+				value: (shareListPrice * sharesToBuy).toString(),
+			})
+
+			// New balance reflected for seller
+			expect(await property.paymentBalances(signers[0].address)).to.be.equal(shareListPrice * sharesToBuy)
+
+			const sellerListing = (await property.listings(signers[0].address))
+			expect(sellerListing.amount).to.be.equal(sharesToList - sharesToBuy)
+
+		}).timeout(100000)
 
 		it('should reject purchasing listed shares for an incorrect amount')
 

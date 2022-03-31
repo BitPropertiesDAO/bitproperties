@@ -72,13 +72,14 @@ contract Property is ERC1155 {
 
         if (amountToPurchase == listings[listingId].amount) {
             delete listings[listingId];
+            shareHolders.remove(listingId);
         } else {
             listings[listingId] = Listing(listings[listingId].price, listings[listingId].amount.sub(amountToPurchase));
         }
 
         shareHolders.add(msg.sender);
 
-        // TODO: emit purchase shares event
+        emit PurchaseShares(msg.sender, listingId, amountToPurchase);
     }
 
     function withdrawFunds (uint256 amount, address payable recipientAddress) public {
