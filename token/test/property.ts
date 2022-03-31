@@ -106,7 +106,7 @@ describe('Property', () => {
 			).to.be.revertedWith("caller must own given token")
 		})
 
-		it.only('should allow purchasing listed shares', async() => {
+		it('should allow purchasing listed shares', async() => {
 			const signers = await ethers.getSigners()
 			const shareListPrice = 12345
 			const sharesToList = 15
