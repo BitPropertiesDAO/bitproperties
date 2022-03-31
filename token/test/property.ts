@@ -113,7 +113,8 @@ describe('Property', () => {
 			const sharesToBuy = 10
 			
 			// signers[0] initially has no payment balance 
-			expect(await property.paymentBalances(signers[0].address)).to.be.equal(0)
+			const originalSellerPaymentBalance = await property.paymentBalances(signers[0].address)
+			expect(originalSellerPaymentBalance).to.be.equal(0)
 
 			// List and purchase shares
 			await property.connect(signers[0]).listShares(shareListPrice, sharesToList)
@@ -123,12 +124,13 @@ describe('Property', () => {
 			})
 
 			// New balance reflected for seller
-			expect(await property.paymentBalances(signers[0].address)).to.be.equal(shareListPrice * sharesToBuy)
+			const newSellerPaymentBalance = await property.paymentBalances(signers[0].address)
+			expect(newSellerPaymentBalance).to.be.equal(shareListPrice * sharesToBuy)
 
-			const sellerListing = (await property.listings(signers[0].address))
-			expect(sellerListing.amount).to.be.equal(sharesToList - sharesToBuy)
+			const sellerAmountLeft = await property.listings(signers[0].address)
+			expect(sellerAmountLeft.amount).to.be.equal(sharesToList - sharesToBuy)
 
-		}).timeout(100000)
+		}).timeout(1000000)
 
 		it('should reject purchasing listed shares for an incorrect amount')
 
