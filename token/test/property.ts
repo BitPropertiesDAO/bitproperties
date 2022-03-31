@@ -76,21 +76,19 @@ describe('Property', () => {
 				value: (pricePerToken.toNumber() * 55).toFixed(0).toString(),
 			})
 	
-			// allow operator (bitproperties) to act as operator
+			// allow properties contract to act as operator
 			await property.setApprovalForAll(property.address, true)
 
 		})
 
 		it('should allow listing of shares owned by a wallet', async () => {
 			const signers = await ethers.getSigners()
-
 			const shareListPrice = 12345
 			const sharesToList = 15
 
 			const resp = await (await property.connect(signers[0]).listShares(shareListPrice, sharesToList)).wait()
 			const event = resp.events?.find(event => event.event === 'ListShares')
 			const [sender, price, amount] = event?.args as any
-			console.log(sender, Number(price), Number(amount))
 
 			expect(sender).to.equal(signers[0].address)
 			expect(Number(price)).to.equal(shareListPrice)
@@ -106,7 +104,7 @@ describe('Property', () => {
 			).to.be.revertedWith("caller must own given token")
 		})
 
-		it.only('should allow purchasing listed shares', async() => {
+		it('should allow purchasing listed shares', async() => {
 			const signers = await ethers.getSigners()
 			const shareListPrice = 12345
 			const sharesToList = 15
@@ -132,9 +130,47 @@ describe('Property', () => {
 
 		}).timeout(1000000)
 
-		it('should reject purchasing listed shares for an incorrect amount')
+		it('should reject purchasing listed shares for an incorrect amount', async() => {
+			const signers = await ethers.getSigners()
+			const shareListPrice = 12345
+			const sharesToList = 15
+			const sharesToBuy = 10
 
-		it('should allow a wallet which has sold shares to withdraw funds')
+			// List shares
+			await property.connect(signers[0]).listShares(shareListPrice, sharesToList)
+			await property.setApprovalForAll(signers[1].address, true)
+
+			const insufficientFunds = 123
+			await expect(property.connect(signers[1]).purchaseShares(signers[0].address, sharesToBuy, {
+				value: (insufficientFunds).toString(),
+			})
+			).to.be.revertedWith("insufficient funds sent")
+		})
+
+		it('should allow a wallet which has sold shares to withdraw funds', async() => {
+			const signers = await ethers.getSigners()
+			const shareListPrice = 100
+			const sharesToList = 10
+			const sharesToBuy = 5
+
+			// List and purchase shares
+			await property.connect(signers[0]).listShares(shareListPrice, sharesToList)
+			await property.setApprovalForAll(signers[1].address, true)
+			await property.connect(signers[1]).purchaseShares(signers[0].address, sharesToBuy, {
+				value: (shareListPrice * sharesToBuy).toString(),
+			})
+
+			const validWithdrawAmount = 250
+			// Before withdraw
+			const sellerPaymentBalance = await property.paymentBalances(signers[0].address)
+			expect(sellerPaymentBalance).to.be.equal(shareListPrice * sharesToBuy)
+
+			await property.connect(signers[0]).withdrawFunds(validWithdrawAmount, signers[0].address)
+
+			// After withdraw
+			const newPaymentBalance = await property.paymentBalances(signers[0].address)
+			expect(newPaymentBalance).to.be.equal(shareListPrice * sharesToBuy - validWithdrawAmount)
+		})
 
 	})
 
