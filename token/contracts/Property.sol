@@ -17,7 +17,7 @@ contract Property is ERC1155 {
     // emitted when funds are received into the contract
     event ReceiveFunds(address fromAddress, uint256 value);
     // emitted for each payment made to individual addresses after the shares-based split
-    event ReceiveFundsPayout(address toAddress, uint256 value);
+    event ReceiveFundsPayout(address toAddress, uint256 tokenBalance, uint256 value);
 
     using SafeMath for uint256;
     using EnumerableSet for EnumerableSet.AddressSet;
@@ -102,7 +102,7 @@ contract Property is ERC1155 {
                 // paymentBalances[shareHolderAddr] = paymentBalances[shareHolderAddr].add(partialPayment);
                 shareHolderAddr.transfer(partialPayment);
 
-                emit ReceiveFundsPayout(shareHolderAddr, partialPayment);
+                emit ReceiveFundsPayout(shareHolderAddr, tokenBalance, partialPayment);
             }
         }
         emit ReceiveFunds(msg.sender, msg.value);
