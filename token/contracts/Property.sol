@@ -50,7 +50,7 @@ contract Property is ERC1155 {
         totalIssuedShares = totalIssuedShares.add(amountOfTokens);
         shareHolders.add(msg.sender);
 
-        // TODO: emit event for issuing of shares
+        emit MintShares(msg.sender, amountOfTokens);
     }
 
     function listShares (uint256 price, uint256 amount) public {
@@ -87,19 +87,24 @@ contract Property is ERC1155 {
 
         recipientAddress.transfer(amount);
         paymentBalances[msg.sender] -= amount;
+
+        emit WithdrawFunds(msg.sender, amount);
     }
 
-    function receiveFunds () public payable {
+    function receiveFunds () public payable {   // property manager pays funds
         // iterate over each holder
         for (uint i = 0; i < shareHolders.length(); i++) {
             address payable shareHolderAddr = payable(shareHolders.at(i));
             uint256 tokenBalance = balanceOf(shareHolderAddr, TOKEN_ID);
 
             if (tokenBalance > 0) {
-                uint256 partialPayment = tokenBalance.div(totalIssuedShares).mul(msg.value);
+                uint256 partialPayment = tokenBalance.div(totalShares).mul(msg.value);
                 // paymentBalances[shareHolderAddr] = paymentBalances[shareHolderAddr].add(partialPayment);
                 shareHolderAddr.transfer(partialPayment);
+
+                emit ReceiveFundsPayout(shareHolderAddr, partialPayment);
             }
         }
+        emit ReceiveFunds(msg.sender, msg.value);
     }
 }
