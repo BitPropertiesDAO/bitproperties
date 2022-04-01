@@ -18,7 +18,7 @@ describe('Property', () => {
 		const signers = await ethers.getSigners()
 		const propertyFactory = await ethers.getContractFactory(
 			'Property',
-			signers[0]
+			signers[0]	// DAO address
 		)
 		property = (await propertyFactory.deploy("", 10 ** 5, 10000)) as Property
 		await property.deployed()
@@ -52,6 +52,17 @@ describe('Property', () => {
 			expect(property.mint(100, { value })).to.eventually.be.rejected
 		})
 
+		it('should deny a wallet to mint if minting amount is greater than total token supply', async() =>  {
+			const signers = await ethers.getSigners()
+			const pricePerToken = await property.pricePerShare()
+			const invalidMintAmount = 10000000000000
+			const value = (pricePerToken.toNumber() * invalidMintAmount).toFixed(0).toString()
+
+			// attempt to mint tokens
+			await expect(property.connect(signers[2]).mint(100000000000, { value })
+			).to.be.revertedWith("Invalid amount of supply")
+		})
+
 		it('should allow a wallet to mint, the totalIssuedShares should be updated', async () => {
 			const pricePerToken = await property.pricePerShare()
 			// mint tokens
@@ -72,13 +83,12 @@ describe('Property', () => {
 			const pricePerToken = await property.pricePerShare()
 			
 			// mint tokens
-			const mintResponse = await property.mint(55, {
+			await property.mint(55, {
 				value: (pricePerToken.toNumber() * 55).toFixed(0).toString(),
 			})
 	
 			// allow properties contract to act as operator
 			await property.setApprovalForAll(property.address, true)
-
 		})
 
 		it('should allow listing of shares owned by a wallet', async () => {
@@ -86,13 +96,11 @@ describe('Property', () => {
 			const shareListPrice = 12345
 			const sharesToList = 15
 
-			const resp = await (await property.connect(signers[0]).listShares(shareListPrice, sharesToList)).wait()
-			const event = resp.events?.find(event => event.event === 'ListShares')
-			const [sender, price, amount] = event?.args as any
-
-			expect(sender).to.equal(signers[0].address)
-			expect(Number(price)).to.equal(shareListPrice)
-			expect(Number(amount)).to.equal(sharesToList)
+			await property.listShares(shareListPrice, sharesToList)
+			
+			const listing = await property.listings(signers[0].address)
+			expect(listing.price).to.be.equal(shareListPrice)
+			expect(listing.amount).to.be.equal(sharesToList)
 		}) 
 
 		it('should reject listing shares not owned by wallet', async() => {
@@ -100,7 +108,7 @@ describe('Property', () => {
 			const shareListPrice = 12345
 			const sharesToList = 15
 
-			await expect(property.connect(signers[1]).listShares(shareListPrice, sharesToList)
+			await expect(property.connect(signers[4]).listShares(shareListPrice, sharesToList)
 			).to.be.revertedWith("caller must own given token")
 		})
 
