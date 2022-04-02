@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 
 import "antd/dist/antd.css";
@@ -95,23 +95,21 @@ export default function Header() {
           bit<span className="header--logo--bolder">Properties</span>
         </button>
       </h1>
-      {!isAlchemy && (
-        <nav>
-          <ul className="header--nav navbar">
-            <NavItem
-              title="WHITEPAPER"
-              url="https://app.gitbook.com/o/royHtkR6AKieNQ1UygU7/s/tgIrluxcjOTzLxDW1aVB/"
-            ></NavItem>
-            <NavItem title="CREATE DAO" navigate={`/Alchemy`}></NavItem>
-            <NavItem
-              title={!account ? "Connect Wallet" : account}
-              type="connect"
-            >
-              <DropdownMenu></DropdownMenu>
-            </NavItem>
-          </ul>
-        </nav>
-      )}
+      {/* {!isAlchemy && ( */}
+      <nav>
+        <ul className="header--nav navbar">
+          <NavItem
+            title="WHITEPAPER"
+            url="https://app.gitbook.com/o/royHtkR6AKieNQ1UygU7/s/tgIrluxcjOTzLxDW1aVB/"
+          ></NavItem>
+          <NavItem title="MARKETPLACE" navigate={`/Marketplace`}></NavItem>
+          <NavItem title="CREATE DAO" navigate={`/Alchemy`}></NavItem>
+          <NavItem title={!account ? "Connect Wallet" : account} type="connect">
+            <DropdownMenu></DropdownMenu>
+          </NavItem>
+        </ul>
+      </nav>
+      {/* )} */}
     </div>
   );
 }

@@ -21,7 +21,7 @@ export function AlchemyLinks(props: any) {
 }
 
 export function InputSubheading(props: any) {
-  return <h2 className="alchemy--section--subtitle ">{props.children}</h2>;
+  return <h2 className="alchemy--section--subtitle">{props.children}</h2>;
 }
 
 export function InputGroup(props: any) {
@@ -30,8 +30,4 @@ export function InputGroup(props: any) {
 
 export function InputFormHeader(props: any) {
   return <h1 className="alchemy--section--title">{props.children}</h1>;
-}
-
-export function InputFormAlchemy(props: any) {
-  return <div className="alchemy--section--right">{props.children}</div>;
 }

@@ -1,12 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./styles.css";
-import { Navigate, Outlet, useNavigate, useLocation } from "react-router";
+import { Outlet, useNavigate, useLocation } from "react-router";
 import { useAppSelector } from "../../utils/reduxhooks";
-import { Progress } from "antd";
-import { Steps } from "antd";
+import { Icon } from "@iconify/react";
 
 export default function Creation() {
-  const { Step } = Steps;
+  const AlchemyTab = (props: any) => {
+    return (
+      <li
+        className={`Alchemy--tab--container ${
+          current === props.current && "brightness--animation"
+        }`}
+        onClick={() => onChange(props.current)}
+        style={{
+          color: current === props.current ? "black" : "rgb(210,210,210)",
+          background: current === props.current ? `` : "transparent",
+        }}
+      >
+        <Icon icon={props.icon} height="25" className="tab--icon" />
+        <div className="Alchemy--tab--title">{props.title}</div>
+      </li>
+    );
+  };
   let navigate = useNavigate();
   let location = useLocation();
 
@@ -48,7 +63,7 @@ export default function Creation() {
       return percentage;
     });
 
-    //Update STEPS on `Next Section / Back
+    //Update tabs on `Next Section / Back
     if (location.pathname === `/Alchemy/create/`) {
       setCurrent(0);
     }
@@ -76,40 +91,47 @@ export default function Creation() {
       navigate(`/Alchemy/create/tokenomics`);
     }
     if (current === 3) {
-      if (percentage === 100) {
-        navigate(`/Alchemy/create/confirmation`);
-      }
+      navigate(`/Alchemy/create/confirmation`);
     }
   };
 
   return (
     <div>
       <div className="creation">
+        <div className="alchemy--progress-bar">
+          <div
+            className="alchemy--progress brightness--animation"
+            style={{ width: `${percentage}%` }}
+          ></div>
+        </div>
         <div className="alchemy--side--container">
-          <Progress
-            percent={percentage}
-            showInfo={false}
-            strokeColor={{
-              "0%": "#108ee9",
-              "100%": "#87d068",
-            }}
-          />
-          <div>
-            <Steps
-              current={current}
-              onChange={onChange}
-              direction="vertical"
-              className="alchemy--steps"
-            >
-              <Step title={`Basic Information`}></Step>
-              <Step title={`Governance`}></Step>
-              <Step title={`Tokenomics`}></Step>
-              <Step title={`Done!`}></Step>
-            </Steps>
-          </div>
+          <ul className="Alchemy--tabs">
+            <AlchemyTab
+              current={0}
+              title="Basic Information"
+              icon="clarity:details-solid"
+            ></AlchemyTab>
+            <AlchemyTab
+              current={1}
+              title="Governance"
+              icon="fluent:building-government-20-filled"
+            ></AlchemyTab>
+            <AlchemyTab
+              current={2}
+              title="Tokenomics"
+              icon="akar-icons:money"
+            ></AlchemyTab>
+            <AlchemyTab
+              current={3}
+              title="Confirmation"
+              icon="line-md:confirm-circle"
+            ></AlchemyTab>
+          </ul>
         </div>
       </div>
-      <Outlet />
+      <div className="alchemy--section--right">
+        <Outlet />
+      </div>
       <div className="alchemy--background"></div>
     </div>
   );

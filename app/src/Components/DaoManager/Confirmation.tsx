@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { useAppSelector } from "../../utils/reduxhooks";
 import { ethers, providers } from "ethers";
-import DAOFactoryABI from "../../artifacts/contracts/DAOFactory.sol/DAOFactory.json";
+
 import { useWeb3React } from "@web3-react/core";
+
+import { DAOFactoryAddress } from "../../contractsconfig";
+
 import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factories/DAOFactory__factory";
+
+import { useNavigate } from "react-router";
 
 const ConfirmationResult = (props: any) => {
   return (
@@ -40,7 +45,13 @@ const Result3Column = (props: any) => {
 };
 
 export default function Confirmation() {
-  const DAOFactoryAddress = "0x870526b7973b56163a6997bb7c886f5e4ea53638";
+  let navigate = useNavigate();
+
+  const [newDAOObject, setNewDAOObject] = useState({
+    daoRouterAddress: "",
+    daoTokenAddress: "",
+    daoGovernorAddress: "",
+  });
 
   const name = useAppSelector((state) => state.Alchemy.name);
 
@@ -75,27 +86,19 @@ export default function Confirmation() {
   const context = useWeb3React();
   const { library } = context;
 
+  const provider = new ethers.providers.JsonRpcProvider(
+    "http://localhost:8545"
+  );
+
   const handleSubmit = async () => {
     try {
-      const provider = new ethers.providers.JsonRpcProvider(
-        "http://localhost:8545"
-      );
-
-      const signer = await provider.getSigner();
+      const signer = provider.getSigner();
 
       console.log(provider);
 
-      // const factory = await DAOFactoryFactory.connect(
-      //   DAOFactoryAddress,
-      //   signer
-      // );
+      const factory = DAOFactoryFactory.connect(DAOFactoryAddress, signer);
 
-      const factory = new ethers.Contract(
-        DAOFactoryAddress,
-        DAOFactoryABI.abi,
-        signer
-      );
-
+      console.log(factory);
       const launchDAOTransaction = await factory.launchDAO(
         inputs.name,
         inputs.tokenName,
@@ -122,7 +125,7 @@ export default function Confirmation() {
       const contractReceipt = await launchDAOTransaction.wait();
       console.log("DAO Launched", contractReceipt);
 
-      const event = contractReceipt.events?.find(
+      const event = await contractReceipt.events?.find(
         (event: any) => event.event === "NewDAO"
       );
       console.log("Event:", event);
@@ -131,14 +134,23 @@ export default function Confirmation() {
         event?.args as any;
 
       console.log(daoRouterAddress, daoTokenAddress, daoGovernorAddress);
+      //  emit NewDAO(address(newDao), newDao.governanceTokenAddress(), newDao.governorAddress());
+
+      setNewDAOObject({
+        daoRouterAddress: daoRouterAddress,
+        daoTokenAddress: daoTokenAddress,
+        daoGovernorAddress: daoGovernorAddress,
+      });
+      console.log(newDAOObject);
     } catch (error) {
       console.log("launchDAO error", error);
     }
   };
 
+  // const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
-    // <>
-    <div className="alchemy--section--right">
+    <>
       <h1 className="alchemy--section--title">Confirmation</h1>
       <ConfirmationResult title="Basic Info">
         <Result2Column resultTitle="Dao Name" result={name}></Result2Column>
@@ -208,14 +220,21 @@ export default function Confirmation() {
           percentage={Developer}
         ></Result3Column>
       </ConfirmationResult>
-
-      <button
-        style={{ marginTop: 30 }}
-        className="header--nav--actionbutton"
-        onClick={handleSubmit}
-      >
-        CREATE DAO
-      </button>
-    </div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <button
+          style={{ marginTop: 30, marginBottom: 30 }}
+          className="header--nav--actionbutton"
+          onClick={handleSubmit}
+        >
+          CREATE DAO
+        </button>
+        <button
+          className="header--nav--actionbutton"
+          onClick={() => navigate(`/DAO/${newDAOObject.daoRouterAddress}`)}
+        >
+          GO TO DAO
+        </button>
+      </div>
+    </>
   );
 }

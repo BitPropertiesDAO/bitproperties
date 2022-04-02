@@ -13,6 +13,9 @@ import App from "./App";
 import Alchemy from "./Components/DaoManager/Alchemy";
 import HomePage from "./Components/Home/HomePage";
 import Header from "./Components/Header/Header";
+
+import Marketplace from "./Components/Marketplace/Marketplace";
+
 import Creation from "./Components/DaoManager/Creation";
 
 import BasicDetails from "./Components/DaoManager/BasicDetails";
@@ -20,8 +23,8 @@ import Governance from "./Components/DaoManager/Governance";
 import Tokenomics from "./Components/DaoManager/Tokenomics";
 import Confirmation from "./Components/DaoManager/Confirmation";
 
-import DashBoard from "./Components/Profile/DashBoard";
-import Profile from "./Components/Profile/Profile";
+import DAODashBoard from "./Components/DAO/DashBoard";
+import DAOPage from "./Components/DAO/DAOPage";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -32,6 +35,7 @@ ReactDOM.render(
           <Routes>
             <Route path="/" element={<App />}>
               <Route path="/" element={<HomePage />}></Route>
+              <Route path="Marketplace" element={<Marketplace />}></Route>
               <Route path="Alchemy" element={<Alchemy />}></Route>
               <Route path="Alchemy/create" element={<Creation />}>
                 <Route
@@ -52,8 +56,11 @@ ReactDOM.render(
                 ></Route>
               </Route>
             </Route>
-            <Route path="profile" element={<DashBoard />}>
-              <Route path=":accountID" element={<Profile />}></Route>
+            <Route path="DAO" element={<DAODashBoard></DAODashBoard>}>
+              <Route
+                path="/DAO/:DAORouterID"
+                element={<DAOPage></DAOPage>}
+              ></Route>
             </Route>
             <Route path="*" element={<App />}></Route>
           </Routes>

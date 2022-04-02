@@ -16,6 +16,7 @@ export default function Alchemy() {
     activate(injected);
     console.log(activate(injected));
   };
+
   return (
     <div>
       <section>
@@ -23,14 +24,14 @@ export default function Alchemy() {
           <div className="center">
             <h1 className="intro--title"> Welcome to bitProperties Alchemy</h1>
           </div>
-          {account ? (
-            <div className="center">
-              <h1 style={{ color: `white` }}>Account: {account}</h1>
-              <p>Continue with this account?</p>
-              <Link to="create">CONTINUE</Link>
-            </div>
-          ) : (
-            <div className="center">
+          {/* {account ? ( */}
+          <div className="center">
+            <h1 style={{ color: `white` }}>Account: {account}</h1>
+            <p>Continue with this account?</p>
+            <Link to="create">CONTINUE</Link>
+          </div>
+          {/* ) : ( */}
+          {/* <div className="center">
               <p>You must be signed in to MetaMask to use this feature</p>
               <Button
                 style={{
@@ -41,8 +42,8 @@ export default function Alchemy() {
               >
                 Sign in
               </Button>
-            </div>
-          )}
+            </div> */}
+          {/* )} */}
         </div>
       </section>
     </div>

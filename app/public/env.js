@@ -28,7 +28,7 @@ window.env = {
   "npm_package_browserslist_development_2": "last 1 safari version",
   "npm_execpath": "/usr/local/lib/node_modules/yarn/bin/yarn.js",
   "npm_package_dependencies_react_redux": "^7.2.6",
-  "PATH": "/var/folders/js/h4x98nfj25g1cxlvsg5jtgzw0000gn/T/yarn--1648552629040-0.1311504289736758:/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/app/node_modules/.bin:/Users/nikitagurbatov/.config/yarn/link/node_modules/.bin:/Users/nikitagurbatov/.yarn/bin:/usr/local/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+  "PATH": "/var/folders/js/h4x98nfj25g1cxlvsg5jtgzw0000gn/T/yarn--1648815999463-0.5921276287606225:/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/app/node_modules/.bin:/Users/nikitagurbatov/.config/yarn/link/node_modules/.bin:/Users/nikitagurbatov/.yarn/bin:/usr/local/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
   "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"start\"],\"original\":[\"start\"]}",
   "npm_package_dependencies__ethersproject_providers": "^5.4.5",
   "_": "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/app/node_modules/.bin/react-dotenv",
@@ -88,5 +88,5 @@ window.env = {
   "COLORTERM": "truecolor",
   "npm_node_execpath": "/usr/local/bin/node",
   "npm_config_version_tag_prefix": "v",
-  "REACT_APP_SMART_CONTRACT_ADDRESS": "0x4bf010f1b9beDA5450a8dD702ED602A104ff65EE"
+  "REACT_APP_SMART_CONTRACT_ADDRESS": "0x2b5A4e5493d4a54E717057B127cf0C000C876f9B"
 };
