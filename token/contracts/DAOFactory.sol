@@ -14,6 +14,12 @@ contract DAOFactory {
 
     mapping(address => DAO) public daoRouters;
 
+    // keep track of all the DAOs created
+    address[] public DAOs;
+
+    using Counters for Counters.Counter;
+    Counters.Counter public daoCounter;
+
     constructor () {}
 
     function launchDAO (
@@ -51,6 +57,13 @@ contract DAOFactory {
         daoRouters[address(newDao)] = DAO(newDao.governorAddress(), newDao.governanceTokenAddress());
         // respond with the address of the newly created DAO router, it's governor and it's token
         emit NewDAO(address(newDao), newDao.governanceTokenAddress(), newDao.governorAddress());
+
+        // push new DAO router address
+        DAOs.push(address(newDao));
+
+        // increment daoCounter by one
+        daoCounter.increment();
+
         return (address(newDao), newDao.governanceTokenAddress(), newDao.governorAddress());
     }
 

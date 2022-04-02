@@ -2,15 +2,15 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/DAOFactory.sol": {
-      "lastModificationDate": 1648320480684,
-      "contentHash": "8aca136981dbce3d7f66a976ec1dcd86",
+      "lastModificationDate": 1648923168884,
+      "contentHash": "886b2f28489dd1e89dfffa8a9a2183b4",
       "sourceName": "contracts/DAOFactory.sol",
       "solcConfig": {
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -41,15 +41,15 @@
       ]
     },
     "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/DAORouter.sol": {
-      "lastModificationDate": 1648304285133,
-      "contentHash": "698daba3eba78be5a282bb9027747773",
+      "lastModificationDate": 1648933371840,
+      "contentHash": "b10dd78c8f8da5f956e1fd25459b2dd1",
       "sourceName": "contracts/DAORouter.sol",
       "solcConfig": {
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -86,8 +86,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -120,15 +120,15 @@
       ]
     },
     "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/DAOGovernor.sol": {
-      "lastModificationDate": 1648304285133,
+      "lastModificationDate": 1648415947112,
       "contentHash": "2cb5903bcbdf9c7b88278f0b56dc830d",
       "sourceName": "contracts/DAOGovernor.sol",
       "solcConfig": {
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -167,8 +167,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -194,15 +194,15 @@
       ]
     },
     "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/Property.sol": {
-      "lastModificationDate": 1648304285133,
+      "lastModificationDate": 1648415722825,
       "contentHash": "3e14a7d972d63da3fd1a47357da90485",
       "sourceName": "contracts/Property.sol",
       "solcConfig": {
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -239,8 +239,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -280,8 +280,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -314,8 +314,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -348,8 +348,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -384,8 +384,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -420,8 +420,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -456,8 +456,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -490,8 +490,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -524,8 +524,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -560,8 +560,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -594,8 +594,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -630,8 +630,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -668,8 +668,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -708,8 +708,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -741,15 +741,15 @@
       ]
     },
     "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/Uniswap.sol": {
-      "lastModificationDate": 1648304285133,
+      "lastModificationDate": 1648415725378,
       "contentHash": "cbf5cea0ff35feacb187fa104043d881",
       "sourceName": "contracts/Uniswap.sol",
       "solcConfig": {
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -783,8 +783,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -817,8 +817,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -853,8 +853,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -887,8 +887,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -923,8 +923,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -959,8 +959,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -993,8 +993,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1027,8 +1027,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1061,8 +1061,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1095,8 +1095,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1129,8 +1129,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1172,8 +1172,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1208,8 +1208,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1244,8 +1244,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1281,8 +1281,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1317,8 +1317,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {
@@ -1351,8 +1351,8 @@
         "version": "0.8.7",
         "settings": {
           "optimizer": {
-            "enabled": false,
-            "runs": 200
+            "enabled": true,
+            "runs": 4000
           },
           "outputSelection": {
             "*": {

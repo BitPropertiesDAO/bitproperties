@@ -21,13 +21,19 @@ import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface DAORouterInterface extends ethers.utils.Interface {
   functions: {
+    "Properties(uint256)": FunctionFragment;
     "daoName()": FunctionFragment;
     "daoProperties(address)": FunctionFragment;
     "governanceTokenAddress()": FunctionFragment;
     "governorAddress()": FunctionFragment;
     "launchNewProperty(string,uint256,uint256)": FunctionFragment;
+    "propertyCounter()": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "Properties",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "daoName", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "daoProperties",
@@ -45,7 +51,12 @@ interface DAORouterInterface extends ethers.utils.Interface {
     functionFragment: "launchNewProperty",
     values: [string, BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "propertyCounter",
+    values?: undefined
+  ): string;
 
+  decodeFunctionResult(functionFragment: "Properties", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "daoName", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "daoProperties",
@@ -63,9 +74,21 @@ interface DAORouterInterface extends ethers.utils.Interface {
     functionFragment: "launchNewProperty",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "propertyCounter",
+    data: BytesLike
+  ): Result;
 
-  events: {};
+  events: {
+    "NewProperty(address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "NewProperty"): EventFragment;
 }
+
+export type NewPropertyEvent = TypedEvent<
+  [string] & { propertyAddress: string }
+>;
 
 export class DAORouter extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -111,6 +134,11 @@ export class DAORouter extends BaseContract {
   interface: DAORouterInterface;
 
   functions: {
+    Properties(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     daoName(overrides?: CallOverrides): Promise<[string]>;
 
     daoProperties(arg0: string, overrides?: CallOverrides): Promise<[string]>;
@@ -125,7 +153,13 @@ export class DAORouter extends BaseContract {
       _pricePerShare: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    propertyCounter(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { _value: BigNumber }>;
   };
+
+  Properties(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   daoName(overrides?: CallOverrides): Promise<string>;
 
@@ -142,7 +176,11 @@ export class DAORouter extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  propertyCounter(overrides?: CallOverrides): Promise<BigNumber>;
+
   callStatic: {
+    Properties(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
     daoName(overrides?: CallOverrides): Promise<string>;
 
     daoProperties(arg0: string, overrides?: CallOverrides): Promise<string>;
@@ -157,11 +195,26 @@ export class DAORouter extends BaseContract {
       _pricePerShare: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    propertyCounter(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
-  filters: {};
+  filters: {
+    "NewProperty(address)"(
+      propertyAddress?: null
+    ): TypedEventFilter<[string], { propertyAddress: string }>;
+
+    NewProperty(
+      propertyAddress?: null
+    ): TypedEventFilter<[string], { propertyAddress: string }>;
+  };
 
   estimateGas: {
+    Properties(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     daoName(overrides?: CallOverrides): Promise<BigNumber>;
 
     daoProperties(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -176,9 +229,16 @@ export class DAORouter extends BaseContract {
       _pricePerShare: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    propertyCounter(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    Properties(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     daoName(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     daoProperties(
@@ -198,5 +258,7 @@ export class DAORouter extends BaseContract {
       _pricePerShare: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    propertyCounter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

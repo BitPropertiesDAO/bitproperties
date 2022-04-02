@@ -2,12 +2,20 @@
 import { HardhatUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
+require("hardhat-contract-sizer");
+require("@nomiclabs/hardhat-ganache");
 
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
         version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 4000,
+          },
+        },
       },
     ],
   },
@@ -23,6 +31,9 @@ const config: HardhatUserConfig = {
       forking: {
         url: "https://eth-mainnet.alchemyapi.io/v2/Sgd8L39stCNQnsuXxYAKXVvFU_z5UlXv",
       },
+    },
+    localhost: {
+      url: "http://127.0.0.1:8545",
     },
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/01091511c975487ba99f221730a3ba08",
