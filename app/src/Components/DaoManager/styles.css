@@ -1,0 +1,249 @@
+:root {
+  --color: rgb(255, 255, 255);
+  --title-font-size: 3.4rem;
+  --title-font-width: 700;
+  --side--width: 300px;
+  --alchemy--title--font-size: 2.2rem;
+}
+@import "~antd/dist/antd.css";
+.alchemy--intro {
+  padding: 100px 40px;
+}
+
+.intro--title {
+  color: var(--color);
+  text-align: center;
+  font-size: var(--title-font-size);
+  font-weight: 700;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.creation {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: calc(100%);
+  width: var(--side--width);
+  /* background: linear-gradient(180deg, #242424 0%, #1a1a1a 100%); */
+  background: #080808;
+  box-shadow: 4px 0px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 45px 0px 0px;
+  border-right: var(--light-border);
+  z-index: 2;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.space--between {
+  justify-content: space-between;
+}
+
+.alchemy--section--right {
+  position: absolute;
+  left: 300px;
+  overflow: scroll;
+  padding: 100px;
+  margin-bottom: 100px;
+  height: 100vh;
+  width: calc(100% - var(--side--width));
+  min-width: 940px;
+  z-index: 1;
+  /* background: linear-gradient(180deg, rgb(47, 47, 47) 0%, rgb(40, 40, 40) 100%); */
+  background: #121418;
+  box-shadow: inset 0px 4px 40px rgba(0, 0, 0, 0.35);
+}
+.alchemy--section--right::-webkit-scrollbar {
+  display: none;
+}
+
+.alchemy--section--title {
+  color: var(--color);
+  font-size: var(--alchemy--title--font-size);
+  font-weight: 600;
+}
+.alchemy--section--subtitle {
+  color: var(--color);
+  font-size: 1.2rem;
+}
+
+.alchemy--inputfield {
+  color: var(--color);
+}
+
+.alchemy--input {
+  margin: 10px 0 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  color: var(--color);
+}
+
+.alchemy--payout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.align--middle {
+  justify-content: center;
+}
+
+.alchemy--account--type {
+  font-weight: 400;
+  margin-top: 32px;
+  width: 200px;
+}
+.alchemy--switch {
+  margin-bottom: 15px;
+}
+
+.alchemy--input--group {
+  /* margin-bottom: 40px; */
+  margin: 40px auto;
+  padding: 35px 0px 50px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.alchemy--bottom--links {
+  justify-content: space-between;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.alchemy--steps {
+  height: 400px;
+}
+.alchemy--step {
+  color: var(--color);
+}
+
+@media (max-width: 1400px) {
+  /* .alchemy--background {
+    position: fixed;
+    background-color: rgb(126, 126, 126);
+    width: 100%;
+    height: 100%;
+    /* left: 300px; 
+    top: 0;
+    z-index: 1; */
+  /* } */
+}
+
+.alchemy--wallet--totalpercentage {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 2px;
+}
+
+.alchemy--confirmation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.alchemy--confirmation--result {
+  width: 200px;
+  margin-left: -150px;
+  /* flex */
+}
+
+.wallet {
+  padding-right: 0;
+}
+
+.plain--button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+.plain--button:hover {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ///////////////////////////////////////////////////////////////////////////// */
+
+.alchemy--side--container {
+  padding: 100px 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes brightness {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(2);
+  }
+}
+
+.Alchemy--tab--container {
+  display: flex;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: rgba(154, 154, 154, 0.9);
+  background: linear-gradient(
+    90deg,
+    #6748db 0%,
+    #8372cd 36.46%,
+    #6b87be 69.79%,
+    #57a3d9 100%
+  );
+  margin: 15px 0;
+  padding: 10px 20px 10px 20px;
+  /* border-radius: 20px 50px 50px 20px; */
+  border-radius: 8px;
+  transition: 0.5s ease;
+  align-items: center;
+}
+
+.brightness--animation {
+  animation-name: brightness;
+  animation-duration: 3s;
+  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.7);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.alchemy--progress-bar {
+  position: absolute;
+  height: 3px;
+  left: var(--side--width);
+  top: var(--header--height);
+  width: calc(101vw - var(--side--width));
+  background-color: transparent;
+}
+
+.alchemy--progress {
+  height: 3px;
+  transition: 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.05);
+  background-color: turquoise;
+  border-radius: 0px 20px 20px 0;
+}
+
+.Alchemy--tab--title {
+  padding-left: 30px;
+}
