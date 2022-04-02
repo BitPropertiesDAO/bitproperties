@@ -16,6 +16,7 @@ export default function Profile() {
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
   );
+  const signer = provider.getSigner();
 
   const [DAOInformation, setDAOInformation] = useState({
     DAOName: "",
@@ -24,7 +25,6 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    const signer = provider.getSigner();
     // @ts-ignore
     const router = DAORouterFactory.connect(DAORouterID, signer);
 
@@ -59,18 +59,12 @@ export default function Profile() {
         numberShares,
         pricePerShare
       );
-
       const propertyReceipt = await launchNewPropertyTsx.wait();
       console.log("Property Launched", propertyReceipt);
-
       const event = await propertyReceipt.events?.find(
         (event: any) => event.event === "NewProperty"
       );
-
-      // console.log("Event:", event);
-
       const [daoPropertyAddress] = event?.args as any;
-
       setPropertyContractAddress(daoPropertyAddress);
     } catch (error) {
       console.log("launchNewPropertyError", error);
@@ -114,6 +108,11 @@ export default function Profile() {
         LaunchNewProperty
       </button>
       <div>Property Contract Address: {propertyContractAddress}</div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <button>VIEW PROPERTIES</button>
     </>
   );
 }

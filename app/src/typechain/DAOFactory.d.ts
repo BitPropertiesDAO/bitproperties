@@ -21,10 +21,17 @@ import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface DAOFactoryInterface extends ethers.utils.Interface {
   functions: {
+    "DAOs(uint256)": FunctionFragment;
+    "daoCounter()": FunctionFragment;
     "daoRouters(address)": FunctionFragment;
     "launchDAO(string,string,string,uint256,tuple,address,tuple)": FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: "DAOs", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "daoCounter",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "daoRouters", values: [string]): string;
   encodeFunctionData(
     functionFragment: "launchDAO",
@@ -52,6 +59,8 @@ interface DAOFactoryInterface extends ethers.utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "DAOs", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "daoCounter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "daoRouters", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "launchDAO", data: BytesLike): Result;
 
@@ -114,6 +123,12 @@ export class DAOFactory extends BaseContract {
   interface: DAOFactoryInterface;
 
   functions: {
+    DAOs(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+
+    daoCounter(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { _value: BigNumber }>;
+
     daoRouters(
       arg0: string,
       overrides?: CallOverrides
@@ -148,6 +163,10 @@ export class DAOFactory extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  DAOs(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  daoCounter(overrides?: CallOverrides): Promise<BigNumber>;
 
   daoRouters(
     arg0: string,
@@ -184,6 +203,10 @@ export class DAOFactory extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    DAOs(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    daoCounter(overrides?: CallOverrides): Promise<BigNumber>;
+
     daoRouters(
       arg0: string,
       overrides?: CallOverrides
@@ -240,6 +263,10 @@ export class DAOFactory extends BaseContract {
   };
 
   estimateGas: {
+    DAOs(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    daoCounter(overrides?: CallOverrides): Promise<BigNumber>;
+
     daoRouters(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     launchDAO(
@@ -268,6 +295,13 @@ export class DAOFactory extends BaseContract {
   };
 
   populateTransaction: {
+    DAOs(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    daoCounter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     daoRouters(
       arg0: string,
       overrides?: CallOverrides

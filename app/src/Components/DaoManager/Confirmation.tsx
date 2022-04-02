@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import "./styles.css";
 import { useAppSelector } from "../../utils/reduxhooks";
 import { ethers, providers } from "ethers";
-
 import { useWeb3React } from "@web3-react/core";
-
 import { DAOFactoryAddress } from "../../contractsconfig";
-
 import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factories/DAOFactory__factory";
-
 import { useNavigate } from "react-router";
 
 const ConfirmationResult = (props: any) => {
@@ -230,7 +226,9 @@ export default function Confirmation() {
         </button>
         <button
           className="header--nav--actionbutton"
-          onClick={() => navigate(`/DAO/${newDAOObject.daoRouterAddress}`)}
+          onClick={() =>
+            navigate(`/DAO/${newDAOObject.daoRouterAddress}/Dashboard`)
+          }
         >
           GO TO DAO
         </button>
