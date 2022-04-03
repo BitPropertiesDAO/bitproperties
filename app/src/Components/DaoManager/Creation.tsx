@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import "./styles.css";
 import { Outlet, useNavigate, useLocation } from "react-router";
 import { useAppSelector } from "../../utils/reduxhooks";
-import AlchemyTab from "../SideBar/AlchemyTab";
+import Tab from "../SideBar/Tab";
 import SideBar from "../SideBar/SideBar";
 
 export default function Creation() {
@@ -57,41 +57,60 @@ export default function Creation() {
     if (location.pathname.includes("/Alchemy/create/confirmation")) {
       setCurrent(3);
     }
-  });
+  }, [
+    name,
+    quorumPercentage,
+    proposalPassing,
+    voteDurationWeeks,
+    tokenSymbol,
+    initTokenSupply,
+    location.pathname,
+    percentage,
+  ]);
 
   return (
     <>
       <SideBar>
-        <ul className="tab--group">
-          <AlchemyTab
+        <div className="MAKEtab--group">
+          {/*     FOR MAIN TAB :
+            //    linkTo={``} leads to first item in tabGroup
+                  do not include id or current
+          */}
+          <Tab
+            title="Alchemy"
+            icon="entypo:lab-flask"
+            linkTo={``}
+            main={true}
+          ></Tab>
+          <Tab
             id={0}
             current={current}
             title="Basic Information"
             icon="clarity:details-solid"
             linkTo={`/Alchemy/create`}
-          ></AlchemyTab>
-          <AlchemyTab
+          ></Tab>
+          <Tab
             id={1}
             current={current}
             title="Governance"
             icon="fluent:building-government-20-filled"
             linkTo={`/Alchemy/create/governance`}
-          ></AlchemyTab>
-          <AlchemyTab
+          ></Tab>
+          <Tab
             id={2}
             current={current}
             title="Tokenomics"
             icon="akar-icons:money"
             linkTo={`/Alchemy/create/tokenomics`}
-          ></AlchemyTab>
-          <AlchemyTab
+          ></Tab>
+          <Tab
             id={3}
             current={current}
             title="Confirmation"
             icon="line-md:confirm-circle"
             linkTo={`/Alchemy/create/confirmation`}
-          ></AlchemyTab>
-        </ul>
+          ></Tab>
+        </div>
         <div className="alchemy--progress-bar">
           <div
             className="alchemy--progress brightness--animation"
