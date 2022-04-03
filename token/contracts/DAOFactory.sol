@@ -15,9 +15,6 @@ contract DAOFactory {
     using Counters for Counters.Counter;
     Counters.Counter public daoCounter;
 
-    using Counters for Counters.Counter;
-    Counters.Counter public daoCounter;
-
     constructor () {}
 
     function launchDAO (
