@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { ethers } from "ethers";
 import { DAORouter__factory } from "../../typechain";
 
 export default function DAOProperties() {
+  let navigate = useNavigate();
   const [numberProperties, setNumberProperties] = useState();
   const [propertyElements, setPropertyElements] = useState([]);
 
@@ -40,7 +41,16 @@ export default function DAOProperties() {
       .then((DAOPropertiesArray) => {
         const propertyElements = DAOPropertiesArray.map(
           (property: any, index: any) => {
-            return <li>{property}</li>;
+            return (
+              <li
+                key={index}
+                onClick={() =>
+                  navigate(`/DAO/${DAORouterID}/Properties/${property}`)
+                }
+              >
+                {property}
+              </li>
+            );
           }
         );
         return propertyElements;
@@ -56,7 +66,8 @@ export default function DAOProperties() {
       <br />
       <br />
       <br />
-      <br />;<ul>{propertyElements}</ul>
+      <br />
+      <ul>{propertyElements}</ul>
     </>
   );
 }

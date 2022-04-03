@@ -5,8 +5,7 @@ import { Outlet } from "react-router";
 import { useLocation } from "react-router";
 import "../DaoManager/styles.css";
 import AlchemyTab from "../SideBar/AlchemyTab";
-
-import "./styles.css";
+import SideBar from "../SideBar/SideBar";
 
 export default function DashBoard() {
   const [current, setCurrent] = useState<number>();
@@ -24,33 +23,31 @@ export default function DashBoard() {
   }, [location]);
 
   return (
-    <div>
-      <div className="creation">
-        <div className="alchemy--side--container">
-          <ul className="Alchemy--tabs">
-            <AlchemyTab
-              id={0}
-              current={current}
-              // onClick={() => handleActiveTab(0)}
-              title="Dashboard"
-              icon="clarity:details-solid"
-              linkTo={`/DAO/${DAORouterID}/Dashboard`}
-            ></AlchemyTab>
-            <AlchemyTab
-              id={1}
-              current={current}
-              // onClick={() => setActiveTab(current)}
-              title="Properties"
-              icon="clarity:details-solid"
-              linkTo={`/DAO/${DAORouterID}/Properties`}
-            ></AlchemyTab>
-          </ul>
-        </div>
-      </div>
+    <>
+      <SideBar>
+        <ul className="Alchemy--tabs">
+          <AlchemyTab
+            id={0}
+            current={current}
+            // onClick={() => handleActiveTab(0)}
+            title="Dashboard"
+            icon="clarity:details-solid"
+            linkTo={`/DAO/${DAORouterID}/Dashboard`}
+          ></AlchemyTab>
+          <AlchemyTab
+            id={1}
+            current={current}
+            // onClick={() => setActiveTab(current)}
+            title="Properties"
+            icon="clarity:details-solid"
+            linkTo={`/DAO/${DAORouterID}/Properties`}
+          ></AlchemyTab>
+        </ul>
+      </SideBar>
       <div className="alchemy--section--right">
         <Outlet />
       </div>
       <div className="alchemy--background"></div>
-    </div>
+    </>
   );
 }

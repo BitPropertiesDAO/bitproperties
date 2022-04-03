@@ -26,6 +26,7 @@ import Confirmation from "./Components/DaoManager/Confirmation";
 import DAODashBoard from "./Components/DAO/DashBoard";
 import DAOPage from "./Components/DAO/DAOPage";
 import DAOProperties from "./Components/DAO/DAOProperties";
+import Property from "./Components/DAO/Property";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -65,6 +66,10 @@ ReactDOM.render(
               <Route
                 path="/DAO/:DAORouterID/Properties"
                 element={<DAOProperties />}
+              ></Route>
+              <Route
+                path="/DAO/:DAORouterID/Properties/:PropertyAddress"
+                element={<Property />}
               ></Route>
             </Route>
             <Route path="*" element={<App />}></Route>

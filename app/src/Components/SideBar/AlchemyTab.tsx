@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router";
 import { Icon } from "@iconify/react";
+import { useState } from "react";
+import "./styles.css";
 
 export default function AlchemyTab(props: any) {
   let navigate = useNavigate();
@@ -16,7 +18,7 @@ export default function AlchemyTab(props: any) {
       }}
     >
       <Icon icon={props.icon} height="25" className="tab--icon" />
-      <div className="Alchemy--tab--title">{props.title}</div>
+      <div className={`Alchemy--tab--title`}>{props.title}</div>
     </li>
   );
 }
