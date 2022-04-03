@@ -6,19 +6,36 @@ import { useLocation } from "react-router";
 import "../DaoManager/styles.css";
 import Tab from "../SideBar/Tab";
 import SideBar from "../SideBar/SideBar";
+import { DAORouter__factory as DAORouterFactory } from "../../typechain/factories/DAORouter__factory";
+import { ethers } from "ethers";
 
 export default function DashBoard() {
   const [current, setCurrent] = useState<number>();
+  const [daoName, setDAOName] = useState<string>();
+
+  const provider = new ethers.providers.JsonRpcProvider(
+    "http://localhost:8545"
+  );
+  const signer = provider.getSigner();
+  let { DAORouterID } = useParams();
+
+  // @ts-ignore
+  const router = DAORouterFactory.connect(DAORouterID, signer);
   let location = useLocation();
 
-  let { DAORouterID } = useParams();
   useEffect(() => {
+    const getDAOName = async () => {
+      const readDAOName = await router.daoName();
+      setDAOName(readDAOName);
+    };
+
     if (location.pathname.includes("/Dashboard")) {
       setCurrent(0);
     }
     if (location.pathname.includes("/Properties")) {
       setCurrent(1);
     }
+    getDAOName();
     console.log(current);
   }, [location]);
 
@@ -26,7 +43,7 @@ export default function DashBoard() {
     <>
       <SideBar>
         <Tab
-          title="DAO"
+          title={daoName}
           main={true}
           linkTo={`/DAO/${DAORouterID}/Dashboard`}
         ></Tab>
