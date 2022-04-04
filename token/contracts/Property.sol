@@ -89,7 +89,7 @@ contract Property is ERC1155 {
         paymentBalances[msg.sender] -= amount;
 
         emit WithdrawFunds(msg.sender, amount);
-    }
+    } 
 
     function receiveFunds () public payable {   // property manager pays funds
         // iterate over each holder

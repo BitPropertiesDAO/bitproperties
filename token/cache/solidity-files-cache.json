@@ -2,7 +2,7 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/andrewchen/Local Documents/bitproperties/bitproperties/token/contracts/DAOFactory.sol": {
-      "lastModificationDate": 1648949810636,
+      "lastModificationDate": 1649044767519,
       "contentHash": "886b2f28489dd1e89dfffa8a9a2183b4",
       "sourceName": "contracts/DAOFactory.sol",
       "solcConfig": {
@@ -41,7 +41,7 @@
       ]
     },
     "/Users/andrewchen/Local Documents/bitproperties/bitproperties/token/contracts/DAORouter.sol": {
-      "lastModificationDate": 1648949810638,
+      "lastModificationDate": 1649044767520,
       "contentHash": "b10dd78c8f8da5f956e1fd25459b2dd1",
       "sourceName": "contracts/DAORouter.sol",
       "solcConfig": {
@@ -194,8 +194,8 @@
       ]
     },
     "/Users/andrewchen/Local Documents/bitproperties/bitproperties/token/contracts/Property.sol": {
-      "lastModificationDate": 1648949810639,
-      "contentHash": "99fbe34f2af2e5fe9c3acaf494fe9811",
+      "lastModificationDate": 1649048930629,
+      "contentHash": "942eb22129416a44d967aade52796134",
       "sourceName": "contracts/Property.sol",
       "solcConfig": {
         "version": "0.8.7",
