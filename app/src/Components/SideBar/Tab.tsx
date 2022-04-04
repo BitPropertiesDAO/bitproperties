@@ -11,7 +11,7 @@ export default function Tab(props: any) {
       className={`main--tab ${
         props.current === props.id && props.main && "brightness--animation"
       } ${!props.main && "mini--tab"}`}
-      onClick={() => navigate(props.linkTo)}
+      onClick={() => navigate(`${props.linkTo}`)}
       style={{
         color: props.current === props.id ? "black" : "rgb(210,210,210)",
         background: props.current === props.id ? `` : "transparent",

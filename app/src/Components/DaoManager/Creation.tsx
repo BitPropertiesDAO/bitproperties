@@ -87,28 +87,28 @@ export default function Creation() {
             current={current}
             title="Basic Information"
             icon="clarity:details-solid"
-            linkTo={`/Alchemy/create`}
+            linkTo={`/app/Alchemy/create`}
           ></Tab>
           <Tab
             id={1}
             current={current}
             title="Governance"
             icon="fluent:building-government-20-filled"
-            linkTo={`/Alchemy/create/governance`}
+            linkTo={`/app/Alchemy/create/governance`}
           ></Tab>
           <Tab
             id={2}
             current={current}
             title="Tokenomics"
             icon="akar-icons:money"
-            linkTo={`/Alchemy/create/tokenomics`}
+            linkTo={`/app/Alchemy/create/tokenomics`}
           ></Tab>
           <Tab
             id={3}
             current={current}
             title="Confirmation"
             icon="line-md:confirm-circle"
-            linkTo={`/Alchemy/create/confirmation`}
+            linkTo={`/app/Alchemy/create/confirmation`}
           ></Tab>
         </div>
         <div className="alchemy--progress-bar">

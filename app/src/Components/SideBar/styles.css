@@ -15,13 +15,12 @@
 .tab--group {
   display: flex;
   flex-direction: column;
-  background-color: #222222;
   border-radius: 15px;
   width: 90%;
   margin: 0 auto;
   box-shadow: 4px 0px 40px rgba(0, 0, 0, 0.45);
   border: 0.3px solid rgb(255, 255, 255, 0.1);
-  background: linear-gradient(145deg, #1f1f1f, #2f2f2f);
+  background-color: rgba(19, 19, 19, 1);
 }
 
 @keyframes brightness {
@@ -35,8 +34,8 @@
 
 .main--tab {
   display: flex;
-  font-size: 1.2rem;
-  font-weight: 650;
+  font-size: 1rem;
+  font-weight: 550;
   cursor: pointer;
   color: rgba(154, 154, 154, 0.9);
   background: linear-gradient(
@@ -61,7 +60,7 @@
   padding-top: 7.5px;
   padding-bottom: 7.5px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 550;
   border-radius: 0px;
   width: 100.3%;
   transform: translateX(-0.15%);

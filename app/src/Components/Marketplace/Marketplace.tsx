@@ -41,7 +41,10 @@ export default function Marketplace() {
       .then((DAORouterArray) => {
         const DAOElements = DAORouterArray.map((DAO: any, index: any) => {
           return (
-            <li onClick={() => navigate(`/DAO/${DAO}/Dashboard`)} key={index}>
+            <li
+              onClick={() => navigate(`/app/DAO/${DAO}/Dashboard`)}
+              key={index}
+            >
               {DAO}
             </li>
           );
@@ -57,6 +60,14 @@ export default function Marketplace() {
     <div>
       <div>Number of DAOs: {numberDAOs}</div>
       <ul>{DAORouters}</ul>
+      <br />
+      <br />
+      <button
+        className="primary--button"
+        onClick={() => navigate(`/app/Alchemy/create`)}
+      >
+        Create DAO
+      </button>
     </div>
   );
 }

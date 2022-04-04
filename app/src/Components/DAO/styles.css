@@ -1,0 +1,7 @@
+.property--card {
+  background-color: rgb(81, 81, 81);
+  width: 400px;
+  height: 300px;
+
+  word-wrap: break-word;
+}

@@ -4,7 +4,7 @@ import { changeName } from "./CreateDAO/DaoCreationSlice";
 import { Input } from "antd";
 import {
   AlchemyLinks,
-  InputFormHeader,
+  AppHeader,
   InputGroup,
   InputSubheading,
 } from "./InputFormAlchemy";
@@ -16,7 +16,7 @@ export default function BasicDetails() {
 
   return (
     <>
-      <InputFormHeader>Basic Details</InputFormHeader>
+      <AppHeader>Basic Details</AppHeader>
       <InputGroup>
         <InputSubheading>DAO Name</InputSubheading>
         <Input
@@ -29,8 +29,8 @@ export default function BasicDetails() {
         ></Input>
       </InputGroup>
       <AlchemyLinks
-        Back="/Alchemy"
-        Next="/Alchemy/create/governance"
+        Back="/app/Alchemy"
+        Next="/app/Alchemy/create/governance"
       ></AlchemyLinks>
     </>
   );

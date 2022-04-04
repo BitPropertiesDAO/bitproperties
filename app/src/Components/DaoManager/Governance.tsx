@@ -9,7 +9,7 @@ import {
 } from "./CreateDAO/DaoCreationSlice";
 import {
   AlchemyLinks,
-  InputFormHeader,
+  AppHeader,
   InputGroup,
   InputSubheading,
 } from "./InputFormAlchemy";
@@ -31,7 +31,7 @@ export default function Governance() {
 
   return (
     <>
-      <InputFormHeader>Governance</InputFormHeader>
+      <AppHeader>Governance</AppHeader>
       <InputGroup>
         <InputSubheading>Proposal Passing %</InputSubheading>
         <Row>
@@ -110,8 +110,8 @@ export default function Governance() {
         Days
       </InputGroup>
       <AlchemyLinks
-        Back="/Alchemy/create/"
-        Next="/Alchemy/create/tokenomics"
+        Back="/app/Alchemy/create/"
+        Next="/app/Alchemy/create/tokenomics"
       ></AlchemyLinks>
     </>
   );

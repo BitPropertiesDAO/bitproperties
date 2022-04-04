@@ -166,11 +166,11 @@ interface PropertyInterface extends ethers.utils.Interface {
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "ListShares(address,uint256)": EventFragment;
+    "ListShares(address,uint256,uint256)": EventFragment;
     "MintShares(address,uint256)": EventFragment;
     "PurchaseShares(address,address,uint256)": EventFragment;
     "ReceiveFunds(address,uint256)": EventFragment;
-    "ReceiveFundsPayout(address,uint256)": EventFragment;
+    "ReceiveFundsPayout(address,uint256,uint256)": EventFragment;
     "TransferBatch(address,address,address,uint256[],uint256[])": EventFragment;
     "TransferSingle(address,address,address,uint256,uint256)": EventFragment;
     "URI(string,uint256)": EventFragment;
@@ -198,7 +198,11 @@ export type ApprovalForAllEvent = TypedEvent<
 >;
 
 export type ListSharesEvent = TypedEvent<
-  [string, BigNumber] & { seller: string; amount: BigNumber }
+  [string, BigNumber, BigNumber] & {
+    seller: string;
+    price: BigNumber;
+    amount: BigNumber;
+  }
 >;
 
 export type MintSharesEvent = TypedEvent<
@@ -218,7 +222,11 @@ export type ReceiveFundsEvent = TypedEvent<
 >;
 
 export type ReceiveFundsPayoutEvent = TypedEvent<
-  [string, BigNumber] & { toAddress: string; value: BigNumber }
+  [string, BigNumber, BigNumber] & {
+    toAddress: string;
+    tokenBalance: BigNumber;
+    value: BigNumber;
+  }
 >;
 
 export type TransferBatchEvent = TypedEvent<
@@ -590,20 +598,22 @@ export class Property extends BaseContract {
       { account: string; operator: string; approved: boolean }
     >;
 
-    "ListShares(address,uint256)"(
+    "ListShares(address,uint256,uint256)"(
       seller?: null,
+      price?: null,
       amount?: null
     ): TypedEventFilter<
-      [string, BigNumber],
-      { seller: string; amount: BigNumber }
+      [string, BigNumber, BigNumber],
+      { seller: string; price: BigNumber; amount: BigNumber }
     >;
 
     ListShares(
       seller?: null,
+      price?: null,
       amount?: null
     ): TypedEventFilter<
-      [string, BigNumber],
-      { seller: string; amount: BigNumber }
+      [string, BigNumber, BigNumber],
+      { seller: string; price: BigNumber; amount: BigNumber }
     >;
 
     "MintShares(address,uint256)"(
@@ -656,20 +666,22 @@ export class Property extends BaseContract {
       { fromAddress: string; value: BigNumber }
     >;
 
-    "ReceiveFundsPayout(address,uint256)"(
+    "ReceiveFundsPayout(address,uint256,uint256)"(
       toAddress?: null,
+      tokenBalance?: null,
       value?: null
     ): TypedEventFilter<
-      [string, BigNumber],
-      { toAddress: string; value: BigNumber }
+      [string, BigNumber, BigNumber],
+      { toAddress: string; tokenBalance: BigNumber; value: BigNumber }
     >;
 
     ReceiveFundsPayout(
       toAddress?: null,
+      tokenBalance?: null,
       value?: null
     ): TypedEventFilter<
-      [string, BigNumber],
-      { toAddress: string; value: BigNumber }
+      [string, BigNumber, BigNumber],
+      { toAddress: string; tokenBalance: BigNumber; value: BigNumber }
     >;
 
     "TransferBatch(address,address,address,uint256[],uint256[])"(
