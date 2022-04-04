@@ -4,6 +4,10 @@ import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factor
 import { ethers } from "ethers";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import DAOCard from '../Card/DAOCard'
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button'
 
 export default function DAOPortal() {
   let navigate = useNavigate();
@@ -36,27 +40,56 @@ export default function DAOPortal() {
           console.log(DAO);
           DAORouterArray.push(DAO);
         }
-        return DAORouterArray;
+        //return DAORouterArray;
+        console.log(DAORouterArray)
+        setDAORouters(DAORouterArray)
       })
-      .then((DAORouterArray) => {
-        const DAOElements = DAORouterArray.map((DAO: any, index: any) => {
-          return (
-            <li onClick={() => navigate(`/DAO/${DAO}/Dashboard`)} key={index}>
-              {DAO}
-            </li>
-          );
-        });
-        return DAOElements;
-      })
-      .then((DAOElements) => {
-        setDAORouters(DAOElements);
-      });
+      // .then((DAORouterArray) => {
+      //   const DAOElements = DAORouterArray.map((DAO: any, index: any) => {
+      //     return (
+      //       <li onClick={() => navigate(`/DAO/${DAO}/Dashboard`)} key={index}>
+      //         {DAO}
+      //       </li>
+      //     );
+      //   });
+      //   return DAOElements;
+      // })
+      // .then((DAOElements) => {
+      //   setDAORouters(DAOElements);
+      // });
   }, []);
 
+  function navigateLink(dao: any) {
+    let link = '/DAO/' + dao.toString() + '/Dashboard'
+    return link
+  }
+
   return (
-    <div>
-      <div>Number of DAOs: {numberDAOs}</div>
-      <ul>{DAORouters}</ul>
-    </div>
+    <>
+    <Box sx={{ flexGrow: 1 }}>
+    {/* <Stack spacing={2}> */}
+      <Button
+        variant="contained"
+        sx={{
+          b: 20
+        }}
+        // onClick={() => navigate()}
+      >Create New DAO</Button>
+      <Grid container spacing={2}>
+        {
+          DAORouters.map((dao: any) => (
+              <Grid item xs={4}>
+                <DAOCard
+                  address={dao}
+                  navigateLink={navigateLink(dao)}
+                ></DAOCard>
+              </Grid>
+          ))
+        }
+      </Grid>
+      {/* </Stack> */}
+    </Box>
+  <div>DAOProperties: {numberDAOs}</div>
+</>
   );
 }

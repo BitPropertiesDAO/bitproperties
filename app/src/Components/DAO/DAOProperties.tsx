@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { DAORouter__factory } from "../../typechain";
+import { useNavigate } from "react-router";
 
 import PropertyCard from '../Card/propertyCard'
 // import GridView from '../Card/GridView'
@@ -12,6 +13,7 @@ import Stack from '@mui/material/Stack'
 import { spacing } from '@mui/system';
 
 export default function DAOProperties() {
+  let navigate = useNavigate();
   const [numberProperties, setNumberProperties] = useState();
   const [propertyElements, setPropertyElements] = useState([]);
 
@@ -23,6 +25,9 @@ export default function DAOProperties() {
 
   // @ts-ignore
   const router = DAORouter__factory.connect(DAORouterID, signer);
+  
+  console.log("DAOROUTERID")
+  console.log(DAORouterID)
 
   useEffect(() => {
     let DAOPropertiesArray: any = [];
