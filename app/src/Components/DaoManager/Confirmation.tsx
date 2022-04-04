@@ -219,18 +219,10 @@ export default function Confirmation() {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <button
           style={{ marginTop: 30, marginBottom: 30 }}
-          className="header--nav--actionbutton"
+          className="primary--button"
           onClick={handleSubmit}
         >
           CREATE DAO
-        </button>
-        <button
-          className="header--nav--actionbutton"
-          onClick={() =>
-            navigate(`/DAO/${newDAOObject.daoRouterAddress}/Dashboard`)
-          }
-        >
-          GO TO DAO
         </button>
       </div>
     </>

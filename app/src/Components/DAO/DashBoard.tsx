@@ -1,4 +1,3 @@
-import { current } from "immer";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Outlet } from "react-router";
@@ -11,7 +10,10 @@ import { ethers } from "ethers";
 
 export default function DashBoard() {
   const [current, setCurrent] = useState<number>();
-  const [daoName, setDAOName] = useState<string>();
+  const [daoInfo, setDAOInfo] = useState<any>({
+    daoName: "",
+    governanceTokenAddress: "",
+  });
 
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
@@ -24,18 +26,28 @@ export default function DashBoard() {
   let location = useLocation();
 
   useEffect(() => {
-    const getDAOName = async () => {
+    const getDAOInfo = async () => {
       const readDAOName = await router.daoName();
-      setDAOName(readDAOName);
+      const readDAOGovernanceTokenAddress =
+        await router.governanceTokenAddress();
+      setDAOInfo({
+        daoName: readDAOName,
+        governanceTokenAddress: readDAOGovernanceTokenAddress,
+      });
     };
 
+    // UPDATE EVERY NEW TAB
+    // CURRENT CORRESPONDS TO PROP IN TAB
     if (location.pathname.includes("/Dashboard")) {
       setCurrent(0);
     }
     if (location.pathname.includes("/Properties")) {
       setCurrent(1);
     }
-    getDAOName();
+    if (location.pathname.includes("/Senate")) {
+      setCurrent(2);
+    }
+    getDAOInfo();
     console.log(current);
   }, [location]);
 
@@ -43,25 +55,33 @@ export default function DashBoard() {
     <>
       <SideBar>
         <Tab
-          title={daoName}
+          title={daoInfo.daoName}
           main={true}
-          linkTo={`/DAO/${DAORouterID}/Dashboard`}
+          linkTo={`/app/DAO/${DAORouterID}/Dashboard`}
         ></Tab>
         <Tab
           id={0}
           current={current}
           // onClick={() => handleActiveTab(0)}
           title="Dashboard"
-          icon="clarity:details-solid"
-          linkTo={`/DAO/${DAORouterID}/Dashboard`}
+          icon="ic:round-space-dashboard"
+          linkTo={`/app/DAO/${DAORouterID}/Dashboard`}
         ></Tab>
         <Tab
           id={1}
           current={current}
           // onClick={() => setActiveTab(current)}
           title="Properties"
-          icon="clarity:details-solid"
-          linkTo={`/DAO/${DAORouterID}/Properties`}
+          icon="fluent:building-home-20-filled"
+          linkTo={`/app/DAO/${DAORouterID}/Properties`}
+        ></Tab>
+        <Tab
+          id={2}
+          current={current}
+          // onClick={() => setActiveTab(current)}
+          title="Senate"
+          icon="fluent:building-government-20-filled"
+          linkTo={`/app/DAO/${DAORouterID}/Senate/${daoInfo.governanceTokenAddress}`}
         ></Tab>
       </SideBar>
       <div className="alchemy--section--right">

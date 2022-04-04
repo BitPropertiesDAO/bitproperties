@@ -23,7 +23,6 @@ interface DAOFactoryInterface extends ethers.utils.Interface {
   functions: {
     "DAOs(uint256)": FunctionFragment;
     "daoCounter()": FunctionFragment;
-    "daoRouters(address)": FunctionFragment;
     "launchDAO(string,string,string,uint256,tuple,address,tuple)": FunctionFragment;
   };
 
@@ -32,7 +31,6 @@ interface DAOFactoryInterface extends ethers.utils.Interface {
     functionFragment: "daoCounter",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "daoRouters", values: [string]): string;
   encodeFunctionData(
     functionFragment: "launchDAO",
     values: [
@@ -61,7 +59,6 @@ interface DAOFactoryInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(functionFragment: "DAOs", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "daoCounter", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "daoRouters", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "launchDAO", data: BytesLike): Result;
 
   events: {
@@ -129,16 +126,6 @@ export class DAOFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { _value: BigNumber }>;
 
-    daoRouters(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string] & {
-        governanceTokenAddress: string;
-        governorAddress: string;
-      }
-    >;
-
     launchDAO(
       _daoName: string,
       _tokenName: string,
@@ -168,16 +155,6 @@ export class DAOFactory extends BaseContract {
 
   daoCounter(overrides?: CallOverrides): Promise<BigNumber>;
 
-  daoRouters(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<
-    [string, string] & {
-      governanceTokenAddress: string;
-      governorAddress: string;
-    }
-  >;
-
   launchDAO(
     _daoName: string,
     _tokenName: string,
@@ -206,16 +183,6 @@ export class DAOFactory extends BaseContract {
     DAOs(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     daoCounter(overrides?: CallOverrides): Promise<BigNumber>;
-
-    daoRouters(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string] & {
-        governanceTokenAddress: string;
-        governorAddress: string;
-      }
-    >;
 
     launchDAO(
       _daoName: string,
@@ -267,8 +234,6 @@ export class DAOFactory extends BaseContract {
 
     daoCounter(overrides?: CallOverrides): Promise<BigNumber>;
 
-    daoRouters(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     launchDAO(
       _daoName: string,
       _tokenName: string,
@@ -301,11 +266,6 @@ export class DAOFactory extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     daoCounter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    daoRouters(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     launchDAO(
       _daoName: string,

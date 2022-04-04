@@ -49,19 +49,6 @@
   z-index: 100000;
 }
 
-.header--nav--actionbutton {
-  background: var(--base--secondary-color);
-  padding: 7.5px 20px;
-  border-radius: 12px;
-  border: var(--light-border);
-  cursor: pointer;
-  color: rgb(255, 255, 255);
-  font-weight: 500;
-  font-size: 0.8rem;
-  width: 18ch;
-  overflow: hidden;
-}
-
 .header--nav--actionbutton:hover {
   box-shadow: 1px 4px 20px rgba(0, 0, 0, 0.25);
   filter: brightness(1.2);
@@ -106,6 +93,29 @@ a:hover {
   display: inline-block;
 }
 
+.nav--divider {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 20px;
+  width: 1px;
+  border: round;
+  border-radius: 10px;
+}
+
+.nav--button {
+  border-radius: 73px;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.nav--button:hover {
+  transition: 0.3s;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+}
+
 @media (max-width: 1150px) {
   .navbar,
   .header--li {
@@ -128,63 +138,4 @@ a:hover {
   .nav--dropdown {
     right: 15px;
   }
-}
-
-.nav--dropdown {
-  position: absolute;
-  width: 450px;
-  background-color: var(--base--secondary-color);
-  right: 40px;
-  top: 70px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--base--boxshadow);
-  color: white;
-  border: var(--light-border);
-  z-index: 3;
-}
-
-.nav--dropdown--item {
-  overflow: hidden;
-  background-color: var(--base--secondary-color);
-  border-radius: 12px;
-  padding: 20px 20px;
-  border: none;
-  border-bottom: var(--light-border);
-  text-align: left;
-  border-radius: 0;
-}
-.nav--dropdown--item:nth-child(1) {
-  border-top: var(--light-border);
-  border-radius: 12px 12px 0px 0px;
-}
-.nav--dropdown--item:nth-last-child(1) {
-  border-radius: 0px 0px 12px 12px;
-}
-
-.nav--dropdown--item:hover {
-  filter: brightness(1.2);
-  cursor: pointer;
-}
-
-.nav--dropdown--item:hover:nth-child(1) {
-  filter: none;
-  cursor: auto;
-}
-
-.nav--dropdown--button {
-  align-self: flex-end;
-  justify-self: flex-end;
-  margin: 0 auto;
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-}
-
-.nav--dropdown--button:hover {
-  font-weight: 600;
-  color: white;
 }

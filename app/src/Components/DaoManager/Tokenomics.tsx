@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import PayableAccounts from "../DaoManager/CreateDAO/PayableAccount";
 import { useEffect, useState } from "react";
 import { AlchemyLinks } from "./InputFormAlchemy";
-import { InputFormHeader } from "./InputFormAlchemy";
+import { AppHeader } from "./InputFormAlchemy";
 import { InputGroup } from "./InputFormAlchemy";
 import { InputSubheading } from "./InputFormAlchemy";
 
@@ -42,7 +42,7 @@ export default function Tokenomics() {
 
   return (
     <>
-      <InputFormHeader>Tokenomics</InputFormHeader>
+      <AppHeader>Tokenomics</AppHeader>
       <InputGroup>
         <InputSubheading>ERC20 Token Name</InputSubheading>
         <Input
@@ -105,8 +105,8 @@ export default function Tokenomics() {
         </div>
       </InputGroup>
       <AlchemyLinks
-        Back="/Alchemy/create/governance"
-        Next="/Alchemy/create/confirmation"
+        Back="/app/Alchemy/create/governance"
+        Next="/app/Alchemy/create/confirmation"
       ></AlchemyLinks>
     </>
   );

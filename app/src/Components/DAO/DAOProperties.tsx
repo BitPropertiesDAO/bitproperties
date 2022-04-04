@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { ethers } from "ethers";
 import { DAORouter__factory } from "../../typechain";
+import { AppHeader } from "../DaoManager/InputFormAlchemy";
+import PropertyCard from "./PropertyCard";
 
 export default function DAOProperties() {
-  let navigate = useNavigate();
   const [numberProperties, setNumberProperties] = useState();
   const [propertyElements, setPropertyElements] = useState([]);
 
@@ -40,16 +41,13 @@ export default function DAOProperties() {
       })
       .then((DAOPropertiesArray) => {
         const propertyElements = DAOPropertiesArray.map(
-          (property: any, index: any) => {
+          (propertyAddress: any, index: number) => {
             return (
-              <li
+              <PropertyCard
                 key={index}
-                onClick={() =>
-                  navigate(`/DAO/${DAORouterID}/Properties/${property}`)
-                }
-              >
-                {property}
-              </li>
+                navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyAddress}`}
+                propertyAddress={propertyAddress}
+              ></PropertyCard>
             );
           }
         );
@@ -62,12 +60,9 @@ export default function DAOProperties() {
 
   return (
     <>
-      <div>DAOProperties: {numberProperties}</div>
+      <AppHeader>Properties: {numberProperties}</AppHeader>
       <br />
-      <br />
-      <br />
-      <br />
-      <ul>{propertyElements}</ul>
+      <div className="property--grid">{propertyElements}</div>
     </>
   );
 }

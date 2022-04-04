@@ -28,6 +28,6 @@ export function InputGroup(props: any) {
   return <div className="alchemy--input--group">{props.children}</div>;
 }
 
-export function InputFormHeader(props: any) {
+export function AppHeader(props: any) {
   return <h1 className="alchemy--section--title">{props.children}</h1>;
 }

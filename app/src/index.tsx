@@ -10,11 +10,10 @@ import { getLibrary } from "./utils/misc";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "./App";
-import Alchemy from "./Components/DaoManager/Alchemy";
 import HomePage from "./Components/Home/HomePage";
 import Header from "./Components/Header/Header";
 
-import Marketplace from "./Components/Marketplace/Marketplace";
+import Explore from "./Components/Explore/Explore";
 
 import Creation from "./Components/DaoManager/Creation";
 
@@ -27,6 +26,8 @@ import DAODashBoard from "./Components/DAO/DashBoard";
 import DAOPage from "./Components/DAO/DAOPage";
 import DAOProperties from "./Components/DAO/DAOProperties";
 import Property from "./Components/DAO/Property";
+import Senate from "./Components/DAO/Senate";
+import ExploreDAOs from "./Components/Explore/ExploreDAOs";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,38 +38,46 @@ ReactDOM.render(
           <Routes>
             <Route path="/" element={<App />}>
               <Route path="/" element={<HomePage />}></Route>
-              <Route path="Marketplace" element={<Marketplace />}></Route>
-              <Route path="Alchemy" element={<Alchemy />}></Route>
-              <Route path="Alchemy/create" element={<Creation />}>
+              <Route path="app/Explore/DAOS" element={<Explore />}>
                 <Route
-                  path="/Alchemy/create"
+                  path="/app/Explore/DAOS"
+                  element={<ExploreDAOs />}
+                ></Route>
+              </Route>
+              <Route path="app/Alchemy/create" element={<Creation />}>
+                <Route
+                  path="/app/Alchemy/create"
                   element={<BasicDetails />}
                 ></Route>
                 <Route
-                  path="/Alchemy/create/governance"
+                  path="/app/Alchemy/create/governance"
                   element={<Governance />}
                 ></Route>
                 <Route
-                  path="/Alchemy/create/tokenomics"
+                  path="/app/Alchemy/create/tokenomics"
                   element={<Tokenomics />}
                 ></Route>
                 <Route
-                  path="/Alchemy/create/confirmation"
+                  path="/app/Alchemy/create/confirmation"
                   element={<Confirmation />}
                 ></Route>
               </Route>
             </Route>
-            <Route path="DAO" element={<DAODashBoard />}>
+            <Route path="app/DAO" element={<DAODashBoard />}>
               <Route
-                path="/DAO/:DAORouterID/Dashboard"
+                path="/app/DAO/:DAORouterID/Dashboard"
                 element={<DAOPage />}
               ></Route>
               <Route
-                path="/DAO/:DAORouterID/Properties"
+                path="/app/DAO/:DAORouterID/Senate/:DAOGovernanceToken"
+                element={<Senate />}
+              ></Route>
+              <Route
+                path="/app/DAO/:DAORouterID/Properties"
                 element={<DAOProperties />}
               ></Route>
               <Route
-                path="/DAO/:DAORouterID/Properties/:PropertyAddress"
+                path="/app/DAO/:DAORouterID/Properties/:PropertyAddress"
                 element={<Property />}
               ></Route>
             </Route>

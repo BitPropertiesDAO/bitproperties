@@ -1,0 +1,12 @@
+.property--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 4rem;
+}
+
+.property--card {
+  background-color: rgb(81, 81, 81);
+  word-wrap: break-word;
+  padding: 20px 20px;
+  border-radius: 20px;
+}

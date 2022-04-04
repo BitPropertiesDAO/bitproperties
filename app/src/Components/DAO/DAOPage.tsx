@@ -102,17 +102,12 @@ export default function Profile() {
       <div>ProeprtyName: {pricePerShare}</div>
       <button
         style={{ marginTop: 30, marginBottom: 30, padding: 10 }}
-        className="header--nav--actionbutton"
+        className="primary--button"
         onClick={handleLaunchNewProperty}
       >
         LaunchNewProperty
       </button>
       <div>Property Contract Address: {propertyContractAddress}</div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <button>VIEW PROPERTIES</button>
     </>
   );
 }
