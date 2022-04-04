@@ -10,6 +10,12 @@ contract DAORouter {
     address public governanceTokenAddress;
     mapping(address => Property) public daoProperties;
 
+    event NewProperty(address propertyAddress);
+    address[] public Properties;
+
+    using Counters for Counters.Counter;
+    Counters.Counter public propertyCounter;
+
     constructor (
         string memory _daoName,
         address _governorAddress,
@@ -26,7 +32,9 @@ contract DAORouter {
         uint256 _pricePerShare
     ) public {
         Property newProperty = new Property("", _pricePerShare, _numShares);
+        emit NewProperty(address(newProperty));
         daoProperties[address(newProperty)] = newProperty;
+        Properties.push(address(newProperty));
+        propertyCounter.increment();
     }
-
 }

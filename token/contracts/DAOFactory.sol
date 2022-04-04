@@ -7,12 +7,13 @@ import "./shared/SharedStructs.sol";
 
 contract DAOFactory {
     event NewDAO(address daoAddress, address tokenAddress, address governorAddress);
-    struct DAO {
-        address governanceTokenAddress;
-        address governorAddress;
-    }
 
-    mapping(address => DAO) public daoRouters;
+    // keep track of all the DAOs created in array
+    address[] public DAOs;
+
+    // keep track of number of DAOs created
+    using Counters for Counters.Counter;
+    Counters.Counter public daoCounter;
 
     constructor () {}
 
@@ -47,10 +48,15 @@ contract DAOFactory {
             address(token)
         );
 
-        // keep track of the new DAO router in the mapping
-        daoRouters[address(newDao)] = DAO(newDao.governorAddress(), newDao.governanceTokenAddress());
         // respond with the address of the newly created DAO router, it's governor and it's token
         emit NewDAO(address(newDao), newDao.governanceTokenAddress(), newDao.governorAddress());
+
+        // push new DAO router address to DAOs array
+        DAOs.push(address(newDao));
+
+        // increment daoCounter by one
+        daoCounter.increment();
+
         return (address(newDao), newDao.governanceTokenAddress(), newDao.governorAddress());
     }
 

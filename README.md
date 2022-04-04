@@ -18,6 +18,8 @@ npx hardhat run --network hardhat scripts/deploy.ts
 
 The above command will deploy the smart contracts locally via `Hardhat` and print the smart contract address to console, you need to set the smart contract address as an env var for the app. Go to the `./app` directory then run the following command
 
+Copy the typechain folder from token into /src
+
 ```
 cp .env.example .env
 ```
