@@ -7,6 +7,9 @@ import PropertyCard from '../Card/propertyCard'
 // import GridView from '../Card/GridView'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+import { spacing } from '@mui/system';
 
 export default function DAOProperties() {
   const [numberProperties, setNumberProperties] = useState();
@@ -49,6 +52,13 @@ export default function DAOProperties() {
   return (
     <>
         <Box sx={{ flexGrow: 1 }}>
+        {/* <Stack spacing={2}> */}
+          <Button
+            variant="contained"
+            sx={{
+              b: 20
+            }}
+          >Add New Property</Button>
           <Grid container spacing={2}>
             {
               propertyElements.map((property) => (
@@ -60,6 +70,7 @@ export default function DAOProperties() {
               ))
             }
           </Grid>
+          {/* </Stack> */}
         </Box>
       <div>DAOProperties: {numberProperties}</div>
     </>
