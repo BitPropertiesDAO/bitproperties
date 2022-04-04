@@ -47,16 +47,15 @@ export default function Property() {
     };
     readProperty();
 
-    // TEMPORARY
-    // WAIT UNTIL CONTRACT IS LAUNCHED ON ALCHEMY AND THEN useWeb3React
-    const getAddress = async () => {
-      const address = await signer.getAddress();
-      setTempAddress(address);
-    };
-    getAddress();
-
     // UPDATE NUMBER OF SHARES
     const handleBalance = async () => {
+      // TEMPORARY
+      // WAIT UNTIL CONTRACT IS LAUNCHED ON ALCHEMY AND THEN useWeb3React
+      const getAddress = async () => {
+        const address = await signer.getAddress();
+        setTempAddress(address);
+      };
+      await getAddress();
       try {
         // @ts-ignore
         const readBalance = await Property.balanceOf(tempAddress, 0);
@@ -67,7 +66,7 @@ export default function Property() {
       }
     };
     handleBalance();
-  }, [eventTransaction]);
+  }, [eventTransaction, tempAddress]);
 
   useEffect(() => {
     // UPDATE TOTAL PRICE OF SHARE BASED ON AMOUNT

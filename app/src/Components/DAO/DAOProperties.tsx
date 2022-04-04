@@ -6,7 +6,6 @@ import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import PropertyCard from "./PropertyCard";
 
 export default function DAOProperties() {
-  let navigate = useNavigate();
   const [numberProperties, setNumberProperties] = useState();
   const [propertyElements, setPropertyElements] = useState([]);
 
@@ -42,22 +41,13 @@ export default function DAOProperties() {
       })
       .then((DAOPropertiesArray) => {
         const propertyElements = DAOPropertiesArray.map(
-          (propertyAddress: any, index: any) => {
+          (propertyAddress: any, index: number) => {
             return (
               <PropertyCard
-                id={index}
+                key={index}
                 navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyAddress}`}
                 propertyAddress={propertyAddress}
               ></PropertyCard>
-
-              // <li
-              //   key={index}
-              //   onClick={() =>
-              //     navigate(`/app/DAO/${DAORouterID}/Properties/${property}`)
-              //   }
-              // >
-              //   {property}
-              // </li>
             );
           }
         );
@@ -72,7 +62,7 @@ export default function DAOProperties() {
     <>
       <AppHeader>Properties: {numberProperties}</AppHeader>
       <br />
-      <ul>{propertyElements}</ul>
+      <div className="property--grid">{propertyElements}</div>
     </>
   );
 }

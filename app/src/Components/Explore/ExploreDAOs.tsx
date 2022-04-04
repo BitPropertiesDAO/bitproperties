@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { DAOFactoryAddress } from "../../contractsconfig";
 import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factories/DAOFactory__factory";
-import { ethers } from "ethers";
-import { useState } from "react";
+import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import { useNavigate } from "react-router";
+import { ethers } from "ethers";
 
-export default function Marketplace() {
-  let navigate = useNavigate();
+export default function ExploreDAOs() {
   const [numberDAOs, setNumberDAOs] = useState<any>();
   const [DAORouters, setDAORouters] = useState<any>([]);
 
@@ -16,6 +15,8 @@ export default function Marketplace() {
 
   const signer = provider.getSigner();
   const factory = DAOFactoryFactory.connect(DAOFactoryAddress, signer);
+  let navigate = useNavigate();
+
   useEffect(() => {
     let DAORouterArray: any = [];
     const getMarket = async () => {
@@ -41,12 +42,12 @@ export default function Marketplace() {
       .then((DAORouterArray) => {
         const DAOElements = DAORouterArray.map((DAO: any, index: any) => {
           return (
-            <li
+            <div
               onClick={() => navigate(`/app/DAO/${DAO}/Dashboard`)}
               key={index}
             >
               {DAO}
-            </li>
+            </div>
           );
         });
         return DAOElements;
@@ -59,15 +60,7 @@ export default function Marketplace() {
   return (
     <div>
       <div>Number of DAOs: {numberDAOs}</div>
-      <ul>{DAORouters}</ul>
-      <br />
-      <br />
-      <button
-        className="primary--button"
-        onClick={() => navigate(`/app/Alchemy/create`)}
-      >
-        Create DAO
-      </button>
+      <div>{DAORouters}</div>
     </div>
   );
 }

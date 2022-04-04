@@ -4,6 +4,13 @@ import "antd/dist/antd.css";
 import "./styles.css";
 
 function NavItem(props: any) {
+  //   // TEMPORARY
+  // // WAIT UNTIL CONTRACT IS LAUNCHED ON ALCHEMY AND THEN useWeb3React
+  // const getAddress = async () => {
+  //   const address = await signer.getAddress();
+  //   setTempAddress(address);
+  // };
+  // await getAddress();
   let navigate = useNavigate();
   return (
     <li className="header--li">
@@ -42,11 +49,10 @@ export default function Header() {
               title="Whitepaper"
               url="https://app.gitbook.com/o/royHtkR6AKieNQ1UygU7/s/tgIrluxcjOTzLxDW1aVB/"
             ></NavItem>
-            <NavItem title="DAOs" navigate={`app/Marketplace`}></NavItem>
             <div className="nav--divider header--li"></div>
             <button
               className="header--li nav--button"
-              onClick={() => navigate(`app/Marketplace`)}
+              onClick={() => navigate("/app/Explore/DAOS")}
             >
               TO APP {">"}
             </button>
@@ -54,7 +60,7 @@ export default function Header() {
         ) : (
           <ul className="header--nav navbar">
             <NavItem title="Properties" navigate={`/`}></NavItem>
-            <NavItem title="DAOs" navigate={`app/Marketplace`}></NavItem>
+            <NavItem title="DAOs" navigate={`app/Explore/DAOS`}></NavItem>
             <div className="nav--divider header--li"></div>
             <div className="header--li nav--button">Account</div>
           </ul>

@@ -13,7 +13,7 @@ import App from "./App";
 import HomePage from "./Components/Home/HomePage";
 import Header from "./Components/Header/Header";
 
-import Marketplace from "./Components/Marketplace/Marketplace";
+import Explore from "./Components/Explore/Explore";
 
 import Creation from "./Components/DaoManager/Creation";
 
@@ -27,6 +27,7 @@ import DAOPage from "./Components/DAO/DAOPage";
 import DAOProperties from "./Components/DAO/DAOProperties";
 import Property from "./Components/DAO/Property";
 import Senate from "./Components/DAO/Senate";
+import ExploreDAOs from "./Components/Explore/ExploreDAOs";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,7 +38,12 @@ ReactDOM.render(
           <Routes>
             <Route path="/" element={<App />}>
               <Route path="/" element={<HomePage />}></Route>
-              <Route path="app/Marketplace" element={<Marketplace />}></Route>
+              <Route path="app/Explore/DAOS" element={<Explore />}>
+                <Route
+                  path="/app/Explore/DAOS"
+                  element={<ExploreDAOs />}
+                ></Route>
+              </Route>
               <Route path="app/Alchemy/create" element={<Creation />}>
                 <Route
                   path="/app/Alchemy/create"
