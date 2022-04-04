@@ -119,10 +119,9 @@ export default function Creation() {
         </div>
       </SideBar>
 
-      <div className="alchemy--section--right">
+      <div className="app--section--right">
         <Outlet />
       </div>
-      <div className="alchemy--background"></div>
     </>
   );
 }

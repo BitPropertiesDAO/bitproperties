@@ -84,10 +84,9 @@ export default function DashBoard() {
           linkTo={`/app/DAO/${DAORouterID}/Senate/${daoInfo.governanceTokenAddress}`}
         ></Tab>
       </SideBar>
-      <div className="alchemy--section--right">
+      <div className="app--section--right">
         <Outlet />
       </div>
-      <div className="alchemy--background"></div>
     </>
   );
 }
