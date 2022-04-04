@@ -24,6 +24,7 @@ export default function DashBoard() {
   }, [location]);
 
   return (
+    <>
     <div>
       <div className="creation">
         <div className="alchemy--side--container">
@@ -52,5 +53,9 @@ export default function DashBoard() {
       </div>
       <div className="alchemy--background"></div>
     </div>
+    <div>
+      
+    </div>
+    </>
   );
 }

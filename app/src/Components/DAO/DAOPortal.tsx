@@ -40,23 +40,8 @@ export default function DAOPortal() {
           console.log(DAO);
           DAORouterArray.push(DAO);
         }
-        //return DAORouterArray;
-        console.log(DAORouterArray)
         setDAORouters(DAORouterArray)
       })
-      // .then((DAORouterArray) => {
-      //   const DAOElements = DAORouterArray.map((DAO: any, index: any) => {
-      //     return (
-      //       <li onClick={() => navigate(`/DAO/${DAO}/Dashboard`)} key={index}>
-      //         {DAO}
-      //       </li>
-      //     );
-      //   });
-      //   return DAOElements;
-      // })
-      // .then((DAOElements) => {
-      //   setDAORouters(DAOElements);
-      // });
   }, []);
 
   function navigateLink(dao: any) {

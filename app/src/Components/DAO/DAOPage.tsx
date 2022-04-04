@@ -5,6 +5,9 @@ import { ethers } from "ethers";
 import { useState } from "react";
 import { Input, InputNumber } from "antd";
 
+import BasicInfo from "./Forms/BasicInfo"
+
+
 export default function Profile() {
   const [propertyName, setPropertyName] = useState();
   const [numberShares, setNumberShares] = useState();
@@ -73,8 +76,9 @@ export default function Profile() {
 
   const { DAOName, governanceAddress, governanceTokenAddress } = DAOInformation;
 
-  return (
-    <>
+  const renderBareBonesForm = () => {
+    return(
+      <>
       <div>DAO ROUTER: {DAORouterID}</div>
       <div>DAO Name: {DAOName}</div>
       <div>Governor Address: {governanceAddress}</div>
@@ -108,11 +112,20 @@ export default function Profile() {
         LaunchNewProperty
       </button>
       <div>Property Contract Address: {propertyContractAddress}</div>
-      <br />
-      <br />
-      <br />
-      <br />
       <button>VIEW PROPERTIES</button>
+    </>
+    )
+  }
+
+  return (
+    <>
+      <div>{renderBareBonesForm()}</div>
+      <div>
+      <BasicInfo></BasicInfo>
+      {/* TODO: <FinancialsForm></FinancialsForm>
+      <PropertyTokenForm></PropertyTokenForm>
+      <PropertyGovernanceForm></PropertyGovernanceForm> */}
+      </div>
     </>
   );
 }

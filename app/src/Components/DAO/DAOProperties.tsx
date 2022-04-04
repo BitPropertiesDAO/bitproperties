@@ -57,7 +57,6 @@ export default function DAOProperties() {
   return (
     <>
         <Box sx={{ flexGrow: 1 }}>
-        {/* <Stack spacing={2}> */}
           <Button
             variant="contained"
             sx={{
@@ -75,7 +74,6 @@ export default function DAOProperties() {
               ))
             }
           </Grid>
-          {/* </Stack> */}
         </Box>
       <div>DAOProperties: {numberProperties}</div>
     </>

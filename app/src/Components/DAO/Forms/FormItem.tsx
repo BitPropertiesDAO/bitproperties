@@ -32,7 +32,7 @@ const FormItem: React.FC<Props> = (props: Props) => {
             type="string"
             value={props.placeHolder}
             //   onChange={(e) => dispatch(changeTokenName(String(e.target.value)))}
-            className="alchemy--input"
+            className="form--input"
         />
         </div>
         

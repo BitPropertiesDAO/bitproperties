@@ -40,7 +40,7 @@ const DAOCard: React.FC<Props> = ({
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-                <a>DAO: {address}</a>
+                <a href={navigateLink}>DAO: {address}</a>
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Lorem Ipsum DAO Description
