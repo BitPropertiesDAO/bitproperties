@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { DAOFactoryAddress } from "../../contractsconfig";
 import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factories/DAOFactory__factory";
-import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import { useNavigate } from "react-router";
 import { ethers } from "ethers";
+import { AppHeader } from "../DaoManager/InputFormAlchemy";
 
 export default function ExploreDAOs() {
   const [numberDAOs, setNumberDAOs] = useState<any>();
@@ -59,7 +59,7 @@ export default function ExploreDAOs() {
 
   return (
     <div>
-      <div>Number of DAOs: {numberDAOs}</div>
+      <AppHeader>Number of DAOs: {numberDAOs}</AppHeader>
       <div>{DAORouters}</div>
     </div>
   );

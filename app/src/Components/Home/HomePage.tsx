@@ -52,7 +52,7 @@ export default function HomePage() {
               }}
             >
               <div className="card--image">
-                <img className="main--image" src={MainHouse}></img>
+                <img className="main--image" src={MainHouse} alt=""></img>
               </div>
             </div>
             <div

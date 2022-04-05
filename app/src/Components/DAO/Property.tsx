@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { Property__factory as PropertyFactory } from "../../typechain";
-import { useWeb3React } from "@web3-react/core";
-import { Web3Provider } from "@ethersproject/providers";
 
 export default function Property() {
   const [propertyInformation, setPropertyInformation] = useState<any>({

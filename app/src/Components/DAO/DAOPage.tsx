@@ -4,13 +4,14 @@ import { DAORouter__factory as DAORouterFactory } from "../../typechain/factorie
 import { ethers } from "ethers";
 import { useState } from "react";
 import { Input, InputNumber } from "antd";
+import { AppHeader } from "../DaoManager/InputFormAlchemy";
 
 export default function Profile() {
   const [propertyName, setPropertyName] = useState();
   const [numberShares, setNumberShares] = useState();
   const [pricePerShare, setPricePerShare] = useState();
 
-  const [propertyContractAddress, setPropertyContractAddress] = useState("");
+  const [tsxMessage, setTsxMessage] = useState<any>("");
 
   let { DAORouterID } = useParams();
   const provider = new ethers.providers.JsonRpcProvider(
@@ -60,12 +61,13 @@ export default function Profile() {
         pricePerShare
       );
       const propertyReceipt = await launchNewPropertyTsx.wait();
-      console.log("Property Launched", propertyReceipt);
-      const event = await propertyReceipt.events?.find(
-        (event: any) => event.event === "NewProperty"
-      );
-      const [daoPropertyAddress] = event?.args as any;
-      setPropertyContractAddress(daoPropertyAddress);
+      setTsxMessage(propertyReceipt.transactionHash);
+      // console.log("Property Launched", propertyReceipt);
+      // const event = await propertyReceipt.events?.find(
+      // (event: any) => event.event === "NewProperty"
+      // );
+      // const [daoPropertyAddress] = event?.args as any;
+      // setPropertyContractAddress(daoPropertyAddress);
     } catch (error) {
       console.log("launchNewPropertyError", error);
     }
@@ -75,8 +77,8 @@ export default function Profile() {
 
   return (
     <>
+      <AppHeader>{DAOName}</AppHeader>
       <div>DAO ROUTER: {DAORouterID}</div>
-      <div>DAO Name: {DAOName}</div>
       <div>Governor Address: {governanceAddress}</div>
       <div>Governance Token Address: {governanceTokenAddress}</div>
       Name:
@@ -107,7 +109,7 @@ export default function Profile() {
       >
         LaunchNewProperty
       </button>
-      <div>Property Contract Address: {propertyContractAddress}</div>
+      {tsxMessage && <div>TransactionHash: {tsxMessage}</div>}
     </>
   );
 }

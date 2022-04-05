@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { DAORouter__factory } from "../../typechain";
 import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import PropertyCard from "./PropertyCard";
+import MainHouse from "../../static/MainHouse.png";
 
 export default function DAOProperties() {
   const [numberProperties, setNumberProperties] = useState();
@@ -37,20 +38,25 @@ export default function DAOProperties() {
           let property = await router.Properties(i);
           DAOPropertiesArray.push(property);
         }
+        console.log(DAOPropertiesArray);
         return DAOPropertiesArray;
       })
       .then((DAOPropertiesArray) => {
-        const propertyElements = DAOPropertiesArray.map(
-          (propertyAddress: any, index: number) => {
+        const propertyElements = DAOPropertiesArray.slice(0)
+          .reverse()
+          .map((propertyListing: any, index: number) => {
             return (
               <PropertyCard
+                type={"property"}
+                image={MainHouse}
                 key={index}
-                navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyAddress}`}
-                propertyAddress={propertyAddress}
+                navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyListing.contractAddress}`}
+                propertyName={propertyListing.daoName}
+                contractAddress={propertyListing.contractAddress}
               ></PropertyCard>
             );
-          }
-        );
+          });
+
         return propertyElements;
       })
       .then((propertyElements) => {
@@ -62,7 +68,7 @@ export default function DAOProperties() {
     <>
       <AppHeader>Properties: {numberProperties}</AppHeader>
       <br />
-      <div className="property--grid">{propertyElements}</div>
+      <div className="display--grid">{propertyElements}</div>
     </>
   );
 }

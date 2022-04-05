@@ -9,7 +9,7 @@ import { DAORouter__factory as DAORouterFactory } from "../../typechain/factorie
 import { ethers } from "ethers";
 
 export default function DashBoard() {
-  const [current, setCurrent] = useState<number>();
+  const [current, setCurrent] = useState<number>(0);
   const [daoInfo, setDAOInfo] = useState<any>({
     daoName: "",
     governanceTokenAddress: "",
@@ -30,6 +30,7 @@ export default function DashBoard() {
       const readDAOName = await router.daoName();
       const readDAOGovernanceTokenAddress =
         await router.governanceTokenAddress();
+
       setDAOInfo({
         daoName: readDAOName,
         governanceTokenAddress: readDAOGovernanceTokenAddress,
@@ -48,7 +49,6 @@ export default function DashBoard() {
       setCurrent(2);
     }
     getDAOInfo();
-    console.log(current);
   }, [location]);
 
   return (
