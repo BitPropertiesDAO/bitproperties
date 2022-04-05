@@ -1,5 +1,4 @@
 pragma solidity ^0.8.7;
-
 import "./Property.sol";
 import "./DAOToken.sol";
 import "./shared/SharedStructs.sol";
@@ -8,10 +7,13 @@ contract DAORouter {
     string public daoName;
     address public governorAddress;
     address public governanceTokenAddress;
-    mapping(address => Property) public daoProperties;
+    struct PropertyListing {
+        string daoName;
+        address contractAddress;
+    }
 
-    event NewProperty(address propertyAddress);
-    address[] public Properties;
+    event NewProperty(address propertyAddress);              
+    PropertyListing[] public Properties;
 
     using Counters for Counters.Counter;
     Counters.Counter public propertyCounter;
@@ -32,9 +34,8 @@ contract DAORouter {
         uint256 _pricePerShare
     ) public {
         Property newProperty = new Property("", _pricePerShare, _numShares);
-        emit NewProperty(address(newProperty));
-        daoProperties[address(newProperty)] = newProperty;
-        Properties.push(address(newProperty));
+        PropertyListing memory newPropertyListing = PropertyListing(_propertyName, address(newProperty));
+        Properties.push(newPropertyListing);
         propertyCounter.increment();
     }
 }
