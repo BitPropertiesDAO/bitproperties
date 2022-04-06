@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { Property__factory as PropertyFactory } from "../../typechain";
-import { read } from "fs";
+import ShareListings from "./ShareListings";
 
 export default function Property() {
   const [tempAddress, setTempAddress] = useState("");
@@ -13,10 +13,18 @@ export default function Property() {
     totalIssuedShares: "",
   });
 
+  const [listing, setListing] = useState<any>({
+    price: 0,
+    amount: 0,
+    owner: "",
+  });
+
   const [sharesToBuy, setSharesToBuy] = useState(0);
   const [totalPrice, setTotalPrice] = useState<number>();
-  const [eventTransactionBuyShares, setEventTransactionBuyShares] =
-    useState<any>();
+  const [tsxHash, setTsxHash] = useState<any>({
+    buyShares: "",
+    listShares: "",
+  });
 
   const [myShares, setMyShares] = useState<any>("");
 
@@ -72,7 +80,7 @@ export default function Property() {
       }
     };
     handleBalance();
-  }, [eventTransactionBuyShares, tempAddress]);
+  }, [tsxHash, tempAddress]);
 
   useEffect(() => {
     // UPDATE TOTAL PRICE OF SHARE BASED ON AMOUNT
@@ -90,8 +98,11 @@ export default function Property() {
         value: totalPrice,
       });
       const buySharesReceipt = await buySharesTsx.wait();
-      console.log(buySharesReceipt);
-      setEventTransactionBuyShares(buySharesReceipt.transactionHash);
+
+      setTsxHash({
+        buyShares: buySharesReceipt.transactionHash,
+        listShares: tsxHash.listShares,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -101,16 +112,94 @@ export default function Property() {
     e.preventDefault();
     console.log(myListing.numberOfShares);
     try {
+      // @ts-ignore
+      await Property.setApprovalForAll(PropertyAddress, true);
       const listSharesTsx = await Property.listShares(
         myListing.price,
         myListing.numberOfShares
       );
-      const receipt = await listSharesTsx.wait();
-      console.log(receipt);
+      const listSharesReceipt = await listSharesTsx.wait();
+      setTsxHash({
+        buyShares: tsxHash.buyShares,
+        listShares: listSharesReceipt.transactionHash,
+      });
     } catch (error) {
       console.log(error);
     }
   };
+
+  // useEffect(() => {
+  //   const getListing = async () => {
+  //     try {
+  //       const numberListings = await Property.listingCounter();
+  //       const listingOne = await Property.Listings(9);
+  //       let { amount, owner, price } = listingOne;
+  //       console.log(numberListings.toNumber());
+  //       setListing({
+  //         amount: amount.toNumber(),
+  //         price: price.toNumber(),
+  //         owner: owner,
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getListing();
+  // }, []);
+
+  // // // // // // // // // // // // // //// // // // // // // // // // // // // // // // // // // // //
+
+  const [numberOfListings, setNumberOfListings] = useState();
+  const [listingElements, setListingElements] = useState([]);
+  useEffect(() => {
+    let listingsArray: any = [];
+    const getListing = async () => {
+      let numberListings: any;
+      try {
+        const listings = await Property.listingCounter();
+        numberListings = await listings.toNumber();
+        // const listingOne = await Property.Listings(0);
+        // let { amount, owner, price } = listingOne;
+        // console.log(numberListings.toNumber());
+        // setListing({
+        //   amount: amount.toNumber(),
+        //   price: price.toNumber(),
+        //   owner: owner,
+        // });
+      } catch (error) {
+        console.log(error);
+      }
+      return numberListings;
+    };
+    getListing()
+      .then(async (totalListings: any) => {
+        for (let i = 0; i < totalListings; i++) {
+          let listing = await Property.Listings(i);
+          listingsArray.push(listing);
+        }
+        return listingsArray;
+      })
+      .then((listingsArray) => {
+        console.log(listingsArray);
+        const listingElements = listingsArray
+          .slice(0)
+          .reverse()
+          .map((listingX: any, index: any) => {
+            return (
+              <div key={index} style={{ display: "flex", marginBottom: 20 }}>
+                <p style={{ marginRight: 20 }}>{listingX.amount.toNumber()}</p>
+                <p style={{ marginRight: 20 }}>{listingX.price.toNumber()}</p>
+                <p style={{ marginRight: 20 }}>{listingX.owner}</p>
+              </div>
+            );
+          });
+        console.log(listingElements);
+        return listingElements;
+      })
+      .then((elements) => {
+        setListingElements(elements);
+      });
+  }, []);
 
   return (
     <>
@@ -124,7 +213,6 @@ export default function Property() {
           propertyInformation.totalIssuedShares}
       </div>
       <br />
-
       <form onSubmit={handleSubmit}>
         <label>
           BuyShares:
@@ -138,13 +226,10 @@ export default function Property() {
         <div>totalPrice: {totalPrice}</div>
         <button type="submit">Buy</button>
       </form>
-      <div>Transaction Hash:{eventTransactionBuyShares}</div>
-
+      <div>Transaction Hash:{tsxHash.buyShares}</div>
       <br />
-
       <div>YourAddress: {tempAddress}</div>
       <div>You own: {myShares} shares</div>
-
       <form onSubmit={handleListShares}>
         <label>
           List Shares:
@@ -176,7 +261,10 @@ export default function Property() {
         <div>listing Price: {myListing.price}</div>
         <div>Shares Listing: {myListing.numberOfShares}</div>
         <button type="submit">List</button>
+        <div>List Shares Receipt: {tsxHash.listShares}</div>
+        <div>{}</div>
       </form>
+      {listingElements}
     </>
   );
 }

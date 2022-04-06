@@ -21,9 +21,7 @@ export default function ProeprtyCard(props: any) {
   const Property = PropertyFactory.connect(props.contractAddress, signer);
   useEffect(() => {
     const getInfo = async () => {
-      console.log(await Property.callStatic);
       try {
-        console.log(await Property.listings);
         let readTotalShares = await Property.totalShares();
         let readTotalIssuedShares = await Property.totalIssuedShares();
         setPropertyInfo({

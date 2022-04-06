@@ -3,6 +3,7 @@ pragma solidity ^0.8.7;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract Property is ERC1155 {
     // emitted when a user purchases shares listed by another user
@@ -22,14 +23,20 @@ contract Property is ERC1155 {
     using SafeMath for uint256;
     using EnumerableSet for EnumerableSet.AddressSet;
 
+    using Counters for Counters.Counter;
+    Counters.Counter public listingCounter;
+
     uint256 TOKEN_ID = 0;
-    mapping(address => Listing) public listings;
+    mapping(uint256 => Listing) public listings;
     mapping(address => uint256) public paymentBalances;
 
     struct Listing {
         uint256 price;
         uint256 amount;
+        address owner;
     }
+
+    Listing[] public Listings;
 
     uint256 public pricePerShare;
     uint256 public totalShares;
@@ -57,29 +64,31 @@ contract Property is ERC1155 {
         require(balanceOf(msg.sender, TOKEN_ID) >= amount, "caller must own given token");
         require(isApprovedForAll(msg.sender, address(this)), "contract must be approved");
 
-        listings[msg.sender] = Listing(price, amount);
+        Listing memory newListing = Listing(price, amount, msg.sender);
+        Listings.push(newListing);
+        listingCounter.increment();
 
-        emit ListShares(msg.sender, listings[msg.sender].price, listings[msg.sender].amount);
+        // emit ListShares(msg.sender, listings[msg.sender].price, listings[msg.sender].amount);
     }
 
-    function purchaseShares (address listingId, uint256 amountToPurchase) public payable {
-        require(msg.value >= listings[listingId].price.mul(amountToPurchase), "insufficient funds sent");
-        require(amountToPurchase <= listings[listingId].amount, "invalid amount of shares requested");
-        require(balanceOf(listingId, TOKEN_ID) >= amountToPurchase, "insufficient amount from owner");
+    function purchaseShares (uint256 listingId, uint256 amountToPurchase) public payable {
+        require(msg.value >= Listings[listingId].price.mul(amountToPurchase), "insufficient funds sent");
+        require(amountToPurchase <= Listings[listingId].amount, "invalid amount of shares requested");
+        require(balanceOf(Listings[listingId].owner, TOKEN_ID) >= amountToPurchase, "insufficient amount from owner");
 
-        paymentBalances[listingId] += msg.value;
-        safeTransferFrom(listingId, msg.sender, TOKEN_ID, amountToPurchase, "");
+        paymentBalances[Listings[listingId].owner] += msg.value;
+        safeTransferFrom(Listings[listingId].owner, msg.sender, TOKEN_ID, amountToPurchase, "");
 
-        if (amountToPurchase == listings[listingId].amount) {
-            delete listings[listingId];
-            shareHolders.remove(listingId);
-        } else {
-            listings[listingId] = Listing(listings[listingId].price, listings[listingId].amount.sub(amountToPurchase));
-        }
+        // if (amountToPurchase == listings[listingId].amount) {
+        //     delete listings[listingId];
+        //     shareHolders.remove(listingId);
+        // } else {
+        //     listings[listingId] = Listing(listings[listingId].price, listings[listingId].amount.sub(amountToPurchase));
+        // }
 
         shareHolders.add(msg.sender);
 
-        emit PurchaseShares(msg.sender, listingId, amountToPurchase);
+        // emit PurchaseShares(msg.sender, listingId, amountToPurchase);
     }
 
     function withdrawFunds (uint256 amount, address payable recipientAddress) public {

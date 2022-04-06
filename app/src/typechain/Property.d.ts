@@ -22,15 +22,17 @@ import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface PropertyInterface extends ethers.utils.Interface {
   functions: {
+    "Listings(uint256)": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "listShares(uint256,uint256)": FunctionFragment;
-    "listings(address)": FunctionFragment;
+    "listingCounter()": FunctionFragment;
+    "listings(uint256)": FunctionFragment;
     "mint(uint256)": FunctionFragment;
     "paymentBalances(address)": FunctionFragment;
     "pricePerShare()": FunctionFragment;
-    "purchaseShares(address,uint256)": FunctionFragment;
+    "purchaseShares(uint256,uint256)": FunctionFragment;
     "receiveFunds()": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
@@ -42,6 +44,10 @@ interface PropertyInterface extends ethers.utils.Interface {
     "withdrawFunds(uint256,address)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "Listings",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [string, BigNumberish]
@@ -58,7 +64,14 @@ interface PropertyInterface extends ethers.utils.Interface {
     functionFragment: "listShares",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "listings", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "listingCounter",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "listings",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "mint", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "paymentBalances",
@@ -70,7 +83,7 @@ interface PropertyInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "purchaseShares",
-    values: [string, BigNumberish]
+    values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "receiveFunds",
@@ -106,6 +119,7 @@ interface PropertyInterface extends ethers.utils.Interface {
     values: [BigNumberish, string]
   ): string;
 
+  decodeFunctionResult(functionFragment: "Listings", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfBatch",
@@ -116,6 +130,10 @@ interface PropertyInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "listShares", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "listingCounter",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "listings", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(
@@ -301,6 +319,17 @@ export class Property extends BaseContract {
   interface: PropertyInterface;
 
   functions: {
+    Listings(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, string] & {
+        price: BigNumber;
+        amount: BigNumber;
+        owner: string;
+      }
+    >;
+
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -325,11 +354,19 @@ export class Property extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    listingCounter(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { _value: BigNumber }>;
+
     listings(
-      arg0: string,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber] & { price: BigNumber; amount: BigNumber }
+      [BigNumber, BigNumber, string] & {
+        price: BigNumber;
+        amount: BigNumber;
+        owner: string;
+      }
     >;
 
     mint(
@@ -345,7 +382,7 @@ export class Property extends BaseContract {
     pricePerShare(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     purchaseShares(
-      listingId: string,
+      listingId: BigNumberish,
       amountToPurchase: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -396,6 +433,17 @@ export class Property extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  Listings(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, string] & {
+      price: BigNumber;
+      amount: BigNumber;
+      owner: string;
+    }
+  >;
+
   balanceOf(
     account: string,
     id: BigNumberish,
@@ -420,10 +468,18 @@ export class Property extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  listingCounter(overrides?: CallOverrides): Promise<BigNumber>;
+
   listings(
-    arg0: string,
+    arg0: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { price: BigNumber; amount: BigNumber }>;
+  ): Promise<
+    [BigNumber, BigNumber, string] & {
+      price: BigNumber;
+      amount: BigNumber;
+      owner: string;
+    }
+  >;
 
   mint(
     amountOfTokens: BigNumberish,
@@ -435,7 +491,7 @@ export class Property extends BaseContract {
   pricePerShare(overrides?: CallOverrides): Promise<BigNumber>;
 
   purchaseShares(
-    listingId: string,
+    listingId: BigNumberish,
     amountToPurchase: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -486,6 +542,17 @@ export class Property extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    Listings(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, string] & {
+        price: BigNumber;
+        amount: BigNumber;
+        owner: string;
+      }
+    >;
+
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -510,11 +577,17 @@ export class Property extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    listingCounter(overrides?: CallOverrides): Promise<BigNumber>;
+
     listings(
-      arg0: string,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber] & { price: BigNumber; amount: BigNumber }
+      [BigNumber, BigNumber, string] & {
+        price: BigNumber;
+        amount: BigNumber;
+        owner: string;
+      }
     >;
 
     mint(
@@ -530,7 +603,7 @@ export class Property extends BaseContract {
     pricePerShare(overrides?: CallOverrides): Promise<BigNumber>;
 
     purchaseShares(
-      listingId: string,
+      listingId: BigNumberish,
       amountToPurchase: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -780,6 +853,8 @@ export class Property extends BaseContract {
   };
 
   estimateGas: {
+    Listings(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -804,7 +879,9 @@ export class Property extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    listings(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    listingCounter(overrides?: CallOverrides): Promise<BigNumber>;
+
+    listings(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     mint(
       amountOfTokens: BigNumberish,
@@ -819,7 +896,7 @@ export class Property extends BaseContract {
     pricePerShare(overrides?: CallOverrides): Promise<BigNumber>;
 
     purchaseShares(
-      listingId: string,
+      listingId: BigNumberish,
       amountToPurchase: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -871,6 +948,11 @@ export class Property extends BaseContract {
   };
 
   populateTransaction: {
+    Listings(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -895,8 +977,10 @@ export class Property extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    listingCounter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     listings(
-      arg0: string,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -913,7 +997,7 @@ export class Property extends BaseContract {
     pricePerShare(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     purchaseShares(
-      listingId: string,
+      listingId: BigNumberish,
       amountToPurchase: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
