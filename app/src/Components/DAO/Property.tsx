@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { Property__factory as PropertyFactory } from "../../typechain";
-import ShareListings from "./ShareListings";
+import ShareListings from "./ShareOwnership/ShareListings";
 
 export default function Property() {
   const [tempAddress, setTempAddress] = useState("");
@@ -11,12 +11,6 @@ export default function Property() {
     pricePerShare: "",
     totalShares: "",
     totalIssuedShares: "",
-  });
-
-  const [listing, setListing] = useState<any>({
-    price: 0,
-    amount: 0,
-    owner: "",
   });
 
   const [sharesToBuy, setSharesToBuy] = useState(0);
@@ -128,28 +122,8 @@ export default function Property() {
     }
   };
 
-  // useEffect(() => {
-  //   const getListing = async () => {
-  //     try {
-  //       const numberListings = await Property.listingCounter();
-  //       const listingOne = await Property.Listings(9);
-  //       let { amount, owner, price } = listingOne;
-  //       console.log(numberListings.toNumber());
-  //       setListing({
-  //         amount: amount.toNumber(),
-  //         price: price.toNumber(),
-  //         owner: owner,
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getListing();
-  // }, []);
-
   // // // // // // // // // // // // // //// // // // // // // // // // // // // // // // // // // // //
 
-  const [numberOfListings, setNumberOfListings] = useState();
   const [listingElements, setListingElements] = useState([]);
   useEffect(() => {
     let listingsArray: any = [];
@@ -175,6 +149,7 @@ export default function Property() {
       .then(async (totalListings: any) => {
         for (let i = 0; i < totalListings; i++) {
           let listing = await Property.Listings(i);
+          // listing.concat(i)
           listingsArray.push(listing);
         }
         return listingsArray;
@@ -186,11 +161,13 @@ export default function Property() {
           .reverse()
           .map((listingX: any, index: any) => {
             return (
-              <div key={index} style={{ display: "flex", marginBottom: 20 }}>
-                <p style={{ marginRight: 20 }}>{listingX.amount.toNumber()}</p>
-                <p style={{ marginRight: 20 }}>{listingX.price.toNumber()}</p>
-                <p style={{ marginRight: 20 }}>{listingX.owner}</p>
-              </div>
+              <ShareListings
+                key={index}
+                listingID={index + 1}
+                numberOfShares={listingX.amount.toNumber()}
+                sharePrice={listingX.price.toNumber()}
+                ownerAddress={listingX.owner}
+              ></ShareListings>
             );
           });
         console.log(listingElements);
@@ -199,7 +176,7 @@ export default function Property() {
       .then((elements) => {
         setListingElements(elements);
       });
-  }, []);
+  }, [tsxHash]);
 
   return (
     <>
@@ -264,7 +241,14 @@ export default function Property() {
         <div>List Shares Receipt: {tsxHash.listShares}</div>
         <div>{}</div>
       </form>
-      {listingElements}
+      <div className="listing--grid">
+        <p className="listing--grid--item">ListingID</p>
+        <p className="listing--grid--item">Number of Shares</p>
+        <p className="listing--grid--item">Price per Share</p>
+        <p className="listing--grid--item">Share Owner</p>
+        <div></div>
+        {listingElements}
+      </div>
     </>
   );
 }

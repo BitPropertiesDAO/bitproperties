@@ -1,0 +1,24 @@
+.listing--grid {
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 1fr 1fr 0.3fr;
+}
+
+.listing--grid--item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(19, 19, 19, 1);
+  padding: 5px;
+  padding: none;
+  margin: none;
+}
+
+.listing-button {
+  border: none;
+  background-color: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: none;
+  margin: none;
+}
