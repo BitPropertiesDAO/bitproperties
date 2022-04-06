@@ -1,9 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/DAOFactory.sol": {
-      "lastModificationDate": 1648923168884,
-      "contentHash": "886b2f28489dd1e89dfffa8a9a2183b4",
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/DAOFactory.sol": {
+      "lastModificationDate": 1649008491102,
+      "contentHash": "92f49c5e7ad237772cd7cc53ca19544e",
       "sourceName": "contracts/DAOFactory.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -40,9 +40,9 @@
         "DAOFactory"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/DAORouter.sol": {
-      "lastModificationDate": 1648933371840,
-      "contentHash": "b10dd78c8f8da5f956e1fd25459b2dd1",
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/DAORouter.sol": {
+      "lastModificationDate": 1649193933362,
+      "contentHash": "e22e907c9a9303ad047abf060063c2c2",
       "sourceName": "contracts/DAORouter.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -78,8 +78,8 @@
         "DAORouter"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/DAOToken.sol": {
-      "lastModificationDate": 1648304285133,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/DAOToken.sol": {
+      "lastModificationDate": 1649008491102,
       "contentHash": "ba39a972fee338bb3cb320fce6c4e1cc",
       "sourceName": "contracts/DAOToken.sol",
       "solcConfig": {
@@ -119,8 +119,8 @@
         "DAOToken"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/DAOGovernor.sol": {
-      "lastModificationDate": 1648415947112,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/DAOGovernor.sol": {
+      "lastModificationDate": 1649008491102,
       "contentHash": "2cb5903bcbdf9c7b88278f0b56dc830d",
       "sourceName": "contracts/DAOGovernor.sol",
       "solcConfig": {
@@ -159,8 +159,8 @@
         "DAOGovernor"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/shared/SharedStructs.sol": {
-      "lastModificationDate": 1648304285133,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/shared/SharedStructs.sol": {
+      "lastModificationDate": 1649008491102,
       "contentHash": "479d1d0c7378198fb793b19373c64095",
       "sourceName": "contracts/shared/SharedStructs.sol",
       "solcConfig": {
@@ -193,9 +193,9 @@
         "SharedStructs"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/Property.sol": {
-      "lastModificationDate": 1648415722825,
-      "contentHash": "3e14a7d972d63da3fd1a47357da90485",
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/Property.sol": {
+      "lastModificationDate": 1649257129590,
+      "contentHash": "99fbe34f2af2e5fe9c3acaf494fe9811",
       "sourceName": "contracts/Property.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -231,8 +231,8 @@
         "Property"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
-      "lastModificationDate": 1648315181018,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
+      "lastModificationDate": 1649008756311,
       "contentHash": "1d68a32647e54f6acd6ff471d940ef4c",
       "sourceName": "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
       "solcConfig": {
@@ -272,8 +272,8 @@
         "ERC1155"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
-      "lastModificationDate": 1648315181016,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
+      "lastModificationDate": 1649008756299,
       "contentHash": "a6a9d6c1f662e922b82c1ba4d81cdd48",
       "sourceName": "@openzeppelin/contracts/utils/math/SafeMath.sol",
       "solcConfig": {
@@ -306,8 +306,8 @@
         "SafeMath"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/structs/EnumerableSet.sol": {
-      "lastModificationDate": 1648315181015,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/structs/EnumerableSet.sol": {
+      "lastModificationDate": 1649008756300,
       "contentHash": "b8070bbbb327a49a4d37f5c590b38238",
       "sourceName": "@openzeppelin/contracts/utils/structs/EnumerableSet.sol",
       "solcConfig": {
@@ -340,8 +340,8 @@
         "EnumerableSet"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
-      "lastModificationDate": 1648315181019,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+      "lastModificationDate": 1649008756311,
       "contentHash": "59e1bc5713fdebc7f821dc52f4d3e0ef",
       "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
       "solcConfig": {
@@ -376,8 +376,8 @@
         "IERC1155"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
-      "lastModificationDate": 1648315181019,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+      "lastModificationDate": 1649008756311,
       "contentHash": "9f8822b72fe2702979e40160cb6d9636",
       "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol",
       "solcConfig": {
@@ -412,8 +412,8 @@
         "IERC1155Receiver"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
-      "lastModificationDate": 1648315181516,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+      "lastModificationDate": 1649008756793,
       "contentHash": "9148c2e10c4efb12c71a7f080da5559b",
       "sourceName": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
       "solcConfig": {
@@ -448,8 +448,8 @@
         "IERC1155MetadataURI"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1648315179822,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "ad714a6368ee7d43cded6bbe8af0b155",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
@@ -482,8 +482,8 @@
         "Address"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1648315179822,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -516,8 +516,8 @@
         "Context"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1648315181015,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1649008756311,
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -552,8 +552,8 @@
         "ERC165"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1648315181015,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1649008756311,
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -586,8 +586,8 @@
         "IERC165"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1648315179819,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -622,8 +622,8 @@
         "Ownable"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1648315181021,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1649008756311,
       "contentHash": "bab063ddd80e9cc9e313361fef7ef07f",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
@@ -660,8 +660,8 @@
         "ERC20"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol": {
-      "lastModificationDate": 1648315181518,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol": {
+      "lastModificationDate": 1649008756794,
       "contentHash": "4e2473d86be8e737a3ba1c38f36a2aab",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol",
       "solcConfig": {
@@ -700,8 +700,8 @@
         "ERC20Permit"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol": {
-      "lastModificationDate": 1648315181518,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol": {
+      "lastModificationDate": 1649008756794,
       "contentHash": "d750921452f3bf2ab170f55cf4f5dc71",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
       "solcConfig": {
@@ -740,8 +740,8 @@
         "ERC20Votes"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/contracts/Uniswap.sol": {
-      "lastModificationDate": 1648415725378,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/Uniswap.sol": {
+      "lastModificationDate": 1649008491102,
       "contentHash": "cbf5cea0ff35feacb187fa104043d881",
       "sourceName": "contracts/Uniswap.sol",
       "solcConfig": {
@@ -775,8 +775,8 @@
         "IUniswapV2Router02"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1648315181021,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1649008756312,
       "contentHash": "a44d1a099633876550ad2476b21bafbe",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
@@ -809,8 +809,8 @@
         "IERC20"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1648315181518,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1649008756794,
       "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
@@ -845,8 +845,8 @@
         "IERC20Metadata"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
-      "lastModificationDate": 1648315181518,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+      "lastModificationDate": 1649008756794,
       "contentHash": "fb77f144244b9ab12533aa6ce85ef8c5",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
       "solcConfig": {
@@ -879,8 +879,8 @@
         "IERC20Permit"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol": {
-      "lastModificationDate": 1648315181015,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol": {
+      "lastModificationDate": 1649008756300,
       "contentHash": "161aae4dc1450371d0f324488f66a9cf",
       "sourceName": "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
       "solcConfig": {
@@ -915,8 +915,8 @@
         "EIP712"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
-      "lastModificationDate": 1648315181014,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
+      "lastModificationDate": 1649008756300,
       "contentHash": "482bcc512029ecf51ca4ae85cf4667c7",
       "sourceName": "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
       "solcConfig": {
@@ -951,8 +951,8 @@
         "ECDSA"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
-      "lastModificationDate": 1648315179822,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
       "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
@@ -985,8 +985,8 @@
         "Counters"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1648315179822,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -1019,8 +1019,8 @@
         "Strings"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
-      "lastModificationDate": 1648315181016,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1649008756300,
       "contentHash": "339b9793dcbd7b5d55af725ef47de74c",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
@@ -1053,8 +1053,8 @@
         "Math"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/governance/utils/IVotes.sol": {
-      "lastModificationDate": 1648315181025,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/governance/utils/IVotes.sol": {
+      "lastModificationDate": 1649008756296,
       "contentHash": "a036d40989f21d08bb990e68d0088fa1",
       "sourceName": "@openzeppelin/contracts/governance/utils/IVotes.sol",
       "solcConfig": {
@@ -1087,8 +1087,8 @@
         "IVotes"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol": {
-      "lastModificationDate": 1648315181016,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol": {
+      "lastModificationDate": 1649008756299,
       "contentHash": "cd91252bfcbee6eaba8f5144f504583c",
       "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
       "solcConfig": {
@@ -1121,8 +1121,8 @@
         "SafeCast"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/governance/Governor.sol": {
-      "lastModificationDate": 1648315179855,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/governance/Governor.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "28514954183285e570ab4889d2dbfe54",
       "sourceName": "@openzeppelin/contracts/governance/Governor.sol",
       "solcConfig": {
@@ -1164,8 +1164,8 @@
         "Governor"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorSettings.sol": {
-      "lastModificationDate": 1648315181027,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorSettings.sol": {
+      "lastModificationDate": 1649008756297,
       "contentHash": "2c6e87fa9b63c7ef8579eb4ae937d4c2",
       "sourceName": "@openzeppelin/contracts/governance/extensions/GovernorSettings.sol",
       "solcConfig": {
@@ -1200,8 +1200,8 @@
         "GovernorSettings"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol": {
-      "lastModificationDate": 1648315181027,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol": {
+      "lastModificationDate": 1649008756297,
       "contentHash": "ea8f93bb65eeed458767a28c233ed3ac",
       "sourceName": "@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol",
       "solcConfig": {
@@ -1236,8 +1236,8 @@
         "GovernorCountingSimple"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol": {
-      "lastModificationDate": 1648315181035,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol": {
+      "lastModificationDate": 1649008756299,
       "contentHash": "232d8cac97c441c8c177aaeeccc94481",
       "sourceName": "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
       "solcConfig": {
@@ -1273,8 +1273,8 @@
         "GovernorVotes"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol": {
-      "lastModificationDate": 1648315181035,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol": {
+      "lastModificationDate": 1649008756299,
       "contentHash": "b346cb21204465106e3d5ea7b6264ee9",
       "sourceName": "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol",
       "solcConfig": {
@@ -1309,8 +1309,8 @@
         "GovernorVotesQuorumFraction"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Timers.sol": {
-      "lastModificationDate": 1648315179830,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/utils/Timers.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "ae135102abee8b2fc88eed09a40cdb4c",
       "sourceName": "@openzeppelin/contracts/utils/Timers.sol",
       "solcConfig": {
@@ -1343,8 +1343,8 @@
         "Timers"
       ]
     },
-    "/Users/nikitagurbatov/Desktop/BITPROPERTIESGOOD/bitproperties/token/node_modules/@openzeppelin/contracts/governance/IGovernor.sol": {
-      "lastModificationDate": 1648315179855,
+    "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/node_modules/@openzeppelin/contracts/governance/IGovernor.sol": {
+      "lastModificationDate": 1649008755079,
       "contentHash": "1a5be50c2b8436df5ec78772626c13e9",
       "sourceName": "@openzeppelin/contracts/governance/IGovernor.sol",
       "solcConfig": {

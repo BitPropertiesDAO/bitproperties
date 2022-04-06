@@ -66,9 +66,20 @@ export default function DAOProperties() {
 
   return (
     <>
-      <AppHeader>Properties: {numberProperties}</AppHeader>
-      <br />
-      <div className="display--grid">{propertyElements}</div>
+      <div className="daoPropertiesBoard">
+        {/* <AppHeader>Properties: {numberProperties}</AppHeader> */}
+        <br />
+        <div className="property--grid headings">
+          <div className="heading--item grid--title">
+            Properties: {numberProperties}
+          </div>
+          <div className="heading--item">Name</div>
+          <div className="heading--item">Shareholders</div>
+          <div className="heading--item">Issued (%)</div>
+          <div className="heading--item">Progress</div>
+        </div>
+        <div className="display--grid">{propertyElements}</div>
+      </div>
     </>
   );
 }

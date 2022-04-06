@@ -4,6 +4,12 @@
   --title-font-width: 700;
   --side--width: 300px;
   --alchemy--title--font-size: 2.2rem;
+  --box-shadow--one: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07);
 }
 @import "~antd/dist/antd.css";
 .alchemy--intro {
@@ -49,9 +55,8 @@
   width: calc(100% - var(--side--width));
   min-width: 940px;
   z-index: 1;
-  /* background: linear-gradient(180deg, rgb(47, 47, 47) 0%, rgb(40, 40, 40) 100%); */
+
   background: #121418;
-  box-shadow: inset 0px 4px 40px rgba(0, 0, 0, 0.35);
 }
 .app--section--right::-webkit-scrollbar {
   display: none;

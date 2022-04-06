@@ -2,20 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { Property__factory as PropertyFactory } from "../../typechain";
+import { read } from "fs";
 
 export default function Property() {
+  const [tempAddress, setTempAddress] = useState("");
+
   const [propertyInformation, setPropertyInformation] = useState<any>({
     pricePerShare: "",
     totalShares: "",
     totalIssuedShares: "",
   });
+
   const [sharesToBuy, setSharesToBuy] = useState(0);
   const [totalPrice, setTotalPrice] = useState<number>();
-  const [eventTransaction, setEventTransaction] = useState<any>();
-
-  const [tempAddress, setTempAddress] = useState("");
+  const [eventTransactionBuyShares, setEventTransactionBuyShares] =
+    useState<any>();
 
   const [myShares, setMyShares] = useState<any>("");
+
+  const [myListing, setMyListing] = useState<any>({
+    price: 0,
+    numberOfShares: 0,
+  });
 
   let { PropertyAddress } = useParams();
   const provider = new ethers.providers.JsonRpcProvider(
@@ -64,7 +72,7 @@ export default function Property() {
       }
     };
     handleBalance();
-  }, [eventTransaction, tempAddress]);
+  }, [eventTransactionBuyShares, tempAddress]);
 
   useEffect(() => {
     // UPDATE TOTAL PRICE OF SHARE BASED ON AMOUNT
@@ -83,7 +91,22 @@ export default function Property() {
       });
       const buySharesReceipt = await buySharesTsx.wait();
       console.log(buySharesReceipt);
-      setEventTransaction(buySharesReceipt);
+      setEventTransactionBuyShares(buySharesReceipt.transactionHash);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleListShares = async (e: any) => {
+    e.preventDefault();
+    console.log(myListing.numberOfShares);
+    try {
+      const listSharesTsx = await Property.listShares(
+        myListing.price,
+        myListing.numberOfShares
+      );
+      const receipt = await listSharesTsx.wait();
+      console.log(receipt);
     } catch (error) {
       console.log(error);
     }
@@ -115,11 +138,45 @@ export default function Property() {
         <div>totalPrice: {totalPrice}</div>
         <button type="submit">Buy</button>
       </form>
+      <div>Transaction Hash:{eventTransactionBuyShares}</div>
 
       <br />
 
       <div>YourAddress: {tempAddress}</div>
       <div>You own: {myShares} shares</div>
+
+      <form onSubmit={handleListShares}>
+        <label>
+          List Shares:
+          <input
+            value={myListing.numberOfShares}
+            onChange={(e: any) =>
+              setMyListing({
+                numberOfShares: e.target.value,
+                price: myListing.price,
+              })
+            }
+            type="number"
+            style={{ color: "black" }}
+            required
+          ></input>
+          <input
+            value={myListing.price}
+            onChange={(e: any) =>
+              setMyListing({
+                numberOfShares: myListing.numberOfShares,
+                price: e.target.value,
+              })
+            }
+            type="number"
+            style={{ color: "black" }}
+            required
+          ></input>
+        </label>
+        <div>listing Price: {myListing.price}</div>
+        <div>Shares Listing: {myListing.numberOfShares}</div>
+        <button type="submit">List</button>
+      </form>
     </>
   );
 }

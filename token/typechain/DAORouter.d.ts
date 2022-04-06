@@ -23,7 +23,6 @@ interface DAORouterInterface extends ethers.utils.Interface {
   functions: {
     "Properties(uint256)": FunctionFragment;
     "daoName()": FunctionFragment;
-    "daoProperties(address)": FunctionFragment;
     "governanceTokenAddress()": FunctionFragment;
     "governorAddress()": FunctionFragment;
     "launchNewProperty(string,uint256,uint256)": FunctionFragment;
@@ -35,10 +34,6 @@ interface DAORouterInterface extends ethers.utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "daoName", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "daoProperties",
-    values: [string]
-  ): string;
   encodeFunctionData(
     functionFragment: "governanceTokenAddress",
     values?: undefined
@@ -58,10 +53,6 @@ interface DAORouterInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(functionFragment: "Properties", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "daoName", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "daoProperties",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "governanceTokenAddress",
     data: BytesLike
@@ -137,11 +128,9 @@ export class DAORouter extends BaseContract {
     Properties(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[string]>;
+    ): Promise<[string, string] & { daoName: string; contractAddress: string }>;
 
     daoName(overrides?: CallOverrides): Promise<[string]>;
-
-    daoProperties(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
     governanceTokenAddress(overrides?: CallOverrides): Promise<[string]>;
 
@@ -159,11 +148,12 @@ export class DAORouter extends BaseContract {
     ): Promise<[BigNumber] & { _value: BigNumber }>;
   };
 
-  Properties(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  Properties(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<[string, string] & { daoName: string; contractAddress: string }>;
 
   daoName(overrides?: CallOverrides): Promise<string>;
-
-  daoProperties(arg0: string, overrides?: CallOverrides): Promise<string>;
 
   governanceTokenAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -179,11 +169,12 @@ export class DAORouter extends BaseContract {
   propertyCounter(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
-    Properties(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    Properties(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, string] & { daoName: string; contractAddress: string }>;
 
     daoName(overrides?: CallOverrides): Promise<string>;
-
-    daoProperties(arg0: string, overrides?: CallOverrides): Promise<string>;
 
     governanceTokenAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -217,8 +208,6 @@ export class DAORouter extends BaseContract {
 
     daoName(overrides?: CallOverrides): Promise<BigNumber>;
 
-    daoProperties(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     governanceTokenAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
     governorAddress(overrides?: CallOverrides): Promise<BigNumber>;
@@ -240,11 +229,6 @@ export class DAORouter extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     daoName(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    daoProperties(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     governanceTokenAddress(
       overrides?: CallOverrides
