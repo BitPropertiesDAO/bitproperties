@@ -8,6 +8,9 @@ import SideBar from "../SideBar/SideBar";
 import { DAORouter__factory as DAORouterFactory } from "../../typechain/factories/DAORouter__factory";
 import { ethers } from "ethers";
 
+import { useDispatch } from "react-redux";
+import { changeCurrDAO } from "../../BreadcrumbsSlice";
+
 export default function DashBoard() {
   const [current, setCurrent] = useState<number>();
   const [daoInfo, setDAOInfo] = useState<any>({
@@ -51,6 +54,8 @@ export default function DashBoard() {
     console.log(current);
   }, [location]);
 
+  const dispatch = useDispatch()
+
   return (
     <>
       <SideBar>
@@ -66,6 +71,7 @@ export default function DashBoard() {
           title="Dashboard"
           icon="ic:round-space-dashboard"
           linkTo={`/app/DAO/${DAORouterID}/Dashboard`}
+          onClick={dispatch(changeCurrDAO(daoInfo.daoName))}
         ></Tab>
         <Tab
           id={1}

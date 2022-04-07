@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import DaoCreationSlice from "./Components/DaoManager/CreateDAO/DaoCreationSlice";
-// import nameSlice from "./Components/DaoManager/CreateDAO/DaoCreationSlice";
+import BreadcrumbsSlice from "./BreadcrumbsSlice";
+
+const rootReducer = {
+  Alchemy: DaoCreationSlice,
+  BreadcrumbsReducer: BreadcrumbsSlice
+}
 
 const store = configureStore({
-  reducer: {
-    Alchemy: DaoCreationSlice,
-  },
+  reducer: rootReducer
 });
 
 export default store;

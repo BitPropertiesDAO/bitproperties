@@ -4,6 +4,7 @@ import { DAORouter__factory as DAORouterFactory } from "../../typechain/factorie
 import { ethers } from "ethers";
 import { useState } from "react";
 import { Input, InputNumber } from "antd";
+import Breadcrumbs from "../../Components/Breadcrumbs";
 
 export default function Profile() {
   const [propertyName, setPropertyName] = useState();
@@ -75,6 +76,7 @@ export default function Profile() {
 
   return (
     <>
+      <Breadcrumbs />
       <div>DAO ROUTER: {DAORouterID}</div>
       <div>DAO Name: {DAOName}</div>
       <div>Governor Address: {governanceAddress}</div>
