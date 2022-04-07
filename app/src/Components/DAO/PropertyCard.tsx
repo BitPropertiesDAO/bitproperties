@@ -4,7 +4,15 @@ import "./styles.css";
 import { Property__factory as PropertyFactory } from "../../typechain";
 import { ethers } from "ethers";
 
-export default function PropertyCard(props: any) {
+interface Propertycard {
+  image: any;
+  key: any;
+  navigateTo: string;
+  propertyName?: string;
+  contractAddress?: any;
+}
+
+export default function PropertyCard(props: Propertycard) {
   const [propertyInfo, setPropertyInfo] = useState<any>({
     totalShares: 0,
     totalIssuedShares: 0,
@@ -17,8 +25,12 @@ export default function PropertyCard(props: any) {
     "http://localhost:8545"
   );
   const signer = provider.getSigner();
+
+  let Property: any;
+
   // @ts-ignore
-  const Property = PropertyFactory.connect(props.contractAddress, signer);
+  Property = PropertyFactory.connect(props.contractAddress, signer);
+
   useEffect(() => {
     const getInfo = async () => {
       try {
