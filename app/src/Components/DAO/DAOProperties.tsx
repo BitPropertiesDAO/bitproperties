@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { DAORouter__factory } from "../../typechain";
-import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import PropertyCard from "./PropertyCard";
 import MainHouse from "../../static/MainHouse.png";
 
@@ -47,7 +46,6 @@ export default function DAOProperties() {
           .map((propertyListing: any, index: number) => {
             return (
               <PropertyCard
-                type={"property"}
                 image={MainHouse}
                 key={index}
                 navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyListing.contractAddress}`}

@@ -31,6 +31,8 @@ contract Property is ERC1155 {
     mapping(address => uint256) public paymentBalances;
 
     struct Listing {
+        bool isActive;
+        uint listingID;
         uint256 price;
         uint256 amount;
         address owner;
@@ -64,7 +66,7 @@ contract Property is ERC1155 {
         require(balanceOf(msg.sender, TOKEN_ID) >= amount, "caller must own given token");
         require(isApprovedForAll(msg.sender, address(this)), "contract must be approved");
 
-        Listing memory newListing = Listing(price, amount, msg.sender);
+        Listing memory newListing = Listing(true, listingCounter.current(), price, amount, msg.sender);
         Listings.push(newListing);
         listingCounter.increment();
 
@@ -75,20 +77,17 @@ contract Property is ERC1155 {
         require(msg.value >= Listings[listingId].price.mul(amountToPurchase), "insufficient funds sent");
         require(amountToPurchase <= Listings[listingId].amount, "invalid amount of shares requested");
         require(balanceOf(Listings[listingId].owner, TOKEN_ID) >= amountToPurchase, "insufficient amount from owner");
+        require(Listings[listingId].isActive == true, "listing not active");
 
         paymentBalances[Listings[listingId].owner] += msg.value;
+
         safeTransferFrom(Listings[listingId].owner, msg.sender, TOKEN_ID, amountToPurchase, "");
 
-        // if (amountToPurchase == listings[listingId].amount) {
-        //     delete listings[listingId];
-        //     shareHolders.remove(listingId);
-        // } else {
-        //     listings[listingId] = Listing(listings[listingId].price, listings[listingId].amount.sub(amountToPurchase));
-        // }
+        Listings[listingId].isActive = false;
 
         shareHolders.add(msg.sender);
 
-        // emit PurchaseShares(msg.sender, listingId, amountToPurchase);
+        emit PurchaseShares(msg.sender, Listings[listingId].owner, amountToPurchase);
     }
 
     function withdrawFunds (uint256 amount, address payable recipientAddress) public {

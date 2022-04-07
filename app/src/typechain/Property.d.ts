@@ -323,7 +323,9 @@ export class Property extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, string] & {
+      [boolean, BigNumber, BigNumber, BigNumber, string] & {
+        isActive: boolean;
+        listingID: BigNumber;
         price: BigNumber;
         amount: BigNumber;
         owner: string;
@@ -362,7 +364,9 @@ export class Property extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, string] & {
+      [boolean, BigNumber, BigNumber, BigNumber, string] & {
+        isActive: boolean;
+        listingID: BigNumber;
         price: BigNumber;
         amount: BigNumber;
         owner: string;
@@ -437,7 +441,9 @@ export class Property extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, string] & {
+    [boolean, BigNumber, BigNumber, BigNumber, string] & {
+      isActive: boolean;
+      listingID: BigNumber;
       price: BigNumber;
       amount: BigNumber;
       owner: string;
@@ -474,7 +480,9 @@ export class Property extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, string] & {
+    [boolean, BigNumber, BigNumber, BigNumber, string] & {
+      isActive: boolean;
+      listingID: BigNumber;
       price: BigNumber;
       amount: BigNumber;
       owner: string;
@@ -546,7 +554,9 @@ export class Property extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, string] & {
+      [boolean, BigNumber, BigNumber, BigNumber, string] & {
+        isActive: boolean;
+        listingID: BigNumber;
         price: BigNumber;
         amount: BigNumber;
         owner: string;
@@ -583,7 +593,9 @@ export class Property extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, string] & {
+      [boolean, BigNumber, BigNumber, BigNumber, string] & {
+        isActive: boolean;
+        listingID: BigNumber;
         price: BigNumber;
         amount: BigNumber;
         owner: string;

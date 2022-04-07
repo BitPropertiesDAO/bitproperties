@@ -9,6 +9,8 @@ interface ShareListing {
   sharePrice: number;
   ownerAddress: string;
   listingID?: any;
+  isActive: boolean;
+  displayActive: boolean;
 }
 
 export default function ShareListings(props: ShareListing) {
@@ -17,17 +19,20 @@ export default function ShareListings(props: ShareListing) {
     "http://localhost:8545"
   );
   const signer = provider.getSigner();
+  const address = signer.getAddress();
   //   @ts-ignore
   const Property = PropertyFactory.connect(PropertyAddress, signer);
 
   const handleBuyShares = async (listingId: any) => {
-    console.log(listingId);
+    // console.log(listingId);
     try {
-      const x = await Property.Listings(listingId);
-      const numberShares = await x.amount.toNumber();
+      const listing = await Property.Listings(listingId);
+      const numberShares: any = listing.amount;
+      const sharePrice: any = listing.price;
       const buySharesTsx = await Property.purchaseShares(
         listingId,
-        numberShares
+        numberShares,
+        { value: sharePrice * numberShares, from: address }
       );
       const receipt = await buySharesTsx.wait();
       console.log(receipt);
@@ -37,15 +42,16 @@ export default function ShareListings(props: ShareListing) {
   };
 
   return (
-    // <div className="listing--grid">
     <>
       <p className="listing--grid--item">{props.listingID}</p>
+      <p className="listing--grid--item">
+        {props.isActive ? "active" : "inactive"}
+      </p>
       <p className="listing--grid--item">{props.numberOfShares}</p>
       <p className="listing--grid--item">{props.sharePrice}</p>
       <p className="listing--grid--item">
         {props.ownerAddress.replace(/(.{9})..+/, "$1…")}
       </p>
-
       {/* AddSmarter way to get ListingID */}
       <button
         onClick={() => handleBuyShares(props.listingID)}

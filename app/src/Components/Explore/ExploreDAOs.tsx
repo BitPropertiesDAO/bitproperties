@@ -4,6 +4,9 @@ import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factor
 import { useNavigate } from "react-router";
 import { ethers } from "ethers";
 import { AppHeader } from "../DaoManager/InputFormAlchemy";
+import DAOCard from "./DAOCard";
+import "./styles.css";
+import PropertyCard from "../DAO/PropertyCard";
 
 export default function ExploreDAOs() {
   const [numberDAOs, setNumberDAOs] = useState<any>();
@@ -42,12 +45,19 @@ export default function ExploreDAOs() {
       .then((DAORouterArray) => {
         const DAOElements = DAORouterArray.map((DAO: any, index: any) => {
           return (
-            <div
-              onClick={() => navigate(`/app/DAO/${DAO}/Dashboard`)}
+            <DAOCard
+              image={``}
               key={index}
-            >
-              {DAO}
-            </div>
+              navigateTo={`/app/DAO/${DAO}/Dashboard`}
+              DAORouter={DAO}
+            ></DAOCard>
+            // <PropertyCard
+            //   image={``}
+            //   key={index}
+            //   navigateTo={`/app/DAO/${DAO}/Dashboard`}
+            //   DAORouter={DAO}>
+
+            // </PropertyCard>
           );
         });
         return DAOElements;

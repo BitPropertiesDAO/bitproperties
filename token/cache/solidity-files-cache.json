@@ -10,7 +10,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -49,7 +49,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -87,7 +87,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -128,7 +128,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -168,7 +168,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -194,15 +194,15 @@
       ]
     },
     "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/Property.sol": {
-      "lastModificationDate": 1649273683354,
-      "contentHash": "db79cfe096db6c543e44dbcfded0559c",
+      "lastModificationDate": 1649346163649,
+      "contentHash": "0f7f08b639400521d9f96ae805b7f776",
       "sourceName": "contracts/Property.sol",
       "solcConfig": {
         "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -241,7 +241,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -282,7 +282,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -316,7 +316,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -350,7 +350,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -386,7 +386,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -422,7 +422,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -458,7 +458,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -492,7 +492,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -526,7 +526,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -562,7 +562,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -596,7 +596,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -632,7 +632,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -670,7 +670,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -710,7 +710,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -750,7 +750,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -785,7 +785,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -819,7 +819,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -855,7 +855,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -889,7 +889,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -925,7 +925,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -961,7 +961,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -995,7 +995,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1029,7 +1029,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1063,7 +1063,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1097,7 +1097,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1131,7 +1131,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1174,7 +1174,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1210,7 +1210,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1246,7 +1246,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1283,7 +1283,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1319,7 +1319,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {
@@ -1353,7 +1353,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 4000
+            "runs": 1000
           },
           "outputSelection": {
             "*": {

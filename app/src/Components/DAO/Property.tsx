@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { Property__factory as PropertyFactory } from "../../typechain";
+import { DAORouter__factory as RouterFactory } from "../../typechain";
 import ShareListings from "./ShareOwnership/ShareListings";
+import ListingsTable from "./ShareOwnership/ListingsTable";
+import { AppHeader } from "../DaoManager/InputFormAlchemy";
 
 export default function Property() {
   const [tempAddress, setTempAddress] = useState("");
-
+  const [propertyName, setPropertyName] = useState("");
   const [propertyInformation, setPropertyInformation] = useState<any>({
     pricePerShare: "",
     totalShares: "",
@@ -27,7 +30,9 @@ export default function Property() {
     numberOfShares: 0,
   });
 
-  let { PropertyAddress } = useParams();
+  const [activeListings, setActiveListings] = useState(true);
+
+  let { PropertyAddress, DAORouterID } = useParams();
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
   );
@@ -35,10 +40,12 @@ export default function Property() {
 
   // @ts-ignore
   const Property = PropertyFactory.connect(PropertyAddress, signer);
+  // @ts-ignore
+  const Router = RouterFactory.connect(DAORouterID, signer);
 
   useEffect(() => {
     // GET PROPERTY DETAILS FROM BLOCKCHAIN
-    const readProperty = async () => {
+    const readPropertyInfo = async () => {
       try {
         let readPricePerShare = await Property.pricePerShare();
         let readTotalShares = await Property.totalShares();
@@ -53,7 +60,19 @@ export default function Property() {
         console.log(error);
       }
     };
-    readProperty();
+    readPropertyInfo();
+
+    const readPropertyName = async () => {
+      try {
+        let readPropertyName = await Router.daoName();
+        console.log(readPropertyName);
+        setPropertyName(readPropertyName);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    readPropertyName();
 
     // UPDATE NUMBER OF SHARES
     const handleBalance = async () => {
@@ -63,8 +82,8 @@ export default function Property() {
         const address = await signer.getAddress();
         setTempAddress(address);
       };
-      await getAddress();
       try {
+        await getAddress();
         // @ts-ignore
         const readBalance = await Property.balanceOf(tempAddress, 0);
         const balance = readBalance.toNumber();
@@ -84,7 +103,7 @@ export default function Property() {
     totalPrice();
   }, [sharesToBuy]);
 
-  const handleSubmit = async (e: any) => {
+  const handleMintShares = async (e: any) => {
     e.preventDefault();
     console.log(sharesToBuy);
     try {
@@ -132,14 +151,6 @@ export default function Property() {
       try {
         const listings = await Property.listingCounter();
         numberListings = await listings.toNumber();
-        // const listingOne = await Property.Listings(0);
-        // let { amount, owner, price } = listingOne;
-        // console.log(numberListings.toNumber());
-        // setListing({
-        //   amount: amount.toNumber(),
-        //   price: price.toNumber(),
-        //   owner: owner,
-        // });
       } catch (error) {
         console.log(error);
       }
@@ -149,37 +160,38 @@ export default function Property() {
       .then(async (totalListings: any) => {
         for (let i = 0; i < totalListings; i++) {
           let listing = await Property.Listings(i);
-          // listing.concat(i)
           listingsArray.push(listing);
         }
         return listingsArray;
       })
       .then((listingsArray) => {
-        console.log(listingsArray);
         const listingElements = listingsArray
-          .slice(0)
-          .reverse()
+          .filter((array: any) => {
+            return array.isActive === activeListings;
+          })
           .map((listingX: any, index: any) => {
             return (
               <ShareListings
                 key={index}
-                listingID={index + 1}
+                listingID={listingX.listingID.toNumber()}
                 numberOfShares={listingX.amount.toNumber()}
                 sharePrice={listingX.price.toNumber()}
                 ownerAddress={listingX.owner}
+                isActive={listingX.isActive}
+                displayActive={activeListings}
               ></ShareListings>
             );
           });
-        console.log(listingElements);
         return listingElements;
       })
       .then((elements) => {
         setListingElements(elements);
       });
-  }, [tsxHash]);
+  }, [tsxHash, activeListings]);
 
   return (
     <>
+      <AppHeader>{propertyName}</AppHeader>
       <div>Property Address: {PropertyAddress}</div>
       <div>Price Per Share: {propertyInformation.pricePerShare}</div>
       <div>Total Shares: {propertyInformation.totalShares}</div>
@@ -190,7 +202,7 @@ export default function Property() {
           propertyInformation.totalIssuedShares}
       </div>
       <br />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleMintShares}>
         <label>
           BuyShares:
           <input
@@ -241,14 +253,10 @@ export default function Property() {
         <div>List Shares Receipt: {tsxHash.listShares}</div>
         <div>{}</div>
       </form>
-      <div className="listing--grid">
-        <p className="listing--grid--item">ListingID</p>
-        <p className="listing--grid--item">Number of Shares</p>
-        <p className="listing--grid--item">Price per Share</p>
-        <p className="listing--grid--item">Share Owner</p>
-        <div></div>
-        {listingElements}
-      </div>
+      <button onClick={() => setActiveListings(!activeListings)}>
+        {activeListings ? "Active Listings" : "Completed Listings"}
+      </button>
+      <ListingsTable listingElements={listingElements}></ListingsTable>
     </>
   );
 }

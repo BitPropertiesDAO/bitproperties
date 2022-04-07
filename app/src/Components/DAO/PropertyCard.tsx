@@ -4,7 +4,7 @@ import "./styles.css";
 import { Property__factory as PropertyFactory } from "../../typechain";
 import { ethers } from "ethers";
 
-export default function ProeprtyCard(props: any) {
+export default function PropertyCard(props: any) {
   const [propertyInfo, setPropertyInfo] = useState<any>({
     totalShares: 0,
     totalIssuedShares: 0,
