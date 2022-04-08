@@ -7,7 +7,7 @@ import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import DAOIcon from "../../static/DAO-Icon.jpg";
 import DAOCard from "./DAOCard";
 import "./styles.css";
-import PropertyCard from "../DAO/PropertyCard";
+import PropertyCard from "../DAO/Property/PropertyCard";
 
 export default function ExploreDAOs() {
   const [numberDAOs, setNumberDAOs] = useState<any>();
@@ -70,7 +70,7 @@ export default function ExploreDAOs() {
 
   return (
     <>
-      <div className="daoPropertiesBoard">
+      <div className="backboard">
         <div className="property--grid headings">
           <div className="heading--item grid--title">DAOs: {numberDAOs}</div>
           <div className="heading--item">Name</div>

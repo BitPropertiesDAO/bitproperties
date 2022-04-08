@@ -63,8 +63,8 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 0.8rem;
+  font-weight: 400;
+  font-size: 0.75rem;
 }
 
 .header--nav--link:hover,
@@ -89,14 +89,14 @@ a:hover {
 }
 
 .header--li {
-  margin-left: 70px;
+  margin-left: 90px;
   display: inline-block;
 }
 
 .nav--divider {
   background-color: rgba(255, 255, 255, 0.8);
-  height: 20px;
-  width: 1px;
+  height: 15px;
+  width: 0.5px;
   border: round;
   border-radius: 10px;
 }
@@ -107,8 +107,9 @@ a:hover {
   font-weight: 500;
   cursor: pointer;
   border: none;
-  font-size: 0.8rem;
   background-color: rgba(255, 255, 255, 0.25);
+  font-weight: 500;
+  font-size: 0.77rem;
 }
 
 .nav--button:hover {

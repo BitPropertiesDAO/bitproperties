@@ -25,7 +25,7 @@ import Confirmation from "./Components/DaoManager/Confirmation";
 import DAODashBoard from "./Components/DAO/DashBoard";
 import DAOPage from "./Components/DAO/DAOPage";
 import DAOProperties from "./Components/DAO/DAOProperties";
-import Property from "./Components/DAO/Property";
+import Property from "./Components/DAO/Property/Property";
 import Senate from "./Components/DAO/Senate";
 import ExploreDAOs from "./Components/Explore/ExploreDAOs";
 

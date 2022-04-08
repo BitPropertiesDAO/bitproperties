@@ -9,7 +9,7 @@ export default function ListingsTable(props: any) {
       <p className="listing--grid--item">Price per Share</p>
       <p className="listing--grid--item">Share Owner</p>
       <p className="listing--grid--item"></p>
-      {props.listingElements}
+      {props.children}
     </div>
   );
 }

@@ -8,7 +8,8 @@ contract DAORouter {
     address public governorAddress;
     address public governanceTokenAddress;
     struct PropertyListing {
-        string daoName;
+        uint256 propertyID;
+        string propertyName;
         address contractAddress;
     }
 
@@ -34,7 +35,7 @@ contract DAORouter {
         uint256 _pricePerShare
     ) public {
         Property newProperty = new Property("", _pricePerShare, _numShares);
-        PropertyListing memory newPropertyListing = PropertyListing(_propertyName, address(newProperty));
+        PropertyListing memory newPropertyListing = PropertyListing(propertyCounter.current(), _propertyName, address(newProperty));
         Properties.push(newPropertyListing);
         propertyCounter.increment();
     }

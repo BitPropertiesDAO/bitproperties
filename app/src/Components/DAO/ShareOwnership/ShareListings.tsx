@@ -20,6 +20,8 @@ export default function ShareListings(props: ShareListing) {
   );
   const signer = provider.getSigner();
   const address = signer.getAddress();
+
+  const [tsxReceipt, setTsxReceipt] = useState<any>();
   //   @ts-ignore
   const Property = PropertyFactory.connect(PropertyAddress, signer);
 
@@ -35,11 +37,14 @@ export default function ShareListings(props: ShareListing) {
         { value: sharePrice * numberShares, from: address }
       );
       const receipt = await buySharesTsx.wait();
+      setTsxReceipt(receipt);
       console.log(receipt);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {});
 
   return (
     <>

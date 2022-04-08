@@ -19,11 +19,11 @@
   filter: brightness(1.1);
 }
 
-.daoPropertiesBoard {
+.backboard {
   position: absolute;
   left: 70px;
   top: 70px;
-  padding: 10px 30px 30px 30px;
+  padding: 30px 30px 30px 30px;
   margin-right: 70px;
   background-color: black;
   border-radius: 40px;

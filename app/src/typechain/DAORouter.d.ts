@@ -128,7 +128,13 @@ export class DAORouter extends BaseContract {
     Properties(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[string, string] & { daoName: string; contractAddress: string }>;
+    ): Promise<
+      [BigNumber, string, string] & {
+        propertyID: BigNumber;
+        propertyName: string;
+        contractAddress: string;
+      }
+    >;
 
     daoName(overrides?: CallOverrides): Promise<[string]>;
 
@@ -151,7 +157,13 @@ export class DAORouter extends BaseContract {
   Properties(
     arg0: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<[string, string] & { daoName: string; contractAddress: string }>;
+  ): Promise<
+    [BigNumber, string, string] & {
+      propertyID: BigNumber;
+      propertyName: string;
+      contractAddress: string;
+    }
+  >;
 
   daoName(overrides?: CallOverrides): Promise<string>;
 
@@ -172,7 +184,13 @@ export class DAORouter extends BaseContract {
     Properties(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[string, string] & { daoName: string; contractAddress: string }>;
+    ): Promise<
+      [BigNumber, string, string] & {
+        propertyID: BigNumber;
+        propertyName: string;
+        contractAddress: string;
+      }
+    >;
 
     daoName(overrides?: CallOverrides): Promise<string>;
 

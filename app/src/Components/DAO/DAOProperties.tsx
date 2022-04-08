@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { DAORouter__factory } from "../../typechain";
-import PropertyCard from "./PropertyCard";
+import PropertyCard from "./Property/PropertyCard";
 import MainHouse from "../../static/MainHouse.png";
 
 export default function DAOProperties() {
@@ -49,8 +49,9 @@ export default function DAOProperties() {
                 image={MainHouse}
                 key={index}
                 navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyListing.contractAddress}`}
-                propertyName={propertyListing.daoName}
+                propertyName={propertyListing.propertyName}
                 contractAddress={propertyListing.contractAddress}
+                propertyID={propertyListing.propertyID}
               ></PropertyCard>
             );
           });
@@ -64,7 +65,7 @@ export default function DAOProperties() {
 
   return (
     <>
-      <div className="daoPropertiesBoard">
+      <div className="backboard">
         {/* <AppHeader>Properties: {numberProperties}</AppHeader> */}
         <br />
         <div className="property--grid headings">

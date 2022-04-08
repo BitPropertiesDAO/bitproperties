@@ -59,7 +59,7 @@ export default function Header() {
           </ul>
         ) : (
           <ul className="header--nav navbar">
-            <NavItem title="Properties" navigate={`/`}></NavItem>
+            <NavItem title="PROPERTIES" navigate={`/`}></NavItem>
             <NavItem title="DAOs" navigate={`app/Explore/DAOS`}></NavItem>
             <div className="nav--divider header--li"></div>
             <div className="header--li nav--button">Account</div>

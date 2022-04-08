@@ -41,8 +41,8 @@
       ]
     },
     "/Users/nikitagurbatov/Desktop/bestproperties/bitproperties/token/contracts/DAORouter.sol": {
-      "lastModificationDate": 1649193933362,
-      "contentHash": "e22e907c9a9303ad047abf060063c2c2",
+      "lastModificationDate": 1649435634685,
+      "contentHash": "a6a096821c4d586678c8c806692438e4",
       "sourceName": "contracts/DAORouter.sol",
       "solcConfig": {
         "version": "0.8.7",

@@ -12,14 +12,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
   color: white;
-  /* background-color: rgb(5, 5, 5); */
-  background: linear-gradient(
-    90deg,
-    #6748db 0%,
-    #8372cd 36.46%,
-    #6b87be 69.79%,
-    #57a3d9 100%
-  );
+
+  background: var(--base--background-gradient);
 
   height: 100%;
   overflow: auto;
