@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
 import { Property__factory as PropertyFactory } from "../../../typechain";
-import { DAORouter__factory as RouterFactory } from "../../../typechain";
 import ShareListings from "../ShareOwnership/ShareListings";
 import ListingsTable from "../ShareOwnership/ListingsTable";
 import { AppHeader } from "../../DaoManager/InputFormAlchemy";
@@ -10,7 +9,6 @@ import DAOPageGrid from "../DAOPageGrid";
 
 export default function Property() {
   const [tempAddress, setTempAddress] = useState("");
-  const [propertyName, setPropertyName] = useState("");
   const [propertyInformation, setPropertyInformation] = useState<any>({
     pricePerShare: "",
     totalShares: "",
@@ -33,7 +31,7 @@ export default function Property() {
 
   const [activeListings, setActiveListings] = useState(true);
 
-  let { PropertyAddress, DAORouterID } = useParams();
+  let { PropertyAddress, PropertyName } = useParams();
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
   );
@@ -41,8 +39,6 @@ export default function Property() {
 
   // @ts-ignore
   const Property = PropertyFactory.connect(PropertyAddress, signer);
-  // @ts-ignore
-  const Router = RouterFactory.connect(DAORouterID, signer);
 
   useEffect(() => {
     // GET PROPERTY DETAILS FROM BLOCKCHAIN
@@ -62,19 +58,6 @@ export default function Property() {
       }
     };
     readPropertyInfo();
-
-    const readPropertyName = async () => {
-      try {
-        let readPropertyName = await Router.daoName();
-        let d = await Router.Properties(1);
-        console.log(readPropertyName);
-        setPropertyName(readPropertyName);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    readPropertyName();
 
     // UPDATE NUMBER OF SHARES
     const handleBalance = async () => {
@@ -193,86 +176,117 @@ export default function Property() {
 
   return (
     <>
-      <AppHeader>{propertyName}</AppHeader>
-      <DAOPageGrid
-        title1="Properties"
-        result1={24}
-        unit1="Listed"
-        title2="Members"
-        result2={1000}
-        unit2="Investors"
-        title3="Volume(24h)"
-        result3={"460K"}
-        unit3="Tokens"
-        title4="Token Price"
-        result4={1.31}
-        unit4="$"
-      ></DAOPageGrid>
-      <div>Property Address: {PropertyAddress}</div>
-      <div>Price Per Share: {propertyInformation.pricePerShare}</div>
-      <div>Total Shares: {propertyInformation.totalShares}</div>
-      <div>Total Issued Shares: {propertyInformation.totalIssuedShares}</div>
-      <div>
-        Shares Left:{" "}
-        {propertyInformation.totalShares -
-          propertyInformation.totalIssuedShares}
+      {/*////////////////////////////////////////// TOP GRID  //////////////////////////////////////////*/}
+      <AppHeader>{PropertyName}</AppHeader>
+      <div style={{ marginTop: 100 }} className="backboard">
+        <DAOPageGrid
+          title1="IRR"
+          result1={24.8}
+          unit1="%"
+          title2="Share price"
+          result2={82.58}
+          unit2="$"
+          // title3="Volume(24h)"
+          // result3={"460K"}
+          // unit3="Tokens"
+          // title4="Token Price"
+          // result4={1.31}
+          // unit4="$"
+        ></DAOPageGrid>
+        <br />
+        <br />
+        <br />
+        <br />
+        {/*////////////////////////////////////////// IPO Shares  //////////////////////////////////////////*/}
+        <div>
+          <div>
+            IPO Shares Left:{" "}
+            {(
+              propertyInformation.totalShares -
+              propertyInformation.totalIssuedShares
+            ).toLocaleString()}{" "}
+            {""}
+            at {propertyInformation.pricePerShare.toLocaleString()} ETH/Share
+          </div>
+          <form onSubmit={handleMintShares}>
+            <label>
+              Buy Initial Shares
+              <input
+                value={sharesToBuy}
+                onChange={(e: any) => setSharesToBuy(e.target.value)}
+                type="number"
+                style={{ color: "black" }}
+              ></input>
+            </label>
+            <div>totalPrice: {totalPrice}</div>
+            <button type="submit">Buy</button>
+          </form>
+          <div>Transaction Hash:{tsxHash.buyShares}</div>
+          <br />
+          <br />
+          <br />
+          <br />
+          {/*////////////////////////////////////////// My Shares => Listing  //////////////////////////////////////////*/}
+          <div>YourAddress: {tempAddress}</div>
+          <div>You own: {myShares} shares</div>
+          <form onSubmit={handleListShares}>
+            <label>
+              List Shares:
+              <input
+                value={myListing.numberOfShares}
+                onChange={(e: any) =>
+                  setMyListing({
+                    numberOfShares: e.target.value,
+                    price: myListing.price,
+                  })
+                }
+                type="number"
+                style={{ color: "black" }}
+                required
+              ></input>
+              <input
+                value={myListing.price}
+                onChange={(e: any) =>
+                  setMyListing({
+                    numberOfShares: myListing.numberOfShares,
+                    price: e.target.value,
+                  })
+                }
+                type="number"
+                style={{ color: "black" }}
+                required
+              ></input>
+            </label>
+            <div>listing Price: {myListing.price}</div>
+            <div>Shares Listing: {myListing.numberOfShares}</div>
+            <button type="submit">List</button>
+            <div>List Shares Receipt: {tsxHash.listShares}</div>
+          </form>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        {/*////////////////////////////////////////// Listings  //////////////////////////////////////////*/}
+        <button onClick={() => setActiveListings(!activeListings)}>
+          {activeListings ? "Active Listings" : "Completed Listings"}
+        </button>
+        <ListingsTable>{listingElements}</ListingsTable>
+        <br />
+        <br />
+        <br />
+        <br />
+        {/*////////////////////////////////////////// Address  //////////////////////////////////////////*/}
+        <div>Property Address: {PropertyAddress}</div>
+        <div>Price Per Share: {propertyInformation.pricePerShare}</div>
+        <div>Total Shares: {propertyInformation.totalShares}</div>
+        <div>Total Issued Shares: {propertyInformation.totalIssuedShares}</div>
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
-      <br />
-      <form onSubmit={handleMintShares}>
-        <label>
-          BuyShares:
-          <input
-            value={sharesToBuy}
-            onChange={(e: any) => setSharesToBuy(e.target.value)}
-            type="number"
-            style={{ color: "black" }}
-          ></input>
-        </label>
-        <div>totalPrice: {totalPrice}</div>
-        <button type="submit">Buy</button>
-      </form>
-      <div>Transaction Hash:{tsxHash.buyShares}</div>
-      <br />
-      <div>YourAddress: {tempAddress}</div>
-      <div>You own: {myShares} shares</div>
-      <form onSubmit={handleListShares}>
-        <label>
-          List Shares:
-          <input
-            value={myListing.numberOfShares}
-            onChange={(e: any) =>
-              setMyListing({
-                numberOfShares: e.target.value,
-                price: myListing.price,
-              })
-            }
-            type="number"
-            style={{ color: "black" }}
-            required
-          ></input>
-          <input
-            value={myListing.price}
-            onChange={(e: any) =>
-              setMyListing({
-                numberOfShares: myListing.numberOfShares,
-                price: e.target.value,
-              })
-            }
-            type="number"
-            style={{ color: "black" }}
-            required
-          ></input>
-        </label>
-        <div>listing Price: {myListing.price}</div>
-        <div>Shares Listing: {myListing.numberOfShares}</div>
-        <button type="submit">List</button>
-        <div>List Shares Receipt: {tsxHash.listShares}</div>
-        <div>{}</div>
-      </form>
-      <button onClick={() => setActiveListings(!activeListings)}>
-        {activeListings ? "Active Listings" : "Completed Listings"}
-      </button>
-      <ListingsTable>{listingElements}</ListingsTable>
+      {/*////////////////////////////////////////// Listings  //////////////////////////////////////////*/}
     </>
   );
 }

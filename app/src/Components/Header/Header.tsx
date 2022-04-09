@@ -1,16 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import "antd/dist/antd.css";
 import "./styles.css";
+import { ethers } from "ethers";
 
 function NavItem(props: any) {
-  //   // TEMPORARY
-  // // WAIT UNTIL CONTRACT IS LAUNCHED ON ALCHEMY AND THEN useWeb3React
-  // const getAddress = async () => {
-  //   const address = await signer.getAddress();
-  //   setTempAddress(address);
-  // };
-  // await getAddress();
   let navigate = useNavigate();
   return (
     <li className="header--li">
@@ -30,6 +24,20 @@ function NavItem(props: any) {
 
 export default function Header() {
   let navigate = useNavigate();
+  const [tempAddress, setTempAddress] = useState("");
+
+  const provider = new ethers.providers.JsonRpcProvider(
+    "http://localhost:8545"
+  );
+
+  useEffect(() => {
+    const signer = provider.getSigner();
+    const getAddress = async () => {
+      const address = await signer.getAddress();
+      setTempAddress(address);
+    };
+    getAddress();
+  }, [provider]);
   const location = useLocation();
 
   const pathName = location.pathname.toString();
@@ -59,10 +67,13 @@ export default function Header() {
           </ul>
         ) : (
           <ul className="header--nav navbar">
-            <NavItem title="PROPERTIES" navigate={`/`}></NavItem>
             <NavItem title="DAOs" navigate={`app/Explore/DAOS`}></NavItem>
             <div className="nav--divider header--li"></div>
-            <div className="header--li nav--button">Account</div>
+            <div className="header--li nav--button">
+              {!tempAddress
+                ? "Account"
+                : tempAddress.replace(/(.{9})..+/, "$1…")}
+            </div>
           </ul>
         )}
       </nav>

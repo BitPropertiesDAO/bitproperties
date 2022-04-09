@@ -60,11 +60,13 @@ export default function Senate() {
   return (
     <>
       <AppHeader>Governance</AppHeader>
-      <div>Governance Token Address: {DAOGovernanceToken}</div>
-      <div>TotalSupply: {daoTokenInfo.totalSupply}</div>
-      <div>Token Name: {daoTokenInfo.tokenName}</div>
-      <div>Token Symbol: {daoTokenInfo.tokenSymbol}</div>
-      <div>DAO Governor Address: {DAOInfo.governorAddress}</div>
+      <div style={{ marginTop: 100 }} className="backboard daopage--backboard">
+        <div>Governance Token Address: {DAOGovernanceToken}</div>
+        <div>TotalSupply: {daoTokenInfo.totalSupply}</div>
+        <div>Token Name: {daoTokenInfo.tokenName}</div>
+        <div>Token Symbol: {daoTokenInfo.tokenSymbol}</div>
+        <div>DAO Governor Address: {DAOInfo.governorAddress}</div>
+      </div>
     </>
   );
 }

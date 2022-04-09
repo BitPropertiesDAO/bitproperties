@@ -49,14 +49,14 @@
   position: absolute;
   left: 300px;
   overflow: scroll;
-  padding: 100px;
+  top: var(--header--height);
+  padding: 100px 100px;
   margin-bottom: 100px;
   height: 100vh;
   width: calc(100% - var(--side--width));
   min-width: 940px;
-  z-index: 1;
-
-  background: #121418;
+  z-index: 0;
+  /* background: #121418; */
 }
 .app--section--right::-webkit-scrollbar {
   display: none;

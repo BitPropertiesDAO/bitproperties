@@ -27,6 +27,8 @@
     #6b87be 69.79%,
     #57a3d9 100%
   );
+  z-index: 1;
+  /* position: absolute; */
 }
 
 .header--logo {

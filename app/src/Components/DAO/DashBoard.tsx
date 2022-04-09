@@ -48,6 +48,9 @@ export default function DashBoard() {
     if (location.pathname.includes("/Senate")) {
       setCurrent(2);
     }
+    if (location.pathname.includes("/addproperty")) {
+      setCurrent(3);
+    }
     getDAOInfo();
   }, [location]);
 
@@ -83,10 +86,18 @@ export default function DashBoard() {
           icon="fluent:building-government-20-filled"
           linkTo={`/app/DAO/${DAORouterID}/Senate/${daoInfo.governanceTokenAddress}`}
         ></Tab>
+        <Tab
+          id={3}
+          current={current}
+          // onClick={() => setActiveTab(current)}
+          title="AddProperty"
+          icon="bxs:message-square-add"
+          linkTo={`/app/DAO/${DAORouterID}/addproperty`}
+        ></Tab>
       </SideBar>
       <div
         className="app--section--right"
-        // style={{ backgroundColor: "", top: 0, marginTop: 0 }}
+        // style={{ top: 0, marginTop: 0 }}
       >
         <Outlet />
       </div>

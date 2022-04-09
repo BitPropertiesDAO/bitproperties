@@ -44,8 +44,6 @@ export default function ShareListings(props: ShareListing) {
     }
   };
 
-  useEffect(() => {});
-
   return (
     <>
       <p className="listing--grid--item">{props.listingID}</p>

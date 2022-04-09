@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-export function AlchemyLinks(props: any) {
+export function FormLinksBottom(props: any) {
   let navigate = useNavigate();
   return (
     <div className="alchemy--bottom--links">

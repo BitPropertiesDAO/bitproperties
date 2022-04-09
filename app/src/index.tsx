@@ -24,10 +24,11 @@ import Confirmation from "./Components/DaoManager/Confirmation";
 
 import DAODashBoard from "./Components/DAO/DashBoard";
 import DAOPage from "./Components/DAO/DAOPage";
-import DAOProperties from "./Components/DAO/DAOProperties";
-import Property from "./Components/DAO/Property/Property";
+import DAOProperties from "./Components/DAO/Property/DAOProperties";
+import Property from "./Components/DAO/Property/PropertyPage";
 import Senate from "./Components/DAO/Senate";
 import ExploreDAOs from "./Components/Explore/ExploreDAOs";
+import AddProperty from "./Components/DAO/Property/AddProperty";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -77,8 +78,12 @@ ReactDOM.render(
                 element={<DAOProperties />}
               ></Route>
               <Route
-                path="/app/DAO/:DAORouterID/Properties/:PropertyAddress"
+                path="/app/DAO/:DAORouterID/Properties/:PropertyAddress/:PropertyName"
                 element={<Property />}
+              ></Route>
+              <Route
+                path="/app/DAO/:DAORouterID/addproperty"
+                element={<AddProperty />}
               ></Route>
             </Route>
             <Route path="*" element={<App />}></Route>

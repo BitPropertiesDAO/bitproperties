@@ -24,8 +24,7 @@ export default function Profile() {
 
   const [DAOInformation, setDAOInformation] = useState({
     DAOName: "",
-    governanceAddress: "",
-    governanceTokenAddress: "",
+    propertyCounter: 0,
   });
 
   useEffect(() => {
@@ -35,13 +34,10 @@ export default function Profile() {
     const getDAOInfo = async () => {
       try {
         const ReacDAOName = await router.daoName();
-        const ReadDAOGovernorAddress = await router.governorAddress();
-        const ReadDAOGovernanceTokenAddress =
-          await router.governanceTokenAddress();
+        const ReadDAOPropertyCounter = await router.propertyCounter();
         setDAOInformation({
           DAOName: ReacDAOName,
-          governanceAddress: ReadDAOGovernorAddress,
-          governanceTokenAddress: ReadDAOGovernanceTokenAddress,
+          propertyCounter: ReadDAOPropertyCounter.toNumber(),
         });
       } catch (e) {
         console.log(e);
@@ -64,18 +60,12 @@ export default function Profile() {
       );
       const propertyReceipt = await launchNewPropertyTsx.wait();
       setTsxMessage(propertyReceipt.transactionHash);
-      // console.log("Property Launched", propertyReceipt);
-      // const event = await propertyReceipt.events?.find(
-      // (event: any) => event.event === "NewProperty"
-      // );
-      // const [daoPropertyAddress] = event?.args as any;
-      // setPropertyContractAddress(daoPropertyAddress);
     } catch (error) {
       console.log("launchNewPropertyError", error);
     }
   };
 
-  const { DAOName, governanceAddress, governanceTokenAddress } = DAOInformation;
+  const { DAOName } = DAOInformation;
 
   return (
     <>
@@ -83,7 +73,7 @@ export default function Profile() {
       <div style={{ marginTop: 100 }} className="backboard daopage--backboard">
         <DAOPageGrid
           title1="Properties"
-          result1={24}
+          result1={DAOInformation.propertyCounter}
           unit1="Listed"
           title2="Members"
           result2={1000}
@@ -95,39 +85,7 @@ export default function Profile() {
           result4={1.31}
           unit4="$"
         ></DAOPageGrid>
-
-        {/* <div>DAO ROUTER: {DAORouterID}</div>
-        <div>Governor Address: {governanceAddress}</div>
-        <div>Governance Token Address: {governanceTokenAddress}</div>
-        Name:
-        <Input
-          value={propertyName}
-          onChange={(e: any) => setPropertyName(e.target.value)}
-          style={{ width: 200, margin: 20 }}
-        ></Input>
-        <div>ProeprtyName: {propertyName}</div>
-        Number of Shares:
-        <InputNumber
-          value={numberShares}
-          onChange={(value: any) => setNumberShares(value)}
-          style={{ width: 200, margin: 20 }}
-        ></InputNumber>
-        <div>ProeprtyName: {numberShares}</div>
-        Price per Share
-        <InputNumber
-          value={pricePerShare}
-          onChange={(value: any) => setPricePerShare(value)}
-          style={{ width: 200, margin: 20 }}
-        ></InputNumber>
-        <div>ProeprtyName: {pricePerShare}</div>
-        <button
-          style={{ marginTop: 30, marginBottom: 30, padding: 10 }}
-          className="primary--button"
-          onClick={handleLaunchNewProperty}
-        >
-          LaunchNewProperty
-        </button>
-        {tsxMessage && <div>TransactionHash: {tsxMessage}</div>} */}
+        <UpcomingProposals></UpcomingProposals>
       </div>
     </>
   );

@@ -1,1 +1,1 @@
-export const DAOFactoryAddress = "0x56fC17a65ccFEC6B7ad0aDe9BD9416CB365B9BE8";
+export const DAOFactoryAddress = "0xefAB0Beb0A557E452b398035eA964948c750b2Fd";

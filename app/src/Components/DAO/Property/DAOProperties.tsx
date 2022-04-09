@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ethers } from "ethers";
-import { DAORouter__factory } from "../../typechain";
-import PropertyCard from "./Property/PropertyCard";
-import MainHouse from "../../static/MainHouse.png";
+import { DAORouter__factory } from "../../../typechain";
+import PropertyCard from "./PropertyCard";
+import MainHouse from "../../../static/MainHouse.png";
+import { AppHeader } from "../../DaoManager/InputFormAlchemy";
 
 export default function DAOProperties() {
   const [numberProperties, setNumberProperties] = useState();
@@ -48,7 +49,7 @@ export default function DAOProperties() {
               <PropertyCard
                 image={MainHouse}
                 key={index}
-                navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyListing.contractAddress}`}
+                navigateTo={`/app/DAO/${DAORouterID}/Properties/${propertyListing.contractAddress}/${propertyListing.propertyName}`}
                 propertyName={propertyListing.propertyName}
                 contractAddress={propertyListing.contractAddress}
                 propertyID={propertyListing.propertyID}
@@ -65,13 +66,11 @@ export default function DAOProperties() {
 
   return (
     <>
-      <div className="backboard">
-        {/* <AppHeader>Properties: {numberProperties}</AppHeader> */}
+      <AppHeader>Properties: {numberProperties}</AppHeader>
+      <div style={{ marginTop: 100 }} className="backboard daopage--backboard">
         <br />
         <div className="property--grid headings">
-          <div className="heading--item grid--title">
-            Properties: {numberProperties}
-          </div>
+          <div className="heading--item grid--title"></div>
           <div className="heading--item">Name</div>
           <div className="heading--item">Shareholders</div>
           <div className="heading--item">Issued (%)</div>

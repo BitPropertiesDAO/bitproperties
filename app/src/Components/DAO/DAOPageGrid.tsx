@@ -25,7 +25,7 @@ export default function DAOPageGrid(props: any) {
   return (
     <div className="DAO--grid--top">
       <GridItemTop
-        title={props.title2}
+        title={props.title1}
         result={props.result1}
         unit={props.unit1}
       ></GridItemTop>

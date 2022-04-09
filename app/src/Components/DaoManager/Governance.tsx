@@ -8,7 +8,7 @@ import {
   changeVoteDurationWeeks,
 } from "./CreateDAO/DaoCreationSlice";
 import {
-  AlchemyLinks,
+  FormLinksBottom,
   AppHeader,
   InputGroup,
   InputSubheading,
@@ -109,10 +109,10 @@ export default function Governance() {
         />{" "}
         Days
       </InputGroup>
-      <AlchemyLinks
+      <FormLinksBottom
         Back="/app/Alchemy/create/"
         Next="/app/Alchemy/create/tokenomics"
-      ></AlchemyLinks>
+      ></FormLinksBottom>
     </>
   );
 }

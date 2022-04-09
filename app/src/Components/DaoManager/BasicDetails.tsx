@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "../../utils/reduxhooks";
 import { changeName } from "./CreateDAO/DaoCreationSlice";
 import { Input } from "antd";
 import {
-  AlchemyLinks,
+  FormLinksBottom,
   AppHeader,
   InputGroup,
   InputSubheading,
@@ -28,10 +28,10 @@ export default function BasicDetails() {
           required
         ></Input>
       </InputGroup>
-      <AlchemyLinks
+      <FormLinksBottom
         Back="/app/Alchemy"
         Next="/app/Alchemy/create/governance"
-      ></AlchemyLinks>
+      ></FormLinksBottom>
     </>
   );
 }

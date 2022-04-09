@@ -1,11 +1,7 @@
-.daopage--backboard {
-  /* padding: 60px; */
-}
-
 .DAO--grid--top {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 2vw;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5rem;
 }
 
 .DAO--grid--top--item {
@@ -65,4 +61,17 @@
   .DAO--grid--top {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.DAO--grid--proposals {
+  background-color: rgba(19, 19, 19, 1);
+  width: 100%;
+  height: 80px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  border-radius: 40px;
 }

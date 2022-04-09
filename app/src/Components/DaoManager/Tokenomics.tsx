@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 
 import PayableAccounts from "../DaoManager/CreateDAO/PayableAccount";
 import { useEffect, useState } from "react";
-import { AlchemyLinks } from "./InputFormAlchemy";
+import { FormLinksBottom } from "./InputFormAlchemy";
 import { AppHeader } from "./InputFormAlchemy";
 import { InputGroup } from "./InputFormAlchemy";
 import { InputSubheading } from "./InputFormAlchemy";
@@ -104,10 +104,10 @@ export default function Tokenomics() {
           <br />
         </div>
       </InputGroup>
-      <AlchemyLinks
+      <FormLinksBottom
         Back="/app/Alchemy/create/governance"
         Next="/app/Alchemy/create/confirmation"
-      ></AlchemyLinks>
+      ></FormLinksBottom>
     </>
   );
 }
