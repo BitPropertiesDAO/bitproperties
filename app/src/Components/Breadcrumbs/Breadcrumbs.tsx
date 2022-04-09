@@ -1,13 +1,13 @@
 import React from "react"
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 import store from "../../store";
-import BreadcrumbItem from "./BreadcrumbItem";
+import BreadcrumbItem from './BreadcrumbItem';
 
 const DAORouterBreadcrumb = (props: any) => (
     <span>{store.getState().BreadcrumbsReducer.DAOName}</span>
 );
 
-const PropertyBreadcrumb = (props: any) => (
+const PropertyBreadcrumb = (props: any) => ( 
     <span>{store.getState().BreadcrumbsReducer.PropertyName}</span>
 );
 
@@ -58,9 +58,8 @@ const Breadcrumbs = () => {
   const breadcrumbs = useBreadcrumbs(routes, { disableDefaults: true })
 
   return (
-    <React.Fragment>
+    <div>
       {
-
         breadcrumbs
         .map(({
             match,
@@ -75,7 +74,7 @@ const Breadcrumbs = () => {
             </>
           ))
         }
-    </React.Fragment>
+    </div>
   );
 }
 

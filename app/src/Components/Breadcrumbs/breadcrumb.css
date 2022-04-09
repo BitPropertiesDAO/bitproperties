@@ -1,0 +1,11 @@
+span {
+    font-size: large;
+}
+
+.notLastCrumb {
+    color: #7595b3
+}
+
+.lastCrumb {
+    color: #1890ff;
+}
