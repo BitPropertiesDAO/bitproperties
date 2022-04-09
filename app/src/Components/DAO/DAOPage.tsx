@@ -6,6 +6,9 @@ import { useState } from "react";
 import { Input, InputNumber } from "antd";
 import Breadcrumbs from "../../Components/Breadcrumbs";
 
+import { useDispatch } from "react-redux";
+import { changeCurrDAO } from "../../BreadcrumbsSlice";
+
 export default function Profile() {
   const [propertyName, setPropertyName] = useState();
   const [numberShares, setNumberShares] = useState();
@@ -14,6 +17,8 @@ export default function Profile() {
   const [propertyContractAddress, setPropertyContractAddress] = useState("");
 
   let { DAORouterID } = useParams();
+
+  const dispatch = useDispatch()
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
   );
@@ -73,10 +78,8 @@ export default function Profile() {
   };
 
   const { DAOName, governanceAddress, governanceTokenAddress } = DAOInformation;
-
   return (
     <>
-      <Breadcrumbs />
       <div>DAO ROUTER: {DAORouterID}</div>
       <div>DAO Name: {DAOName}</div>
       <div>Governor Address: {governanceAddress}</div>

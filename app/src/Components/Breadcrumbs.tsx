@@ -7,22 +7,41 @@ const DAORouterBreadcrumb = (props: any) => (
     <span>{store.getState().BreadcrumbsReducer.DAOName}</span>
 );
 
+const PropertyBreadcrumb = (props: any) => (
+    <span>{store.getState().BreadcrumbsReducer.PropertyName}</span>
+);
+
+const getPath = (props: any) => (
+    <span>{props.match.pathname.split('/').pop()}</span>
+);
+
 const routes = [
     {
-        path: "/"
+        path: "/app",
     },
     {
-        path: "app/Explore/DAOS",
-        breadcrumb: "MyDAOs"
+        path: "/app/Explore/DAOs",
+        breadcrumb: "My DAOs"
     },
     {
         path: "/app/DAO",
-        breadcrumb: "MyDAOs"
+        breadcrumb: "My DAOs",
+        children: [
+            {
+                path: "/app/DAO/:DAORouterID",
+                breadcrumb: DAORouterBreadcrumb,
+            },
+            {
+                path: "/app/DAO/:DAORouterID/Properties",
+                breadcrumb: "Properties",
+            },
+            {
+                path: "/app/DAO/:DAORouterID/Properties/:PropertyAddress",
+                breadcrumb: getPath,
+            },
+        ]
     },
-    {
-        path: "/app/DAO/:DAORouterID/Dashboard",
-        breadcrumb: DAORouterBreadcrumb
-    },
+
 ]
 
 const Breadcrumbs = () => {
@@ -33,6 +52,7 @@ const Breadcrumbs = () => {
   return (
     <React.Fragment>
       {
+
         breadcrumbs
         .map(({
             match,
@@ -40,7 +60,7 @@ const Breadcrumbs = () => {
           }) => (
             <>
             <span key={match.pathname}>
-                <NavLink to={match.pathname}>{breadcrumb}  </NavLink>
+                <NavLink to={match.pathname}>{breadcrumb} </NavLink>
             </span>
             </>
           ))

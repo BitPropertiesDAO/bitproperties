@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import { DAORouter__factory } from "../../typechain";
 import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import PropertyCard from "./PropertyCard";
+import Breadcrumbs from "../../Components/Breadcrumbs";
 
 export default function DAOProperties() {
   const [numberProperties, setNumberProperties] = useState();
@@ -57,7 +58,7 @@ export default function DAOProperties() {
         setPropertyElements(propertyElements);
       });
   }, []);
-
+  
   return (
     <>
       <AppHeader>Properties: {numberProperties}</AppHeader>

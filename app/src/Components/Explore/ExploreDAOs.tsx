@@ -58,9 +58,11 @@ export default function ExploreDAOs() {
   }, []);
 
   return (
-    <div>
-      <div>Number of DAOs: {numberDAOs}</div>
-      <div>{DAORouters}</div>
-    </div>
+    <> 
+      <div>
+        <div>Number of DAOs: {numberDAOs}</div>
+        <div>{DAORouters}</div>
+      </div>
+    </>
   );
 }

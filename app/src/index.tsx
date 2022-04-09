@@ -29,6 +29,8 @@ import Property from "./Components/DAO/Property";
 import Senate from "./Components/DAO/Senate";
 import ExploreDAOs from "./Components/Explore/ExploreDAOs";
 
+import { RedirectDAODashboard, RedirectExploreDAOS } from "./Redirects"
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -36,8 +38,9 @@ ReactDOM.render(
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<App />}>
+          <Route path="/" element={<App />}>
               <Route path="/" element={<HomePage />}></Route>
+              <Route path="/app"  element={<RedirectExploreDAOS/>}/>
               <Route path="app/Explore/DAOS" element={<Explore />}>
                 <Route
                   path="/app/Explore/DAOS"
@@ -63,23 +66,28 @@ ReactDOM.render(
                 ></Route>
               </Route>
             </Route>
-            <Route path="app/DAO" element={<DAODashBoard />}>
-              <Route
-                path="/app/DAO/:DAORouterID/Dashboard"
-                element={<DAOPage />}
-              ></Route>
-              <Route
-                path="/app/DAO/:DAORouterID/Senate/:DAOGovernanceToken"
-                element={<Senate />}
-              ></Route>
-              <Route
-                path="/app/DAO/:DAORouterID/Properties"
-                element={<DAOProperties />}
-              ></Route>
-              <Route
-                path="/app/DAO/:DAORouterID/Properties/:PropertyAddress"
-                element={<Property />}
-              ></Route>
+            <Route path="app/DAO" element={<RedirectExploreDAOS/>}/>
+            <Route path="app/DAO/:DAORouterID" element={<DAODashBoard />}>
+                <Route
+                  path="/app/DAO/:DAORouterID/Dashboard"
+                  element={<DAOPage />}
+                ></Route>
+                <Route
+                  path="/app/DAO/:DAORouterID/Senate/:DAOGovernanceToken"
+                  element={<Senate />}
+                ></Route>
+                <Route
+                  path="/app/DAO/:DAORouterID/Properties"
+                  element={<DAOProperties />}
+                ></Route>
+                <Route
+                  path="/app/DAO/:DAORouterID/Properties/:PropertyAddress"
+                  element={<Property />}
+                ></Route>
+                <Route
+                  path="/app/DAO/:DAORouterID"
+                  element={<RedirectDAODashboard/>}
+                ></Route>
             </Route>
             <Route path="*" element={<App />}></Route>
           </Routes>
