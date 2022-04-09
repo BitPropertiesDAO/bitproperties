@@ -7,7 +7,7 @@ import Tab from "../SideBar/Tab";
 import SideBar from "../SideBar/SideBar";
 import { DAORouter__factory as DAORouterFactory } from "../../typechain/factories/DAORouter__factory";
 import { ethers } from "ethers";
-import Breadcrumbs from "../../Components/Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useDispatch } from "react-redux";
 import { changeCurrDAO } from "../../BreadcrumbsSlice";
 

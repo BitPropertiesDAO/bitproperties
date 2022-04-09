@@ -1,7 +1,7 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
-import store from "../store";
+import store from "../../store";
+import BreadcrumbItem from "./BreadcrumbItem";
 
 const DAORouterBreadcrumb = (props: any) => (
     <span>{store.getState().BreadcrumbsReducer.DAOName}</span>
@@ -64,12 +64,14 @@ const Breadcrumbs = () => {
         breadcrumbs
         .map(({
             match,
-            breadcrumb
-          }) => (
+            breadcrumb,
+          }, index, arr) => (
             <>
-            <span key={match.pathname}>
-                <NavLink to={match.pathname}>{breadcrumb} </NavLink>
-            </span>
+            <BreadcrumbItem
+                pathname={match.pathname}
+                breadcrumb={breadcrumb}
+                isLast={arr.length - 1 != index ? false : true}
+            />
             </>
           ))
         }

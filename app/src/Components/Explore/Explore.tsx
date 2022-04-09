@@ -9,7 +9,7 @@ import Tab from "../SideBar/Tab";
 import { Outlet } from "react-router";
 import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import { useLocation } from "react-router";
-import Breadcrumbs from "../Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 export default function Explore() {
   const [current, setCurrent] = useState<number>();

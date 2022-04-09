@@ -4,7 +4,7 @@ import { DAORouter__factory as DAORouterFactory } from "../../typechain/factorie
 import { ethers } from "ethers";
 import { useState } from "react";
 import { Input, InputNumber } from "antd";
-import Breadcrumbs from "../../Components/Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 import { useDispatch } from "react-redux";
 import { changeCurrDAO } from "../../BreadcrumbsSlice";
