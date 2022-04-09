@@ -11,7 +11,7 @@ const PropertyBreadcrumb = (props: any) => (
     <span>{store.getState().BreadcrumbsReducer.PropertyName}</span>
 );
 
-const getPath = (props: any) => (
+const defaultBreadcrumb = (props: any) => (
     <span>{props.match.pathname.split('/').pop()}</span>
 );
 
@@ -34,20 +34,28 @@ const routes = [
             {
                 path: "/app/DAO/:DAORouterID/Properties",
                 breadcrumb: "Properties",
+                children: [
+                    {
+                        path: "/app/DAO/:DAORouterID/Properties/:PropertyAddress",
+                        breadcrumb: PropertyBreadcrumb,
+                    },
+                ]
             },
             {
-                path: "/app/DAO/:DAORouterID/Properties/:PropertyAddress",
-                breadcrumb: getPath,
-            },
+                path: "/app/DAO/:DAORouterID/Senate",
+                children: [
+                    {
+                        path: "/app/DAO/:DAORouterID/Senate/:DAOGovernanceToken",
+                        breadcrumb: "Senate",
+                    },
+                ]
+            }
         ]
     },
-
 ]
 
 const Breadcrumbs = () => {
   const breadcrumbs = useBreadcrumbs(routes, { disableDefaults: true })
-
-  console.log(breadcrumbs)
 
   return (
     <React.Fragment>
