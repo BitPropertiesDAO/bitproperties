@@ -9,6 +9,7 @@ import Tab from "../SideBar/Tab";
 import { Outlet } from "react-router";
 import { AppHeader } from "../DaoManager/InputFormAlchemy";
 import { useLocation } from "react-router";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 export default function Explore() {
   const [current, setCurrent] = useState<number>();
@@ -48,6 +49,7 @@ export default function Explore() {
         ></Tab>
       </SideBar>
       <div className="alchemy--section--right">
+        <Breadcrumbs/>
         <Outlet />
       </div>
       <div className="alchemy--background"></div>

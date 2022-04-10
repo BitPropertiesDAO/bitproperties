@@ -7,6 +7,9 @@ import Tab from "../SideBar/Tab";
 import SideBar from "../SideBar/SideBar";
 import { DAORouter__factory as DAORouterFactory } from "../../typechain/factories/DAORouter__factory";
 import { ethers } from "ethers";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import { useDispatch } from "react-redux";
+import { changeCurrDAO } from "../../BreadcrumbsSlice";
 
 export default function DashBoard() {
   const [current, setCurrent] = useState<number>();
@@ -21,6 +24,15 @@ export default function DashBoard() {
   const signer = provider.getSigner();
   let { DAORouterID } = useParams();
 
+  let dispatch = useDispatch()
+
+  const renderBreadcrumbs = () => {
+    dispatch(changeCurrDAO(daoInfo.daoName))
+    return (
+      <Breadcrumbs/>
+    )
+  }
+
   // @ts-ignore
   const router = DAORouterFactory.connect(DAORouterID, signer);
   let location = useLocation();
@@ -30,11 +42,13 @@ export default function DashBoard() {
       const readDAOName = await router.daoName();
       const readDAOGovernanceTokenAddress =
         await router.governanceTokenAddress();
+      
       setDAOInfo({
         daoName: readDAOName,
         governanceTokenAddress: readDAOGovernanceTokenAddress,
       });
     };
+    getDAOInfo();
 
     // UPDATE EVERY NEW TAB
     // CURRENT CORRESPONDS TO PROP IN TAB
@@ -47,8 +61,7 @@ export default function DashBoard() {
     if (location.pathname.includes("/Senate")) {
       setCurrent(2);
     }
-    getDAOInfo();
-    console.log(current);
+
   }, [location]);
 
   return (
@@ -85,9 +98,11 @@ export default function DashBoard() {
         ></Tab>
       </SideBar>
       <div className="alchemy--section--right">
+        {renderBreadcrumbs()}
         <Outlet />
       </div>
-      <div className="alchemy--background"></div>
+      <div className="alchemy--background">
+      </div>
     </>
   );
 }

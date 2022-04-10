@@ -4,6 +4,10 @@ import { DAORouter__factory as DAORouterFactory } from "../../typechain/factorie
 import { ethers } from "ethers";
 import { useState } from "react";
 import { Input, InputNumber } from "antd";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+
+import { useDispatch } from "react-redux";
+import { changeCurrDAO } from "../../BreadcrumbsSlice";
 
 export default function Profile() {
   const [propertyName, setPropertyName] = useState();
@@ -13,6 +17,8 @@ export default function Profile() {
   const [propertyContractAddress, setPropertyContractAddress] = useState("");
 
   let { DAORouterID } = useParams();
+
+  const dispatch = useDispatch()
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
   );
@@ -72,7 +78,6 @@ export default function Profile() {
   };
 
   const { DAOName, governanceAddress, governanceTokenAddress } = DAOInformation;
-
   return (
     <>
       <div>DAO ROUTER: {DAORouterID}</div>
