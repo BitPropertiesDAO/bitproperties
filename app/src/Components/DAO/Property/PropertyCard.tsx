@@ -60,12 +60,16 @@ export default function PropertyCard(props: Propertycard) {
       <p className="property--card--item">{props.propertyName}</p>
       <p className="property--card--item">Shareholders</p>
       <p className="property--card--item">{propertyInfo.percentageIssued}%</p>
-      <div className="property--card--progressslot  property--card--item">
-        <div
-          className="property--card--progressbar "
-          style={{ width: `${propertyInfo.percentageIssued}%` }}
-        ></div>
-      </div>
+      {propertyInfo.percentageIssued !== 100 ? (
+        <div className="property--card--progressslot  property--card--item">
+          <div
+            className="property--card--progressbar "
+            style={{ width: `${propertyInfo.percentageIssued}%` }}
+          ></div>
+        </div>
+      ) : (
+        <p className="property--card--item">MINTED</p>
+      )}
     </div>
   );
 }

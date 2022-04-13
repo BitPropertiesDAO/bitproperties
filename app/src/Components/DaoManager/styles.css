@@ -3,7 +3,7 @@
   --title-font-size: 3.4rem;
   --title-font-width: 700;
   --side--width: 300px;
-  --alchemy--title--font-size: 2.2rem;
+  --alchemy--title--font-size: 2.4rem;
   --box-shadow--one: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
     6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
     12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
@@ -45,29 +45,16 @@
   justify-content: space-between;
 }
 
-.app--section--right {
-  position: absolute;
-  left: 300px;
-  overflow: scroll;
-  top: var(--header--height);
-  padding: 100px 100px;
-  margin-bottom: 100px;
-  height: 100vh;
-  width: calc(100% - var(--side--width));
-  min-width: 940px;
-  z-index: 0;
-  /* background: #121418; */
-}
 .app--section--right::-webkit-scrollbar {
   display: none;
 }
 
-.alchemy--section--title {
+.section--section--right--subtitle {
   color: var(--color);
   font-size: var(--alchemy--title--font-size);
   font-weight: 600;
 }
-.alchemy--section--subtitle {
+.section--right--subtitle {
   color: var(--color);
   font-size: 1.2rem;
 }

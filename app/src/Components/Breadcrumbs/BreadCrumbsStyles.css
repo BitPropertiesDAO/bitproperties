@@ -1,0 +1,22 @@
+.breadcrumbs {
+  display: flex;
+  flex-direction: row;
+}
+
+.breadcrumbitem {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.breadcrumbitem:nth-child(1) {
+  margin-left: 0;
+}
+
+.bread--container {
+  position: fixed;
+  top: 25px;
+  left: 400px;
+}

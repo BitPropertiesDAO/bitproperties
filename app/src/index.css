@@ -14,7 +14,6 @@ body {
   color: white;
 
   background: var(--base--background-gradient);
-
   height: 100%;
   overflow: auto;
   overflow-x: hidden;

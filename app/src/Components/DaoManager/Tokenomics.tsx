@@ -42,72 +42,78 @@ export default function Tokenomics() {
 
   return (
     <>
-      <AppHeader>Tokenomics</AppHeader>
-      <InputGroup>
-        <InputSubheading>ERC20 Token Name</InputSubheading>
-        <Input
-          maxLength={25}
-          style={{ width: 300 }}
-          type="string"
-          value={tokenName}
-          onChange={(e) => dispatch(changeTokenName(String(e.target.value)))}
-          className="alchemy--input"
-        />
-      </InputGroup>
-      <InputGroup>
-        <InputSubheading>ERC20 Token Symbol</InputSubheading>
-        <Input
-          maxLength={4}
-          style={{ width: 100 }}
-          type="string"
-          value={tokenSymbol}
-          onChange={(e) => dispatch(changeTokenSymbol(String(e.target.value)))}
-          className="alchemy--input"
-        />
-      </InputGroup>
-      <InputGroup>
-        <InputSubheading>Initial Token Supply</InputSubheading>
-        <div className="flex space--between">
-          <InputNumber
-            min={0}
-            max={1000000000000}
-            defaultValue={3}
-            style={{ width: 225 }}
+      <div className="backboard">
+        <AppHeader>Tokenomics</AppHeader>
+        <InputGroup>
+          <InputSubheading>ERC20 Token Name</InputSubheading>
+          <Input
+            maxLength={25}
+            style={{ width: 300 }}
+            type="string"
+            value={tokenName}
+            onChange={(e) => dispatch(changeTokenName(String(e.target.value)))}
             className="alchemy--input"
-            value={initTokenSupply}
-            onChange={(value) => dispatch(changeInitTokenSupply(Number(value)))}
           />
-          <div style={{ marginLeft: 100 }}>
-            {initTokenSupply.toLocaleString()} {tokenSymbol}
+        </InputGroup>
+        <InputGroup>
+          <InputSubheading>ERC20 Token Symbol</InputSubheading>
+          <Input
+            maxLength={4}
+            style={{ width: 100 }}
+            type="string"
+            value={tokenSymbol}
+            onChange={(e) =>
+              dispatch(changeTokenSymbol(String(e.target.value)))
+            }
+            className="alchemy--input"
+          />
+        </InputGroup>
+        <InputGroup>
+          <InputSubheading>Initial Token Supply</InputSubheading>
+          <div className="flex space--between">
+            <InputNumber
+              min={0}
+              max={1000000000000}
+              defaultValue={3}
+              style={{ width: 225 }}
+              className="alchemy--input"
+              value={initTokenSupply}
+              onChange={(value) =>
+                dispatch(changeInitTokenSupply(Number(value)))
+              }
+            />
+            <div style={{ marginLeft: 100 }}>
+              {initTokenSupply.toLocaleString()} {tokenSymbol}
+            </div>
           </div>
-        </div>
-      </InputGroup>
-      <InputGroup>
-        <InputSubheading>Payouts</InputSubheading>
-        <PayableAccounts></PayableAccounts>
-        <div
-          className="alchemy--wallet--totalpercentage"
-          style={{
-            color: totalPercent !== 100 ? "red" : "lightgreen ",
-          }}
-        >
-          {totalPercent !== 100 ? (
-            <>
-              Please make sure the total adds up to 100%
-              <br />
-              Total: ${totalPercent}%
-            </>
-          ) : (
-            `Total: ${totalPercent}%`
-          )}
-          <br />
-          <br />
-        </div>
-      </InputGroup>
-      <FormLinksBottom
-        Back="/app/Alchemy/create/governance"
-        Next="/app/Alchemy/create/confirmation"
-      ></FormLinksBottom>
+        </InputGroup>
+        <InputGroup>
+          <InputSubheading>Payouts</InputSubheading>
+          <PayableAccounts></PayableAccounts>
+          <div
+            className="alchemy--wallet--totalpercentage"
+            style={{
+              color: totalPercent !== 100 ? "red" : "lightgreen ",
+            }}
+          >
+            {totalPercent !== 100 ? (
+              <>
+                Please make sure the total adds up to 100%
+                <br />
+                Total: ${totalPercent}%
+              </>
+            ) : (
+              `Total: ${totalPercent}%`
+            )}
+            <br />
+            <br />
+          </div>
+        </InputGroup>
+        <FormLinksBottom
+          Back="/app/Alchemy/create/governance"
+          Next="/app/Alchemy/create/confirmation"
+        ></FormLinksBottom>
+      </div>
     </>
   );
 }

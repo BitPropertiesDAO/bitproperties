@@ -21,7 +21,7 @@ export function FormLinksBottom(props: any) {
 }
 
 export function InputSubheading(props: any) {
-  return <h2 className="alchemy--section--subtitle">{props.children}</h2>;
+  return <h2 className="section--right--subtitle">{props.children}</h2>;
 }
 
 export function InputGroup(props: any) {
@@ -29,5 +29,7 @@ export function InputGroup(props: any) {
 }
 
 export function AppHeader(props: any) {
-  return <h1 className="alchemy--section--title">{props.children}</h1>;
+  return (
+    <h1 className="section--section--right--subtitle">{props.children}</h1>
+  );
 }

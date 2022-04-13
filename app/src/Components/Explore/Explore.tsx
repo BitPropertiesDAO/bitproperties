@@ -5,6 +5,7 @@ import Tab from "../SideBar/Tab";
 import { Outlet } from "react-router";
 
 import { useLocation } from "react-router";
+import BreadCrumbs from "../Breadcrumbs/BreadCrumbs";
 
 export default function Explore() {
   const [current, setCurrent] = useState<number>();
@@ -29,15 +30,16 @@ export default function Explore() {
           icon="ic:round-space-dashboard"
           linkTo={`/app/Explore/DAOS`}
         ></Tab>
-        <Tab
+        {/* <Tab
           id={1}
           current={current}
           title="Create DAO"
           icon="fluent:building-home-20-filled"
           linkTo={`/app/Alchemy/create`}
-        ></Tab>
+        ></Tab> */}
       </SideBar>
       <div className="app--section--right">
+        <BreadCrumbs root="DAOs" rootRoute={`app/Explore/DAOS`}></BreadCrumbs>
         <Outlet />
       </div>
     </>

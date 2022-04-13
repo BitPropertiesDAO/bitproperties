@@ -17,14 +17,14 @@ interface DAOCreationState {
 
 // Define the initial state using that type
 const initialState: DAOCreationState = {
-  name: "Quinta DAO",
-  proposalPassing: 50,
-  quorumPercentage: 20,
+  name: "",
+  proposalPassing: 0,
+  quorumPercentage: 0,
   voteDurationDays: 0,
-  voteDurationWeeks: 1,
-  tokenName: "Quinta DAO Token",
-  tokenSymbol: "QPDT",
-  initTokenSupply: 10 ** 9,
+  voteDurationWeeks: 0,
+  tokenName: "",
+  tokenSymbol: "",
+  initTokenSupply: 0,
   walletAddresses: {
     AirDropAddress: "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
     LiquidityAddress: "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",

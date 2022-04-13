@@ -3,19 +3,12 @@ import { useParams } from "react-router";
 import { DAORouter__factory as DAORouterFactory } from "../../typechain/factories/DAORouter__factory";
 import { ethers } from "ethers";
 import { useState } from "react";
-import { Input, InputNumber } from "antd";
 import { AppHeader } from "../DaoManager/InputFormAlchemy";
-import DAOPageGrid from "./DAOPageGrid";
+import DisplayGridTwo from "./DisplayGridTwo";
 import "./daogridstyles.css";
 import UpcomingProposals from "./UpcomingProposals";
 
 export default function Profile() {
-  const [propertyName, setPropertyName] = useState<any>();
-  const [numberShares, setNumberShares] = useState<any>();
-  const [pricePerShare, setPricePerShare] = useState<any>();
-
-  const [tsxMessage, setTsxMessage] = useState<any>("");
-
   let { DAORouterID } = useParams();
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
@@ -47,44 +40,28 @@ export default function Profile() {
     getDAOInfo();
   }, []);
 
-  const handleLaunchNewProperty = async () => {
-    try {
-      const signer = provider.getSigner();
-      // @ts-ignore
-      const router = DAORouterFactory.connect(DAORouterID, signer);
-
-      const launchNewPropertyTsx = await router.launchNewProperty(
-        propertyName,
-        numberShares,
-        pricePerShare
-      );
-      const propertyReceipt = await launchNewPropertyTsx.wait();
-      setTsxMessage(propertyReceipt.transactionHash);
-    } catch (error) {
-      console.log("launchNewPropertyError", error);
-    }
-  };
-
   const { DAOName } = DAOInformation;
 
   return (
     <>
-      <AppHeader>{DAOName}</AppHeader>
-      <div style={{ marginTop: 100 }} className="backboard daopage--backboard">
-        <DAOPageGrid
+      <div className="backboard">
+        <AppHeader>{DAOName}</AppHeader>
+        <DisplayGridTwo
           title1="Properties"
           result1={DAOInformation.propertyCounter}
           unit1="Listed"
           title2="Members"
-          result2={1000}
+          result2={1}
           unit2="Investors"
-          title3="Volume(24h)"
-          result3={"460K"}
-          unit3="Tokens"
-          title4="Token Price"
-          result4={1.31}
-          unit4="$"
-        ></DAOPageGrid>
+        ></DisplayGridTwo>
+        <DisplayGridTwo
+          title1="Volume(24h)"
+          result1={"0K"}
+          unit1="Tokens"
+          title2="Governance Token Price"
+          result2={0.0}
+          unit2="$"
+        ></DisplayGridTwo>
         <UpcomingProposals></UpcomingProposals>
       </div>
     </>

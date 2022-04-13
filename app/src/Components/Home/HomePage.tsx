@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import "./styles.css";
 import HeroImage from "../../static/HeroImage.png";
 import MainHouse from "../../static/MainHouse.png";
+import MainProperty from "../../static/MainProperty.png";
+import LeftProperty from "../../static/PropertyPos3.png";
 
 import { useMousePosition } from "../../utils/useMousePosition";
 
@@ -34,16 +36,58 @@ export default function HomePage() {
         <div className="section--hero">
           <div className="section--hero--left">
             <p className="hero--title">
-              The industry standard platform for invesing in real-estate through
-              DAOs
+              The fully fledged platform for DAOs managing real world assets
             </p>
             <p className="hero--sub">
               Bit Properties simplifies DAO management by providing a platform
               to manage real-world and metaverse properties and assets, manage
-              re-constitution at the asset level, and manage payment splitting
+              re-constitution at the asset level, and manage payment splitting.
+              We aim to make asset management on blockchains smoother and more
+              more reliable
             </p>
             <button className="primary--button">Start your DAO journey</button>
           </div>
+          {/* <div
+            style={{ backgroundColor: "orange" }}
+            className="section--hero--right"
+          >
+            <div>
+              <div className="main--div--">
+                <img
+                  style={{
+                    transform: `translate(${xPos.current}px, ${yPos.current}px)`,
+                  }}
+                  alt=""
+                  src={MainProperty}
+                  className="main--card--"
+                ></img>
+              </div>
+              <div className="left--div--">
+                <img
+                  src={LeftProperty}
+                  alt=""
+                  className="left--card--"
+                  style={{
+                    transform: `translate(${xPos.current * 1.5}px, ${
+                      yPos.current * 1.5
+                    }px)`,
+                  }}
+                ></img>
+              </div> */}
+          {/* <div className="right--div--">
+                <img
+                  src={PropRight}
+                  alt=""
+                  className="right--card--"
+                  style={{
+                    transform: `translate(${xPos.current * 1.5}px, ${
+                      yPos.current * 1.5
+                    }px)`,
+                  }}
+                ></img>
+              </div> */}
+          {/* </div>
+          </div> */}
           <div className="section--hero--right">
             <div
               className="section--hero--right--card main--card"

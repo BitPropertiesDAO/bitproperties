@@ -4,8 +4,11 @@ import { ethers } from "ethers";
 import { Property__factory as PropertyFactory } from "../../../typechain";
 import ShareListings from "../ShareOwnership/ShareListings";
 import ListingsTable from "../ShareOwnership/ListingsTable";
-import { AppHeader } from "../../DaoManager/InputFormAlchemy";
-import DAOPageGrid from "../DAOPageGrid";
+import { AppHeader, InputSubheading } from "../../DaoManager/InputFormAlchemy";
+import DisplayGridTwo from "../DisplayGridTwo";
+import ethPrice from "../../../placeholderData";
+import { InputGroup } from "../../DaoManager/InputFormAlchemy";
+import { InputNumber } from "antd";
 
 export default function Property() {
   const [tempAddress, setTempAddress] = useState("");
@@ -16,7 +19,7 @@ export default function Property() {
   });
 
   const [sharesToBuy, setSharesToBuy] = useState(0);
-  const [totalPrice, setTotalPrice] = useState<number>();
+  const [totalPrice, setTotalPrice] = useState<any>();
   const [tsxHash, setTsxHash] = useState<any>({
     buyShares: "",
     listShares: "",
@@ -29,7 +32,7 @@ export default function Property() {
     numberOfShares: 0,
   });
 
-  const [activeListings, setActiveListings] = useState(true);
+  // const [activeListings, setActiveListings] = useState(true);
 
   let { PropertyAddress, PropertyName } = useParams();
   const provider = new ethers.providers.JsonRpcProvider(
@@ -113,7 +116,7 @@ export default function Property() {
       // @ts-ignore
       await Property.setApprovalForAll(PropertyAddress, true);
       const listSharesTsx = await Property.listShares(
-        myListing.price,
+        myListing.price * 10 ** 9,
         myListing.numberOfShares
       );
       const listSharesReceipt = await listSharesTsx.wait();
@@ -152,7 +155,7 @@ export default function Property() {
       .then((listingsArray) => {
         const listingElements = listingsArray
           .filter((array: any) => {
-            return array.isActive === activeListings;
+            return array.isActive === true;
           })
           .map((listingItem: any, index: any) => {
             return (
@@ -163,7 +166,7 @@ export default function Property() {
                 sharePrice={listingItem.price.toNumber()}
                 ownerAddress={listingItem.owner}
                 isActive={listingItem.isActive}
-                displayActive={activeListings}
+                displayActive={true}
               ></ShareListings>
             );
           });
@@ -172,120 +175,145 @@ export default function Property() {
       .then((elements) => {
         setListingElements(elements);
       });
-  }, [tsxHash, activeListings]);
+  }, [tsxHash]);
 
   return (
     <>
       {/*////////////////////////////////////////// TOP GRID  //////////////////////////////////////////*/}
-      <AppHeader>{PropertyName}</AppHeader>
-      <div style={{ marginTop: 100 }} className="backboard">
-        <DAOPageGrid
+      <div className="backboard">
+        <AppHeader>
+          {PropertyName} :{" "}
+          {propertyInformation.totalShares -
+            propertyInformation.totalIssuedShares !==
+          0 ? (
+            <span style={{ color: "#17f73c" }}>MINTING</span>
+          ) : (
+            <span style={{ color: "#f48933" }}>MINTED</span>
+          )}
+        </AppHeader>
+
+        <DisplayGridTwo
           title1="IRR"
           result1={24.8}
           unit1="%"
           title2="Share price"
-          result2={82.58}
+          result2={(propertyInformation.pricePerShare * ethPrice) / 10 ** 9}
           unit2="$"
-          // title3="Volume(24h)"
-          // result3={"460K"}
-          // unit3="Tokens"
-          // title4="Token Price"
-          // result4={1.31}
-          // unit4="$"
-        ></DAOPageGrid>
-        <br />
-        <br />
-        <br />
-        <br />
-        {/*////////////////////////////////////////// IPO Shares  //////////////////////////////////////////*/}
-        <div>
-          <div>
-            IPO Shares Left:{" "}
-            {(
-              propertyInformation.totalShares -
-              propertyInformation.totalIssuedShares
-            ).toLocaleString()}{" "}
-            {""}
-            at {propertyInformation.pricePerShare.toLocaleString()} ETH/Share
-          </div>
-          <form onSubmit={handleMintShares}>
-            <label>
-              Buy Initial Shares
-              <input
-                value={sharesToBuy}
-                onChange={(e: any) => setSharesToBuy(e.target.value)}
-                type="number"
-                style={{ color: "black" }}
-              ></input>
-            </label>
-            <div>totalPrice: {totalPrice}</div>
-            <button type="submit">Buy</button>
-          </form>
-          <div>Transaction Hash:{tsxHash.buyShares}</div>
-          <br />
-          <br />
-          <br />
-          <br />
-          {/*////////////////////////////////////////// My Shares => Listing  //////////////////////////////////////////*/}
-          <div>YourAddress: {tempAddress}</div>
-          <div>You own: {myShares} shares</div>
-          <form onSubmit={handleListShares}>
-            <label>
-              List Shares:
-              <input
-                value={myListing.numberOfShares}
-                onChange={(e: any) =>
-                  setMyListing({
-                    numberOfShares: e.target.value,
-                    price: myListing.price,
-                  })
-                }
-                type="number"
-                style={{ color: "black" }}
-                required
-              ></input>
-              <input
-                value={myListing.price}
-                onChange={(e: any) =>
-                  setMyListing({
-                    numberOfShares: myListing.numberOfShares,
-                    price: e.target.value,
-                  })
-                }
-                type="number"
-                style={{ color: "black" }}
-                required
-              ></input>
-            </label>
-            <div>listing Price: {myListing.price}</div>
-            <div>Shares Listing: {myListing.numberOfShares}</div>
-            <button type="submit">List</button>
-            <div>List Shares Receipt: {tsxHash.listShares}</div>
-          </form>
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
+        ></DisplayGridTwo>
+        <div className="page--divider"></div>
         {/*////////////////////////////////////////// Listings  //////////////////////////////////////////*/}
-        <button onClick={() => setActiveListings(!activeListings)}>
+        {/* <button onClick={() => setActiveListings(!activeListings)}>
           {activeListings ? "Active Listings" : "Completed Listings"}
-        </button>
+        </button> */}
         <ListingsTable>{listingElements}</ListingsTable>
-        <br />
-        <br />
-        <br />
-        <br />
-        {/*////////////////////////////////////////// Address  //////////////////////////////////////////*/}
+        {/*////////////////////////////////////////// IPO Shares  //////////////////////////////////////////*/}
+        <div className="page--divider"></div>
+
+        <InputSubheading>
+          IPO Shares Left:{" "}
+          {(
+            propertyInformation.totalShares -
+            propertyInformation.totalIssuedShares
+          ).toLocaleString()}{" "}
+          {""}
+          at {(propertyInformation.pricePerShare / 10 ** 9).toLocaleString()}
+          ETH/Share
+        </InputSubheading>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <InputNumber
+            className="alchemy--input"
+            value={sharesToBuy}
+            onChange={(value: any) => setSharesToBuy(value)}
+          ></InputNumber>
+          <div>
+            totalPrice: {totalPrice / 10 ** 9} ETH ≈{" "}
+            {(totalPrice * ethPrice) / 10 ** 9} USD
+          </div>
+        </div>
+
+        <div
+          style={{ marginTop: 30, display: "flex", flexDirection: "column" }}
+        >
+          <button onClick={handleMintShares} className="primary--button">
+            Mint Shares
+          </button>
+        </div>
+        {tsxHash.buyShares && (
+          <div style={{ color: "#17f73c" }}>
+            Transaction Hash:{tsxHash.buyShares}
+          </div>
+        )}
+
+        {/*////////////////////////////////////////// My Shares => Listing  //////////////////////////////////////////*/}
+        <div className="page--divider"></div>
+        <InputSubheading>
+          Your Address: {tempAddress} <br />
+          {myShares} shares under ownership
+        </InputSubheading>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <InputNumber
+            className="alchemy--input"
+            value={myListing.numberOfShares}
+            onChange={(value: any) =>
+              setMyListing({
+                numberOfShares: value,
+                price: myListing.price,
+              })
+            }
+          ></InputNumber>
+          <div>{myListing.numberOfShares} Shares</div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <InputNumber
+            className="alchemy--input"
+            value={myListing.price}
+            onChange={(value: any) =>
+              setMyListing({
+                numberOfShares: myListing.numberOfShares,
+                price: value,
+              })
+            }
+            step={0.05}
+          ></InputNumber>
+          <div>{myListing.price} ETH</div>
+        </div>
+        <div
+          style={{ marginTop: 30, display: "flex", flexDirection: "column" }}
+        >
+          <button onClick={handleListShares} className="primary--button">
+            List Shares
+          </button>{" "}
+        </div>
+        {tsxHash.listShares && (
+          <div style={{ color: "#17f73c" }}>
+            List Shares Receipt: {tsxHash.listShares}
+          </div>
+        )}
+        <div className="page--divider"></div>
         <div>Property Address: {PropertyAddress}</div>
-        <div>Price Per Share: {propertyInformation.pricePerShare}</div>
         <div>Total Shares: {propertyInformation.totalShares}</div>
-        <div>Total Issued Shares: {propertyInformation.totalIssuedShares}</div>
-        <br />
-        <br />
-        <br />
-        <br />
       </div>
+
+      {/*////////////////////////////////////////// Address  //////////////////////////////////////////*/}
+
       {/*////////////////////////////////////////// Listings  //////////////////////////////////////////*/}
     </>
   );

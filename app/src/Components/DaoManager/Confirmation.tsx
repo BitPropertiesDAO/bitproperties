@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 const ConfirmationResult = (props: any) => {
   return (
     <div style={{ marginBottom: 40 }}>
-      <h2 className="alchemy--section--subtitle" style={{ fontSize: "1.8rem" }}>
+      <h2 className="section--right--subtitle" style={{ fontSize: "1.8rem" }}>
         {props.title}
       </h2>
       {props.children}
@@ -85,6 +85,7 @@ export default function Confirmation() {
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
   );
+  const [tsxHash, setTsxHash] = useState<any>();
 
   const handleSubmit = async () => {
     try {
@@ -120,6 +121,7 @@ export default function Confirmation() {
 
       const contractReceipt = await launchDAOTransaction.wait();
       console.log("DAO Launched", contractReceipt);
+      setTsxHash(contractReceipt.transactionHash);
 
       const event = await contractReceipt.events?.find(
         (event: any) => event.event === "NewDAO"
@@ -147,83 +149,86 @@ export default function Confirmation() {
 
   return (
     <>
-      <h1 className="alchemy--section--title">Confirmation</h1>
-      <ConfirmationResult title="Basic Info">
-        <Result2Column resultTitle="Dao Name" result={name}></Result2Column>
-      </ConfirmationResult>
+      <div className="backboard">
+        <h1 className="section--section--right--subtitle">Confirmation</h1>
+        <ConfirmationResult title="Basic Info">
+          <Result2Column resultTitle="Dao Name" result={name}></Result2Column>
+        </ConfirmationResult>
 
-      {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
+        {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
 
-      <ConfirmationResult title="Governance">
-        <Result2Column
-          resultTitle="Proposal Passing Percentage"
-          result={`${inputs.proposalPassing} %`}
-        ></Result2Column>
-        <Result2Column
-          resultTitle="Vote Duration"
-          result={`${inputs.voteDurationWeeks} Weeks ${inputs.voteDurationDays} Days`}
-        ></Result2Column>
-      </ConfirmationResult>
+        <ConfirmationResult title="Governance">
+          <Result2Column
+            resultTitle="Proposal Passing Percentage"
+            result={`${inputs.proposalPassing} %`}
+          ></Result2Column>
+          <Result2Column
+            resultTitle="Vote Duration"
+            result={`${inputs.voteDurationWeeks} Weeks ${inputs.voteDurationDays} Days`}
+          ></Result2Column>
+        </ConfirmationResult>
 
-      {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
+        {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
 
-      <ConfirmationResult title="Tokenomics">
-        <Result2Column
-          resultTitle="Token Name"
-          result={inputs.tokenName}
-        ></Result2Column>
-        <Result2Column
-          resultTitle="Token Symbol"
-          result={inputs.tokenSymbol}
-        ></Result2Column>
-        <Result2Column
-          resultTitle="Initial Token Supply"
-          result={inputs.initTokenSupply.toLocaleString()}
-        ></Result2Column>
-      </ConfirmationResult>
+        <ConfirmationResult title="Tokenomics">
+          <Result2Column
+            resultTitle="Token Name"
+            result={inputs.tokenName}
+          ></Result2Column>
+          <Result2Column
+            resultTitle="Token Symbol"
+            result={inputs.tokenSymbol}
+          ></Result2Column>
+          <Result2Column
+            resultTitle="Initial Token Supply"
+            result={inputs.initTokenSupply.toLocaleString()}
+          ></Result2Column>
+        </ConfirmationResult>
 
-      {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
+        {/* //////////////////////// //////////////////////// //////////////////////// //////////////////////// */}
 
-      <ConfirmationResult title="Payouts">
-        <Result3Column
-          wallet="AirDrop Wallet"
-          address={AirDropAddress}
-          percentage={AirDropWallet}
-        ></Result3Column>
-        <Result3Column
-          wallet="Liquidity Wallet"
-          address={LiquidityAddress}
-          percentage={Liquidity}
-        ></Result3Column>
-        <Result3Column
-          wallet="Burn Wallet"
-          address={BurnAddress}
-          percentage={Burn}
-        ></Result3Column>
-        <Result3Column
-          wallet="Real Estate Wallet"
-          address={RealEstateAddress}
-          percentage={RealEstate}
-        ></Result3Column>
-        <Result3Column
-          wallet="Marketing Wallet"
-          address={MarketingAddress}
-          percentage={Marketing}
-        ></Result3Column>
-        <Result3Column
-          wallet="Developer Wallet"
-          address={DeveloperAddress}
-          percentage={Developer}
-        ></Result3Column>
-      </ConfirmationResult>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <button
-          style={{ marginTop: 30, marginBottom: 30 }}
-          className="primary--button"
-          onClick={handleSubmit}
-        >
-          CREATE DAO
-        </button>
+        <ConfirmationResult title="Payouts">
+          <Result3Column
+            wallet="AirDrop Wallet"
+            address={AirDropAddress}
+            percentage={AirDropWallet}
+          ></Result3Column>
+          <Result3Column
+            wallet="Liquidity Wallet"
+            address={LiquidityAddress}
+            percentage={Liquidity}
+          ></Result3Column>
+          <Result3Column
+            wallet="Burn Wallet"
+            address={BurnAddress}
+            percentage={Burn}
+          ></Result3Column>
+          <Result3Column
+            wallet="Real Estate Wallet"
+            address={RealEstateAddress}
+            percentage={RealEstate}
+          ></Result3Column>
+          <Result3Column
+            wallet="Marketing Wallet"
+            address={MarketingAddress}
+            percentage={Marketing}
+          ></Result3Column>
+          <Result3Column
+            wallet="Developer Wallet"
+            address={DeveloperAddress}
+            percentage={Developer}
+          ></Result3Column>
+        </ConfirmationResult>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <button
+            style={{ marginTop: 30, marginBottom: 30 }}
+            className="primary--button"
+            onClick={handleSubmit}
+          >
+            CREATE DAO
+          </button>
+        </div>
+        {tsxHash && <div style={{ color: "#17f73c" }}>{tsxHash}</div>}
       </div>
     </>
   );

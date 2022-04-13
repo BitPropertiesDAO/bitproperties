@@ -7,6 +7,7 @@ import Tab from "../SideBar/Tab";
 import SideBar from "../SideBar/SideBar";
 import { DAORouter__factory as DAORouterFactory } from "../../typechain/factories/DAORouter__factory";
 import { ethers } from "ethers";
+import BreadCrumbs from "../Breadcrumbs/BreadCrumbs";
 
 export default function DashBoard() {
   const [current, setCurrent] = useState<number>(0);
@@ -19,7 +20,7 @@ export default function DashBoard() {
     "http://localhost:8545"
   );
   const signer = provider.getSigner();
-  let { DAORouterID } = useParams();
+  let { DAORouterID, DAOName } = useParams();
 
   // @ts-ignore
   const router = DAORouterFactory.connect(DAORouterID, signer);
@@ -27,14 +28,17 @@ export default function DashBoard() {
 
   useEffect(() => {
     const getDAOInfo = async () => {
-      const readDAOName = await router.daoName();
-      const readDAOGovernanceTokenAddress =
-        await router.governanceTokenAddress();
-
-      setDAOInfo({
-        daoName: readDAOName,
-        governanceTokenAddress: readDAOGovernanceTokenAddress,
-      });
+      try {
+        const readDAOName = await router.daoName();
+        const readDAOGovernanceTokenAddress =
+          await router.governanceTokenAddress();
+        setDAOInfo({
+          daoName: readDAOName,
+          governanceTokenAddress: readDAOGovernanceTokenAddress,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     // UPDATE EVERY NEW TAB
@@ -52,7 +56,7 @@ export default function DashBoard() {
       setCurrent(3);
     }
     getDAOInfo();
-  }, [location]);
+  }, [location, daoInfo]);
 
   return (
     <>
@@ -60,7 +64,7 @@ export default function DashBoard() {
         <Tab
           title={daoInfo.daoName}
           main={true}
-          linkTo={`/app/DAO/${DAORouterID}/Dashboard`}
+          linkTo={`/app/DAO/${DAORouterID}/${daoInfo.daoName}/Dashboard`}
         ></Tab>
         <Tab
           id={0}
@@ -68,7 +72,7 @@ export default function DashBoard() {
           // onClick={() => handleActiveTab(0)}
           title="Dashboard"
           icon="ic:round-space-dashboard"
-          linkTo={`/app/DAO/${DAORouterID}/Dashboard`}
+          linkTo={`/app/DAO/${DAORouterID}/${daoInfo.daoName}/Dashboard`}
         ></Tab>
         <Tab
           id={1}
@@ -76,7 +80,7 @@ export default function DashBoard() {
           // onClick={() => setActiveTab(current)}
           title="Properties"
           icon="fluent:building-home-20-filled"
-          linkTo={`/app/DAO/${DAORouterID}/Properties`}
+          linkTo={`/app/DAO/${DAORouterID}/${daoInfo.daoName}/Properties`}
         ></Tab>
         <Tab
           id={2}
@@ -84,21 +88,22 @@ export default function DashBoard() {
           // onClick={() => setActiveTab(current)}
           title="Senate"
           icon="fluent:building-government-20-filled"
-          linkTo={`/app/DAO/${DAORouterID}/Senate/${daoInfo.governanceTokenAddress}`}
+          linkTo={`/app/DAO/${DAORouterID}/${daoInfo.daoName}/Senate/${daoInfo.governanceTokenAddress}`}
         ></Tab>
         <Tab
           id={3}
           current={current}
           // onClick={() => setActiveTab(current)}
-          title="AddProperty"
+          title="Add Property"
           icon="bxs:message-square-add"
-          linkTo={`/app/DAO/${DAORouterID}/addproperty`}
+          linkTo={`/app/DAO/${DAORouterID}/${daoInfo.daoName}/addproperty`}
         ></Tab>
       </SideBar>
-      <div
-        className="app--section--right"
-        // style={{ top: 0, marginTop: 0 }}
-      >
+      <div className="app--section--right">
+        <BreadCrumbs
+          root={DAOName}
+          rootRoute={`app/DAO/${DAORouterID}/${daoInfo.daoName}/Dashboard`}
+        ></BreadCrumbs>
         <Outlet />
       </div>
     </>

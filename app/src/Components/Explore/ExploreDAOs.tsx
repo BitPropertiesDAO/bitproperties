@@ -3,11 +3,16 @@ import { DAOFactoryAddress } from "../../contractsconfig";
 import { DAOFactory__factory as DAOFactoryFactory } from "../../typechain/factories/DAOFactory__factory";
 import { useNavigate } from "react-router";
 import { ethers } from "ethers";
-import { AppHeader } from "../DaoManager/InputFormAlchemy";
+import {
+  AppHeader,
+  InputGroup,
+  InputSubheading,
+} from "../DaoManager/InputFormAlchemy";
 import DAOIcon from "../../static/DAO-Icon.jpg";
 import DAOCard from "./DAOCard";
 import "./styles.css";
 import PropertyCard from "../DAO/Property/PropertyCard";
+import { Input } from "antd";
 
 export default function ExploreDAOs() {
   const [numberDAOs, setNumberDAOs] = useState<any>();
@@ -40,7 +45,7 @@ export default function ExploreDAOs() {
       .then(async (numberOfDAOs) => {
         for (let i = 0; i < numberOfDAOs; i++) {
           let DAO = await factory.DAOs(i);
-          console.log(DAO);
+
           DAORouterArray.push(DAO);
         }
         return DAORouterArray;
@@ -51,7 +56,7 @@ export default function ExploreDAOs() {
             <DAOCard
               image={DAOIcon}
               key={index}
-              navigateTo={`/app/DAO/${DAO}/Dashboard`}
+              navigateTo={`/app/DAO/${DAO}`}
               DAORouter={DAO}
             ></DAOCard>
           );
@@ -65,32 +70,45 @@ export default function ExploreDAOs() {
 
   const handleLookUpAddress = (e: any, address: any) => {
     e.preventDefault();
+    if (!address) return;
     navigate(`/app/DAO/${address}/Dashboard`);
   };
 
   return (
-    <>
-      <div className="backboard">
-        <div className="property--grid headings">
-          <div className="heading--item grid--title">DAOs: {numberDAOs}</div>
-          <div className="heading--item">Name</div>
-          <div className="heading--item">Assets Listed</div>
-          <div className="heading--item">Statistic</div>
-          <div className="heading--item">Address</div>
-        </div>
-        <div className="display--grid">{DAORouters}</div>
-        <form onSubmit={(e) => handleLookUpAddress(e, lookupAddress)}>
-          <label>
-            Search by address:
-            <input
-              style={{ color: "black" }}
-              value={lookupAddress}
-              onChange={(e) => setLookupAddress(e.target.value)}
-            ></input>
-          </label>
-          <button type="submit">Look Up</button>
-        </form>
+    <div className="backboard">
+      <AppHeader></AppHeader>
+      <div className="property--grid headings">
+        <div className="heading--item grid--title">DAOs: {numberDAOs}</div>
+        <div className="heading--item">Name</div>
+        <div className="heading--item">Assets Listed</div>
+        <div className="heading--item">Statistic</div>
+        <div className="heading--item">Address</div>
       </div>
-    </>
+      <div className="display--grid">{DAORouters}</div>
+
+      <div className="page--divider"></div>
+      <InputSubheading>Search by address:</InputSubheading>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <Input
+          onChange={(e) => setLookupAddress(e.target.value)}
+          value={lookupAddress}
+          className="alchemy--input"
+          style={{ width: 300 }}
+        ></Input>
+        <button
+          onClick={(e) => handleLookUpAddress(e, lookupAddress)}
+          className="action--button"
+        >
+          Search
+        </button>
+      </div>
+    </div>
   );
 }

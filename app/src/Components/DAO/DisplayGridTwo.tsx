@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DAOPageGrid(props: any) {
+export default function DisplayGridTwo(props: any) {
   const GridItemTop = (props: any) => {
     return (
       <div className="DAO--grid--top--item">
@@ -23,7 +23,7 @@ export default function DAOPageGrid(props: any) {
   };
 
   return (
-    <div className="DAO--grid--top">
+    <div className="DAO--grid--top" style={{ marginBottom: "1.5rem" }}>
       <GridItemTop
         title={props.title1}
         result={props.result1}
@@ -33,16 +33,6 @@ export default function DAOPageGrid(props: any) {
         title={props.title2}
         result={props.result2}
         unit={props.unit2}
-      ></GridItemTop>
-      <GridItemTop
-        title={props.title3}
-        result={props.result3}
-        unit={props.unit3}
-      ></GridItemTop>
-      <GridItemTop
-        title={props.title4}
-        result={props.result4}
-        unit={props.unit4}
       ></GridItemTop>
     </div>
   );

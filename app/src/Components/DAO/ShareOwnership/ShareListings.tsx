@@ -37,7 +37,7 @@ export default function ShareListings(props: ShareListing) {
         { value: sharePrice * numberShares, from: address }
       );
       const receipt = await buySharesTsx.wait();
-      setTsxReceipt(receipt);
+      setTsxReceipt(receipt.transactionHash);
       console.log(receipt);
     } catch (error) {
       console.log(error);
@@ -51,17 +51,24 @@ export default function ShareListings(props: ShareListing) {
         {props.isActive ? "active" : "inactive"}
       </p>
       <p className="listing--grid--item">{props.numberOfShares}</p>
-      <p className="listing--grid--item">{props.sharePrice}</p>
+      <p className="listing--grid--item">{props.sharePrice * 10 ** -9}</p>
       <p className="listing--grid--item">
         {props.ownerAddress.replace(/(.{9})..+/, "$1…")}
       </p>
       {/* AddSmarter way to get ListingID */}
-      <button
-        onClick={() => handleBuyShares(props.listingID)}
-        className="listing--grid--item listing-button"
-      >
-        BUY
-      </button>
+
+      {tsxReceipt ? (
+        <div className="listing--grid--item" style={{ color: "#17f73c" }}>
+          {tsxReceipt.replace(/(.{9})..+/, "$1…")}
+        </div>
+      ) : (
+        <button
+          onClick={() => handleBuyShares(props.listingID)}
+          className="listing--grid--item listing-button"
+        >
+          BUY
+        </button>
+      )}
     </>
   );
 }

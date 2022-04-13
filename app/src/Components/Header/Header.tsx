@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import "antd/dist/antd.css";
 import "./styles.css";
 import { ethers } from "ethers";
+import BreadCrumbs from "../Breadcrumbs/BreadCrumbs";
 
 function NavItem(props: any) {
   let navigate = useNavigate();
@@ -68,6 +69,10 @@ export default function Header() {
         ) : (
           <ul className="header--nav navbar">
             <NavItem title="DAOs" navigate={`app/Explore/DAOS`}></NavItem>
+            <NavItem
+              title="Create DAO"
+              navigate={`app/Alchemy/create`}
+            ></NavItem>
             <div className="nav--divider header--li"></div>
             <div className="header--li nav--button">
               {!tempAddress

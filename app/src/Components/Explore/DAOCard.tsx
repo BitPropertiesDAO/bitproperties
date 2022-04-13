@@ -45,7 +45,10 @@ export default function DAOCard(props: DAOCard) {
   }, []);
 
   return (
-    <div onClick={() => navigate(props.navigateTo)} className="property--grid">
+    <div
+      onClick={() => navigate(`${props.navigateTo}/${daoInfo.name}/Dashboard`)}
+      className="property--grid"
+    >
       <img
         src={props.image}
         className="grid--card--image property--card--item"

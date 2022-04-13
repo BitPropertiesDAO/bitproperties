@@ -8,6 +8,7 @@ import {
   InputGroup,
   InputSubheading,
 } from "../../DaoManager/InputFormAlchemy";
+import ethPrice from "../../../placeholderData";
 
 export default function AddProperty() {
   const [tsxMessage, setTsxMessage] = useState<any>("");
@@ -15,7 +16,7 @@ export default function AddProperty() {
   const [newProperty, setNewProperty] = useState<any>({
     propertyName: "",
     numberShares: 0,
-    pricePerShare: 0,
+    totalPropertyValue: 0,
   });
 
   let { DAORouterID } = useParams();
@@ -34,7 +35,7 @@ export default function AddProperty() {
       setTsxMessage("Details are Incomplete");
       return;
     }
-    if (newProperty.pricePerShare === 0) {
+    if (newProperty.totalPropertyValue === 0) {
       setTsxMessage("Details are Incomplete");
       return;
     }
@@ -46,7 +47,7 @@ export default function AddProperty() {
       const launchNewPropertyTsx = await router.launchNewProperty(
         newProperty.propertyName,
         newProperty.numberShares,
-        newProperty.pricePerShare
+        (newProperty.totalPropertyValue * 10 ** 9) / newProperty.numberShares
       );
       const propertyReceipt = await launchNewPropertyTsx.wait();
       setTsxMessage(propertyReceipt.transactionHash);
@@ -56,8 +57,9 @@ export default function AddProperty() {
   };
   return (
     <>
-      <AppHeader>Add Property</AppHeader>
-      <InputGroup>
+      <div className="backboard">
+        <AppHeader>Add Property</AppHeader>
+        {/* <InputGroup> */}
         <InputSubheading>Property Name</InputSubheading>
         <div className="flex space--between">
           <Input
@@ -66,7 +68,7 @@ export default function AddProperty() {
               setNewProperty({
                 propertyName: e.target.value,
                 numberShares: newProperty.numberShares,
-                pricePerShare: newProperty.pricePerShare,
+                totalPropertyValue: newProperty.totalPropertyValue,
               })
             }
             style={{ width: 200, margin: 20 }}
@@ -74,6 +76,26 @@ export default function AddProperty() {
             required
           ></Input>
           <div>{newProperty.propertyName}</div>
+        </div>
+        <InputSubheading>Total Property Value (ETH)</InputSubheading>
+        <div className="flex space--between">
+          <InputNumber
+            value={newProperty.totalPropertyValue}
+            onChange={(value: any) =>
+              setNewProperty({
+                propertyName: newProperty.propertyName,
+                numberShares: newProperty.numberShares,
+                totalPropertyValue: value,
+              })
+            }
+            style={{ width: 200, margin: 20 }}
+            className="alchemy--input"
+            required
+          ></InputNumber>
+          <div>
+            {newProperty.totalPropertyValue}ETH ≈{" "}
+            {(newProperty.totalPropertyValue * ethPrice).toLocaleString()} USD
+          </div>
         </div>
         <InputSubheading>Number of Shares:</InputSubheading>
         <div className="flex space--between">
@@ -83,7 +105,7 @@ export default function AddProperty() {
               setNewProperty({
                 propertyName: newProperty.propertyName,
                 numberShares: value,
-                pricePerShare: newProperty.pricePerShare,
+                totalPropertyValue: newProperty.totalPropertyValue,
               })
             }
             style={{ width: 200, margin: 20 }}
@@ -92,33 +114,31 @@ export default function AddProperty() {
           ></InputNumber>
           <div>{newProperty.numberShares}</div>
         </div>
-        <InputSubheading>Price Per Share</InputSubheading>
-        <div className="flex space--between">
-          <InputNumber
-            value={newProperty.pricePerShare}
-            onChange={(value: any) =>
-              setNewProperty({
-                propertyName: newProperty.propertyName,
-                numberShares: newProperty.numberShares,
-                pricePerShare: value,
-              })
-            }
-            style={{ width: 200, margin: 20 }}
-            className="alchemy--input"
-            required
-          ></InputNumber>
-          <div>{newProperty.pricePerShare}</div>
+        <div>
+          Value Per Share ={" "}
+          {newProperty.totalPropertyValue / newProperty.numberShares} ETH ≈{" "}
+          {(newProperty.totalPropertyValue * ethPrice) /
+            newProperty.numberShares}{" "}
+          USD
+          <br />
+          {/* {(
+            (newProperty.totalPropertyValue * 10 ** 18) /
+            newProperty.numberShares
+          ).toLocaleString()}{" "}
+          WEI */}
         </div>
-        <button
-          style={{ marginTop: 30, marginBottom: 30, padding: 10 }}
-          className="primary--button"
-          onClick={handleLaunchNewProperty}
-        >
-          LaunchNewProperty
-        </button>
-        <div>{tsxMessage}</div>
-      </InputGroup>
-      You must have XXX to display add a property for minting
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <button
+            style={{ marginTop: 30, marginBottom: 30, padding: 10 }}
+            className="primary--button"
+            onClick={handleLaunchNewProperty}
+          >
+            LaunchNewProperty
+          </button>
+        </div>
+        <div style={{ color: "#17f73c" }}>{tsxMessage}</div>
+        {/* </InputGroup> */}* You must have XXX to add a property proposal
+      </div>
     </>
   );
 }

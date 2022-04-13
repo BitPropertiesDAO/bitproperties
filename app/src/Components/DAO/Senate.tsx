@@ -59,8 +59,8 @@ export default function Senate() {
 
   return (
     <>
-      <AppHeader>Governance</AppHeader>
-      <div style={{ marginTop: 100 }} className="backboard daopage--backboard">
+      <div className="backboard daopage--backboard">
+        <AppHeader>Governance</AppHeader>
         <div>Governance Token Address: {DAOGovernanceToken}</div>
         <div>TotalSupply: {daoTokenInfo.totalSupply}</div>
         <div>Token Name: {daoTokenInfo.tokenName}</div>

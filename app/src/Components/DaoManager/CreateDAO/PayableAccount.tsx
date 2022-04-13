@@ -63,7 +63,7 @@ export default function PayableAccounts() {
     <>
       <div className="alchemy--payout">
         <div className="align--middle column">
-          {/* <h3 className="alchemy--section--subtitle">Type</h3> */}
+          {/* <h3 className="section--right--subtitle">Type</h3> */}
           <div
             className="alchemy--account--type"
             style={isCompleted(AirDropAddress)}
@@ -72,7 +72,7 @@ export default function PayableAccounts() {
           </div>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Wallet Address</h3>
+          <h3 className="section--right--subtitle ">Wallet Address</h3>
           <Input
             placeholder="Address"
             style={{
@@ -90,7 +90,7 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
+          <h3 className="section--right--subtitle ">Allocation %</h3>
           <InputNumber
             placeholder="%"
             max={100}
@@ -107,7 +107,7 @@ export default function PayableAccounts() {
       {/* ================================================================================================================ */}
       <div className="alchemy--payout">
         <div className="align--middle column">
-          {/* <h3 className="alchemy--section--subtitle">Type</h3> */}
+          {/* <h3 className="section--right--subtitle">Type</h3> */}
           <div
             className="alchemy--account--type "
             style={isCompleted(LiquidityAddress)}
@@ -116,7 +116,7 @@ export default function PayableAccounts() {
           </div>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Wallet Address</h3>
+          <h3 className="section--right--subtitle ">Wallet Address</h3>
           <Input
             placeholder="Address"
             style={{
@@ -134,7 +134,7 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
+          <h3 className="section--right--subtitle ">Allocation %</h3>
           <InputNumber
             placeholder="%"
             style={{ width: 110 }}
@@ -151,7 +151,7 @@ export default function PayableAccounts() {
       {/* ================================================================================================================ */}
       <div className="alchemy--payout">
         <div className="align--middle column">
-          {/* <h3 className="alchemy--section--subtitle">Type</h3> */}
+          {/* <h3 className="section--right--subtitle">Type</h3> */}
           <div
             className="alchemy--account--type "
             style={isCompleted(BurnAddress)}
@@ -160,7 +160,7 @@ export default function PayableAccounts() {
           </div>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Wallet Address</h3>
+          <h3 className="section--right--subtitle ">Wallet Address</h3>
           <Input
             placeholder="Address"
             style={{
@@ -178,7 +178,7 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
+          <h3 className="section--right--subtitle ">Allocation %</h3>
           <InputNumber
             placeholder="%"
             style={{ width: 110 }}
@@ -195,7 +195,7 @@ export default function PayableAccounts() {
       {/* ================================================================================================================ */}
       <div className="alchemy--payout">
         <div className="align--middle column">
-          {/* <h3 className="alchemy--section--subtitle">Type</h3> */}
+          {/* <h3 className="section--right--subtitle">Type</h3> */}
           <div
             className="alchemy--account--type "
             style={isCompleted(BurnAddress)}
@@ -204,7 +204,7 @@ export default function PayableAccounts() {
           </div>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Wallet Address</h3>
+          <h3 className="section--right--subtitle ">Wallet Address</h3>
           <Input
             placeholder="Address"
             style={{
@@ -222,7 +222,7 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
+          <h3 className="section--right--subtitle ">Allocation %</h3>
           <InputNumber
             max={100}
             placeholder="%"
@@ -239,7 +239,7 @@ export default function PayableAccounts() {
       {/* ================================================================================================================ */}
       <div className="alchemy--payout">
         <div className="align--middle column">
-          {/* <h3 className="alchemy--section--subtitle">Type</h3> */}
+          {/* <h3 className="section--right--subtitle">Type</h3> */}
           <div
             className="alchemy--account--type "
             style={isCompleted(BurnAddress)}
@@ -248,7 +248,7 @@ export default function PayableAccounts() {
           </div>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Wallet Address</h3>
+          <h3 className="section--right--subtitle ">Wallet Address</h3>
           <Input
             placeholder="Address"
             style={{
@@ -266,7 +266,7 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
+          <h3 className="section--right--subtitle ">Allocation %</h3>
           <InputNumber
             max={100}
             placeholder="%"
@@ -283,7 +283,7 @@ export default function PayableAccounts() {
       {/* ================================================================================================================ */}
       <div className="alchemy--payout" style={{ marginBottom: 50 }}>
         <div className="align--middle column">
-          {/* <h3 className="alchemy--section--subtitle">Type</h3> */}
+          {/* <h3 className="section--right--subtitle">Type</h3> */}
           <div
             className="alchemy--account--type "
             style={isCompleted(BurnAddress)}
@@ -292,7 +292,7 @@ export default function PayableAccounts() {
           </div>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Wallet Address</h3>
+          <h3 className="section--right--subtitle ">Wallet Address</h3>
           <Input
             placeholder="Address"
             style={{
@@ -310,7 +310,7 @@ export default function PayableAccounts() {
           ></Input>
         </div>
         <div style={{ marginLeft: 20 }}>
-          <h3 className="alchemy--section--subtitle ">Allocation %</h3>
+          <h3 className="section--right--subtitle ">Allocation %</h3>
           <InputNumber
             max={100}
             placeholder="%"

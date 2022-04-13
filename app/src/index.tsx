@@ -66,23 +66,23 @@ ReactDOM.render(
             </Route>
             <Route path="app/DAO" element={<DAODashBoard />}>
               <Route
-                path="/app/DAO/:DAORouterID/Dashboard"
+                path="/app/DAO/:DAORouterID/:DAOName/Dashboard"
                 element={<DAOPage />}
               ></Route>
               <Route
-                path="/app/DAO/:DAORouterID/Senate/:DAOGovernanceToken"
+                path="/app/DAO/:DAORouterID/:DAOName/Senate/:DAOGovernanceToken"
                 element={<Senate />}
               ></Route>
               <Route
-                path="/app/DAO/:DAORouterID/Properties"
+                path="/app/DAO/:DAORouterID/:DAOName/Properties"
                 element={<DAOProperties />}
               ></Route>
               <Route
-                path="/app/DAO/:DAORouterID/Properties/:PropertyAddress/:PropertyName"
+                path="/app/DAO/:DAORouterID/:DAOName/Properties/:PropertyAddress/:PropertyName"
                 element={<Property />}
               ></Route>
               <Route
-                path="/app/DAO/:DAORouterID/addproperty"
+                path="/app/DAO/:DAORouterID/:DAOName/addproperty"
                 element={<AddProperty />}
               ></Route>
             </Route>

@@ -4,6 +4,7 @@ import { Outlet, useNavigate, useLocation } from "react-router";
 import { useAppSelector } from "../../utils/reduxhooks";
 import Tab from "../SideBar/Tab";
 import SideBar from "../SideBar/SideBar";
+import BreadCrumbs from "../Breadcrumbs/BreadCrumbs";
 
 export default function Creation() {
   let location = useLocation();
@@ -120,6 +121,10 @@ export default function Creation() {
       </SideBar>
 
       <div className="app--section--right">
+        <BreadCrumbs
+          root="Alchemy"
+          rootRoute={`app/Alchemy/create`}
+        ></BreadCrumbs>
         <Outlet />
       </div>
     </>

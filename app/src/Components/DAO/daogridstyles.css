@@ -20,7 +20,8 @@
 }
 
 .DAO--grid--top--item--bottom {
-  background: var(--base--background-gradient);
+  /* background: var(--base--background-gradient); */
+  background: rgb(255, 255, 255, 0.8);
   height: 65%;
   width: 100%;
   border-radius: 40px 0px 40px 40px;
@@ -63,6 +64,48 @@
   }
 }
 
+.app--section--right {
+  position: absolute;
+  left: 300px;
+  overflow: scroll;
+  /* top: 75px; */
+  margin: 0px 0px;
+  height: calc(100vh - var(--header--height));
+  width: calc(100% - var(--side--width));
+  min-width: 940px;
+  z-index: 0;
+  /* top: var(--header--height); */
+  background: #121418;
+}
+
+.backboard {
+  margin: 50px 75px;
+  background: var(--sidebar--color);
+  padding: 30px;
+  border-radius: 40px;
+  max-height: 100%;
+  overflow: auto;
+  border: 0.3px solid rgb(255, 255, 255, 0.05);
+}
+/*
+position: absolute;
+  top: 0;
+  padding: 30px 40px 30px 40px;
+  box-shadow: var(--box-shadow--one);
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 100px);
+  overflow: scroll;
+  height: 90vh;
+  background: #121418;
+  border: 0.3px solid rgba(255, 255, 255, 0.2);
+}
+*/
+.backboard::-webkit-scrollbar {
+  display: none;
+}
+/*   /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */
+
 .DAO--grid--proposals {
   background-color: rgba(19, 19, 19, 1);
   width: 100%;
@@ -72,6 +115,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5rem;
   border-radius: 40px;
 }
